@@ -11,10 +11,10 @@ export default function Home() {
       <StyledList>
         {itemlist.map((item) => {
           return (
-            <StyledItem>
-              <StyledListName key={item.name}>{item.name}</StyledListName>
-              <StyledListUnit key={item.unit}>{item.unit}</StyledListUnit>
-              <StyledListActualAmount key={item.actualAmount}>
+            <StyledItem key={item.id}>
+              <StyledListName>{item.name}</StyledListName>
+              <StyledListUnit>{item.unit}</StyledListUnit>
+              <StyledListActualAmount>
                 {item.actualAmount}
               </StyledListActualAmount>
             </StyledItem>
