@@ -14,6 +14,9 @@ export default function Home() {
             <StyledItem key={item.id}>
               <StyledListName>{item.name}</StyledListName>
               <StyledListUnit>{item.unit}</StyledListUnit>
+              {/* <StyledListActualAmount>
+                {item.actualAmount}
+              </StyledListActualAmount> */}
               <StyledListActualAmount>
                 {item.actualAmount}
               </StyledListActualAmount>
