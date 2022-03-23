@@ -1,0 +1,32 @@
+export const itemlist = [
+  {
+    id: 0,
+    name: "Eier",
+    unit: "Stück",
+    unitCount: 1,
+    measurement: 1,
+    minAmount: 4,
+    actualAmount: 6,
+    maxAmount: 10,
+  },
+  {
+    id: 1,
+    name: "Brot",
+    unit: "Stück",
+    unitCount: 1,
+    measurement: 1,
+    minAmount: 1,
+    actualAmount: 2,
+    maxAmount: 3,
+  },
+  {
+    id: 2,
+    name: "Mehl",
+    unit: "Gramm",
+    unitCount: 100,
+    measurement: 1000,
+    minAmount: 4,
+    actualAmount: 6,
+    maxAmount: 10,
+  },
+];

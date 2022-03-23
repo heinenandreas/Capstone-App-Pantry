@@ -1,14 +1,23 @@
+:root {
+  --darkblue: #2d2861;
+  --orange: #fe7902;
+  --lightyellow: #fcc13f;
+  --green: #fe7902;
+  --lightgreen: #8ad234;
+  --pink: #d6007e;
+  --neonpink: #fc008b;
+}
+
 html,
 body {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
   padding: 0;
   margin: 0;
   font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Oxygen,
     Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue, sans-serif;
-}
-
-a {
-  color: inherit;
-  text-decoration: none;
 }
 
 * {
