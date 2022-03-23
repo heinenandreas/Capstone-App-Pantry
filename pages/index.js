@@ -20,9 +20,6 @@ export default function Home() {
               <StyledListActualAmount>
                 {item.actualAmount}
               </StyledListActualAmount>
-              {/* <StyledListActualAmount>
-                {item.actualAmount}
-              </StyledListActualAmount> */}
             </StyledItem>
           );
         })}
