@@ -50,15 +50,15 @@ const StyledItem = styled.div`
   align-items: center;
 `;
 const StyledListName = styled.p`
-  color: darkblue;
+  color: #2d2861;
   font-size: 20px;
 `;
 
 const StyledListUnit = styled.p`
-  color: darkblue;
+  color: #2d2861;
   font-size: 16px;
 `;
 const StyledListActualAmount = styled.p`
-  color: --darkblue;
+  color: #2d2861;
   font-size: 40px;
 `;
