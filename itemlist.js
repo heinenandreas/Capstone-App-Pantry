@@ -22,7 +22,7 @@ export const itemlist = [
   {
     id: 2,
     name: "Mehl",
-    unit: "Gramm",
+    unit: "kg",
     unitCount: 100,
     measurement: 1000,
     minAmount: 4,
