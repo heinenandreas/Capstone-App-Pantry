@@ -1,8 +1,6 @@
 //import Head from "next/head";
 //import Image from "next/image";
 import styled from "styled-components";
-//import styles from "../styles/Home.module.css";
-import { itemlist } from "../itemlist";
 import ItemList from "../components/Itemlist/Itemlist";
 
 export default function Home() {
