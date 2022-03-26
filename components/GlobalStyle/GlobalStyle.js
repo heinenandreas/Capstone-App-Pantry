@@ -1,7 +1,9 @@
 import { createGlobalStyle } from "styled-components";
+//mport "https://fonts.googleapis.com/css2?family=Kalam:wght@700&display=swap";
 
 export const GlobalStyle = createGlobalStyle`
   * {
+    font-family: 'Fredoka', sans-serif;
       box-sizing: border-box;
       --darkblue: #2d2861;
       --orange: #fe7902;

@@ -1,6 +1,8 @@
 import { useState } from "react";
 import { itemlist as initialItemList } from "../../itemlist";
 import styled from "styled-components";
+import Remove from "../../src/Icons/Remove.svg";
+import Add from "../../src/Icons/Add.svg";
 
 function IncrementCounter() {
   const [itemlist, setItemlist] = useState(initialItemList);
@@ -33,7 +35,7 @@ function IncrementCounter() {
                 );
               }}
             >
-              -
+              <Remove />
             </DecrementButton>
             <StyledListActualAmount>{item.actualAmount}</StyledListActualAmount>
             <IncrementButton
@@ -55,7 +57,7 @@ function IncrementCounter() {
                 );
               }}
             >
-              +
+              <Add />
             </IncrementButton>
           </StyledItem>
         );
@@ -92,6 +94,7 @@ const IncrementButton = styled.button`
   display: flex;
   justify-content: center;
   align-items: center;
+  cursor: pointer;
 
   &:hover {
     font-size: 20px;
@@ -113,6 +116,7 @@ const DecrementButton = styled.button`
   display: flex;
   justify-content: center;
   align-items: center;
+  cursor: pointer;
 
   &:hover {
     font-size: 20px;

@@ -30,3 +30,84 @@ export const itemlist = [
     maxAmount: 10,
   },
 ];
+
+export const categoryItemlist = [
+  {
+    id: 0,
+    categoryName: "Kühlschrank",
+    Content: [
+      {
+        id: 0,
+        name: "Eier",
+        unit: "Stück",
+        unitCount: 1,
+        measurement: 1,
+        minAmount: 4,
+        actualAmount: 6,
+        maxAmount: 10,
+      },
+      {
+        id: 1,
+        name: "Milch",
+        unit: "Pack",
+        unitCount: 1,
+        measurement: 1,
+        minAmount: 4,
+        actualAmount: 6,
+        maxAmount: 3,
+      },
+    ],
+  },
+  {
+    id: 1,
+    categoryName: "Regal",
+    Content: [
+      {
+        id: 0,
+        name: "Erbsen",
+        unit: "Dose",
+        unitCount: 1,
+        measurement: 1,
+        minAmount: 5,
+        actualAmount: 8,
+        maxAmount: 9,
+      },
+      {
+        id: 1,
+        name: "Möhren",
+        unit: "Dose",
+        unitCount: 1,
+        measurement: 1,
+        minAmount: 4,
+        actualAmount: 6,
+        maxAmount: 3,
+      },
+    ],
+  },
+  {
+    id: 2,
+    categoryName: "Kühltruhe",
+    Content: [
+      {
+        id: 0,
+        name: "Pizza",
+        unit: "Stück",
+        unitCount: 1,
+        measurement: 1,
+        minAmount: 4,
+        actualAmount: 6,
+        maxAmount: 10,
+      },
+      {
+        id: 1,
+        name: "Spinat",
+        unit: "Pack",
+        unitCount: 1,
+        measurement: 1,
+        minAmount: 4,
+        actualAmount: 6,
+        maxAmount: 3,
+      },
+    ],
+  },
+];

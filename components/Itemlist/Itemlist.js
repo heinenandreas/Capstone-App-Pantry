@@ -29,8 +29,11 @@ const StyledAmountHeadline = styled.div`
 
 const StyledList = styled.div`
   height: auto;
-  width: 342px;
+  width: 20.9rem;
+
   border: 2px solid var(--darkblue);
+  border-top: 0px;
+  border-left: 0px;
   border-radius: 0 0 22px 0;
 `;
 
