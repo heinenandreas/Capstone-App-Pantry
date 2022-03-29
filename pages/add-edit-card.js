@@ -12,10 +12,8 @@ import Link from "next/link";
 
 // plus button fügt eine 1 hinzu wenn man vorher eine zahl eingetippt hat
 //maßeinheiten
-// kann man über form option mappen?
-// decrement und increment verallgemeinern?
 
-function AddEditCard() {
+function AddEditCard({ product }) {
   const [productName, setProductName] = useState("");
   const [unit, setUnit] = useState("");
   const [category, setCategory] = useState("");
@@ -100,11 +98,15 @@ function AddEditCard() {
           <StyledOption defaultValue="selected">
             Wähle eine Kategorie
           </StyledOption>
-          <StyledOption>
-            {categories.map((category) => {
-              return category.name;
-            })}
-          </StyledOption>
+
+          {categories.map((category) => {
+            return (
+              <StyledOption key={category.name} value={category.name}>
+                {category.name}
+              </StyledOption>
+            );
+          })}
+
           {/* <StyledOption value={categories[1].name}>
             {categories[1].name}
           </StyledOption>
