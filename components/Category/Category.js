@@ -66,10 +66,7 @@ function Category() {
                 onClick={() => {
                   setFridgeItemlist(
                     fridgeItemlist.map((innerItem) => {
-                      if (
-                        innerItem.id === fridgeitem.id &&
-                        innerItem.actualAmount > 0
-                      ) {
+                      if (innerItem.id === fridgeitem.id) {
                         return {
                           ...innerItem,
                           actualAmount: innerItem.actualAmount + 1,
@@ -142,10 +139,7 @@ function Category() {
                 onClick={() => {
                   setShelfItemlist(
                     shelfItemlist.map((innerItem) => {
-                      if (
-                        innerItem.id === shelfitem.id &&
-                        innerItem.actualAmount > 0
-                      ) {
+                      if (innerItem.id === shelfitem.id) {
                         return {
                           ...innerItem,
                           actualAmount: innerItem.actualAmount + 1,
@@ -218,10 +212,7 @@ function Category() {
                 onClick={() => {
                   setFreezerItemlist(
                     freezerItemlist.map((innerItem) => {
-                      if (
-                        innerItem.id === freezeritem.id &&
-                        innerItem.actualAmount > 0
-                      ) {
+                      if (innerItem.id === freezeritem.id) {
                         return {
                           ...innerItem,
                           actualAmount: innerItem.actualAmount + 1,
