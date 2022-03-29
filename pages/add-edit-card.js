@@ -1,4 +1,3 @@
-useState;
 import { useState } from "react";
 import { units, categories } from "../itemlist";
 import styled from "styled-components";
@@ -33,11 +32,12 @@ function AddEditCard() {
   };
 
   const decrementActualAmount = () => {
-    if (actualAmount > 0) setActualAmount(actualAmount - 1);
+    if (actualAmount > 0 && actualAmount > minAmount)
+      setActualAmount(actualAmount - 1);
   };
 
   const incrementActualAmount = () => {
-    setActualAmount(actualAmount + 1);
+    if (actualAmount < maxAmount) setActualAmount(actualAmount + 1);
   };
 
   const decrementMaxAmount = () => {
@@ -58,7 +58,6 @@ function AddEditCard() {
       actualAmount,
       maxAmount,
     };
-    console.log(product);
   };
   return (
     <AddCardStyled>
@@ -121,9 +120,7 @@ function AddEditCard() {
         </StyledSelect>
         <p>Mindesbestand</p>
         <AmountStyle>
-          <DecrementButton
-            onClick={(event) => decrementMinAmount(event.target.value)}
-          >
+          <DecrementButton onClick={(event) => decrementMinAmount()}>
             <Remove />
           </DecrementButton>
           <StyledInput
@@ -133,20 +130,16 @@ function AddEditCard() {
             name="minAmount"
             placeholder="Min"
             value={minAmount}
-            onChange={(event) => setMinAmount(event.target.value)}
+            onChange={(event) => setMinAmount()}
           />
 
-          <IncrementButton
-            onClick={(event) => incrementMinAmount(event.target.value)}
-          >
+          <IncrementButton onClick={(event) => incrementMinAmount()}>
             <Add />
           </IncrementButton>
         </AmountStyle>
         <p>aktueller Bestand</p>
         <AmountStyle>
-          <DecrementButton
-            onClick={(event) => decrementActualAmount(event.target.value)}
-          >
+          <DecrementButton onClick={(event) => decrementActualAmount()}>
             <Remove />
           </DecrementButton>
           <StyledInput
@@ -155,20 +148,16 @@ function AddEditCard() {
             name="actualAmount"
             placeholder="Aktuell"
             value={actualAmount}
-            onChange={(event) => setActualAmount(event.target.value)}
+            onChange={(event) => setActualAmount()}
           />
 
-          <IncrementButton
-            onClick={(event) => incrementActualAmount(event.target.value)}
-          >
+          <IncrementButton onClick={(event) => incrementActualAmount()}>
             <Add />
           </IncrementButton>
         </AmountStyle>
         <p>Maximalbestand</p>
         <AmountStyle>
-          <DecrementButton
-            onClick={(event) => decrementMaxAmount(event.target.value)}
-          >
+          <DecrementButton onClick={(event) => decrementMaxAmount()}>
             <Remove />
           </DecrementButton>
           <StyledInput

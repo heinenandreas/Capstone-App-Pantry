@@ -1,25 +1,22 @@
 import { useState } from "react";
 import styled from "styled-components";
-import { fridgeList, shelfList, freezerList } from "../../itemlist";
+import {
+  initialFridgeList,
+  initialShelfList,
+  initialFreezerList,
+} from "../../itemlist";
 import Add from "../../src/Icons/Add.svg";
 import Remove from "../../src/Icons/Remove.svg";
 import Link from "next/link";
 
 function Category() {
-  const [fridgeItemlist, setFridgeItemlist] = useState(fridgeList);
-  const [shelfItemlist, setShelfItemlist] = useState(shelfList);
-  const [freezerItemlist, setFreezerItemlist] = useState(freezerList);
+  const [fridgeItemlist, setFridgeItemlist] = useState(initialFridgeList);
+  const [shelfItemlist, setShelfItemlist] = useState(initialShelfList);
+  const [freezerItemlist, setFreezerItemlist] = useState(initialFreezerList);
   return (
     <>
       <CategoryStyled>
         <CategoryNameStyled>Kühlschrank</CategoryNameStyled>
-        <div>
-          <AddProductButton href="/AddEditCard">
-            <Add />
-          </AddProductButton>
-
-          {/*Edit-Button*/}
-        </div>
       </CategoryStyled>
       <StyledList>
         <StyledAmountHeadline>
@@ -86,15 +83,6 @@ function Category() {
       </StyledList>
       <CategoryStyled>
         <CategoryNameStyled>Regal</CategoryNameStyled>
-        <div>
-          <Link href="/AddEditCard">
-            <AddProductButton>
-              <Add />
-            </AddProductButton>
-          </Link>
-
-          {/*Edit-Button*/}
-        </div>
       </CategoryStyled>
       <StyledList>
         <StyledAmountHeadline>
@@ -161,13 +149,6 @@ function Category() {
       </StyledList>
       <CategoryStyled>
         <CategoryNameStyled>Kühltruhe</CategoryNameStyled>
-        <div>
-          <AddProductButton href="/AddEditCard">
-            <Add />
-          </AddProductButton>
-
-          {/*Edit-Button*/}
-        </div>
       </CategoryStyled>
       <StyledList>
         <StyledAmountHeadline>

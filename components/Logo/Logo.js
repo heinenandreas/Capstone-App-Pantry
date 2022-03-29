@@ -15,27 +15,24 @@ function Logo() {
 
 export default Logo;
 
-const LogoContainer = styled.div`
+const LogoContainer = styled.h2`
   display: flex;
   justify-content: center;
-`;
-
-const LogoOrange = styled.h2`
-  font-family: "Kalam", cursive;
   font-size: 2.5rem;
   margin: 1.5rem 0;
+`;
+
+const LogoOrange = styled.span`
+  font-family: "Kalam", cursive;
   color: var(--orange);
 `;
 
-const LogoPink = styled.h2`
+const LogoPink = styled.span`
   font-family: "Kalam", cursive;
-  font-size: 2.5rem;
-  margin: 1.5rem 0;
   color: var(--pink);
 `;
-const LogoGreen = styled.h2`
+
+const LogoGreen = styled.span`
   font-family: "Kalam", cursive;
-  font-size: 2.5rem;
-  margin: 1.5rem 0;
   color: var(--lightgreen);
 `;

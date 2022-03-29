@@ -4,12 +4,15 @@ import Remove from "../../src/Icons/Remove.svg";
 import Add from "../../src/Icons/Add.svg";
 import ArrowLeft from "../../src/Icons/ArrowLeft.svg";
 import Trashcan from "../../src/Icons/Trashcan.svg";
+import Link from "next/link";
 
 export function ButtonAddCategory() {
   return (
-    <RoundButtonFixedPos>
-      <AddBig />
-    </RoundButtonFixedPos>
+    <Link href="/add-edit-card">
+      <RoundButtonFixedPos>
+        <AddBig />
+      </RoundButtonFixedPos>
+    </Link>
   );
 }
 

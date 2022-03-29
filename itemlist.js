@@ -52,7 +52,7 @@ export const categories = [
   },
 ];
 
-export const fridgeList = [
+export const initialFridgeList = [
   {
     id: 0,
     name: "Eier",
@@ -75,7 +75,7 @@ export const fridgeList = [
   },
 ];
 
-export const shelfList = [
+export const initialShelfList = [
   {
     id: 0,
     name: "Erbsen",
@@ -98,7 +98,7 @@ export const shelfList = [
   },
 ];
 
-export const freezerList = [
+export const initialFreezerList = [
   {
     id: 0,
     name: "Pizza",
