@@ -87,8 +87,8 @@ function Category() {
       <CategoryStyled>
         <CategoryNameStyled>Regal</CategoryNameStyled>
         <div>
-          <Link>
-            <AddProductButton href="/AddEditCard">
+          <Link href="/AddEditCard">
+            <AddProductButton>
               <Add />
             </AddProductButton>
           </Link>

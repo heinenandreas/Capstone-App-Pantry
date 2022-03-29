@@ -187,8 +187,8 @@ function AddEditCard() {
           </IncrementButton>
         </AmountStyle>
         <ButtonBar>
-          <Link>
-            <a href="/">
+          <Link href="/">
+            <a>
               <ButtonBack />
             </a>
           </Link>
