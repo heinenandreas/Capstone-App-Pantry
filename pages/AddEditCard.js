@@ -60,7 +60,7 @@ function AddEditCard() {
   //   };
   //   console.log(product);
   // };
-  // return (
+  return (
     <AddCardStyled>
       <FormStyled onSubmit={handleSubmit}>
         <LabelStyled>Neues Produkt</LabelStyled>
