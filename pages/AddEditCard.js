@@ -48,18 +48,18 @@ function AddEditCard() {
     setMaxAmount(maxAmount + 1);
   };
 
-  // const handleSubmit = (event) => {
-  //   event.preventDefault();
-  //   const product = {
-  //     productName,
-  //     unit,
-  //     category,
-  //     minAmount,
-  //     actualAmount,
-  //     maxAmount,
-  //   };
-  //   console.log(product);
-  // };
+  const handleSubmit = (event) => {
+    event.preventDefault();
+    const product = {
+      productName,
+      unit,
+      category,
+      minAmount,
+      actualAmount,
+      maxAmount,
+    };
+    console.log(product);
+  };
   return (
     <AddCardStyled>
       <FormStyled onSubmit={handleSubmit}>
