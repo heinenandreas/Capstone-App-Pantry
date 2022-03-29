@@ -13,6 +13,7 @@ import {
 // plus button fügt eine 1 hinzu wenn man vorher eine zahl eingetippt hat
 //maßeinheiten
 // kann man über form option mappen?
+// decrement und increment verallgemeinern?
 
 function AddEditCard() {
   const [productName, setProductName] = useState("");
