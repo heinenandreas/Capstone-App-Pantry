@@ -9,6 +9,7 @@ import {
   ButtonDelete,
   ButtonSave,
 } from "../components/Buttons/Buttons";
+import Link from "next/link";
 
 // plus button fügt eine 1 hinzu wenn man vorher eine zahl eingetippt hat
 //maßeinheiten
@@ -186,9 +187,11 @@ function AddEditCard() {
           </IncrementButton>
         </AmountStyle>
         <ButtonBar>
-          <a href="/">
-            <ButtonBack />
-          </a>
+          <Link>
+            <a href="/">
+              <ButtonBack />
+            </a>
+          </Link>
           <ButtonSave type="submit" />
           <ButtonDelete />
         </ButtonBar>
