@@ -7,6 +7,6 @@ const productSchema = new Schema(
   { timestamps: true }
 );
 
-export default model("Product", jokeSchema, "products", {
+export default model("Product", productSchema, "products", {
   overwriteModels: true,
 });

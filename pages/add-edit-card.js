@@ -32,12 +32,11 @@ function AddEditCard() {
   };
 
   const decrementActualAmount = () => {
-    if (actualAmount > 0 && actualAmount > minAmount)
-      setActualAmount(actualAmount - 1);
+    if (actualAmount > 0) setActualAmount(actualAmount - 1);
   };
 
   const incrementActualAmount = () => {
-    if (actualAmount < maxAmount) setActualAmount(actualAmount + 1);
+    setActualAmount(actualAmount + 1);
   };
 
   const decrementMaxAmount = () => {
@@ -50,6 +49,7 @@ function AddEditCard() {
 
   const handleSubmit = (event) => {
     event.preventDefault();
+    alert("the form was submitted");
     const product = {
       productName,
       unit,
@@ -79,14 +79,17 @@ function AddEditCard() {
           value={unit}
           onChange={(event) => setUnit(event.target.value)}
         >
-          <StyledOption defaultValue="selected">
+          <StyledOption disabled defaultValue="selected">
             Wähle eine Einheit
           </StyledOption>
-          <StyledOption>
-            {units.map((unit) => {
-              return unit.name;
-            })}
-          </StyledOption>
+
+          {units.map((unit) => {
+            return (
+              <StyledOption key={unit.name} value={unit.name}>
+                {unit.name}
+              </StyledOption>
+            );
+          })}
         </StyledSelect>
         <p>Kategorie</p>
         <StyledSelect
