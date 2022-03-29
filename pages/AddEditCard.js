@@ -1,5 +1,5 @@
 useState;
-import { useState } from "react/cjs/react.development";
+import { useState } from "react";
 import { units, categories } from "../itemlist";
 import styled from "styled-components";
 import Remove from "../src/Icons/Remove.svg";
