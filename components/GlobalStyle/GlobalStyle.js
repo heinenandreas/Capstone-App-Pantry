@@ -1,11 +1,11 @@
 import { createGlobalStyle } from "styled-components";
-//mport "https://fonts.googleapis.com/css2?family=Kalam:wght@700&display=swap";
 
 export const GlobalStyle = createGlobalStyle`
   * {
     font-family: 'Fredoka', sans-serif;
       box-sizing: border-box;
       --darkblue: #2d2861;
+      --lightblue: #7271B3;
       --orange: #fe7902;
       --lightyellow: #fcc13f;
       --green: #2AA04B;
@@ -13,5 +13,6 @@ export const GlobalStyle = createGlobalStyle`
       --pink: #d6007e;
       --neonpink: #fc008b;
       margin: 0;
+      color: var(--darkblue);
 }
 `;

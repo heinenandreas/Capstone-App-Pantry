@@ -1,5 +1,9 @@
 import { useState } from "react";
-import { itemlist as initialItemList } from "../../itemlist";
+import {
+  itemlist as initialItemList,
+  pantrylist,
+  category,
+} from "../../itemlist";
 import styled from "styled-components";
 import Remove from "../../src/Icons/Remove.svg";
 import Add from "../../src/Icons/Add.svg";
@@ -129,6 +133,42 @@ const DecrementButton = styled.button`
 const StyledListActualAmount = styled.p`
   color: var(--darkblue);
   font-size: 40px;
+`;
+
+const CategoryStyled = styled.div`
+  height: 2rem;
+  width: 95%;
+  background-color: var(--lightgreen);
+  border-radius: 0 1em 1em 0;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+`;
+
+const CategoryNameStyled = styled.h3`
+  font-size: 1.6rem;
+  margin: 0;
+  padding-left: 0.5rem;
+  color: white;
+  border-radius: 0 1em 1em 0;
+`;
+
+const AddProductButton = styled.a`
+  height: 2rem;
+  width: 2rem;
+  margin: 0;
+  padding-right: 0.5rem;
+  color: white;
+  font-size: 1.5rem;
+  border: 0;
+  border-radius: 999px;
+  background-color: var(--lightgreen);
+  cursor: pointer;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  align-content: center;
 `;
 
 export default IncrementCounter;

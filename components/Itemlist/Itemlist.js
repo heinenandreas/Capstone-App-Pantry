@@ -9,7 +9,6 @@ function ItemList() {
         <h3>aktuell</h3>
         <p>max</p>
       </StyledAmountHeadline>
-      <Counter />
     </StyledList>
   );
 }
