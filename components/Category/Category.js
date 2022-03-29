@@ -1,7 +1,6 @@
 import { useState } from "react";
 import styled from "styled-components";
 import { fridgeList, shelfList, freezerList } from "../../itemlist";
-import ItemList from "../Itemlist/Itemlist";
 import Add from "../../src/Icons/Add.svg";
 import Remove from "../../src/Icons/Remove.svg";
 import Link from "next/link";

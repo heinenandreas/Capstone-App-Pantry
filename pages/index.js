@@ -2,10 +2,8 @@
 //import Image from "next/image";
 import Logo from "../components/Logo/Logo";
 import styled from "styled-components";
-import ItemList from "../components/Itemlist/Itemlist";
 import Category from "../components/Category/Category";
 import { ButtonAddCategory } from "../components/Buttons/Buttons";
-import IncrementCounter from "../components/Counter/Counter";
 
 export default function Home() {
   return (
