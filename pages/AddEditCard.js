@@ -10,9 +10,9 @@ import {
   ButtonSave,
 } from "../components/Buttons/Buttons";
 
-// index Produkt auf 0 geht nicht mehr requestAnimationFrame,
-// submit funktioniert nicht mehr
 // plus button fügt eine 1 hinzu wenn man vorher eine zahl eingetippt hat
+//maßeinheiten
+// kann man über form option mappen?
 
 function AddEditCard() {
   const [productName, setProductName] = useState("");
@@ -72,14 +72,21 @@ function AddEditCard() {
           onChange={(event) => setProductName(event.target.value)}
         />
         <p>Maßeinheit</p>
-        <StyledInput
+        <StyledSelect
           required
-          type="text"
-          name="unit"
           placeholder="Maß z.B. kg, Pkg, Flasche, Stk"
           value={unit}
           onChange={(event) => setUnit(event.target.value)}
-        />
+        >
+          <StyledOption defaultValue="selected">
+            Wähle eine Einheit
+          </StyledOption>
+          <StyledOption>
+            {units.map((unit) => {
+              return unit.name;
+            })}
+          </StyledOption>
+        </StyledSelect>
         <p>Kategorie</p>
         <StyledSelect
           required
@@ -89,10 +96,12 @@ function AddEditCard() {
           <StyledOption defaultValue="selected">
             Wähle eine Kategorie
           </StyledOption>
-          <StyledOption value={categories[0].name}>
-            {categories[0].name}
+          <StyledOption>
+            {categories.map((category) => {
+              return category.name;
+            })}
           </StyledOption>
-          <StyledOption value={categories[1].name}>
+          {/* <StyledOption value={categories[1].name}>
             {categories[1].name}
           </StyledOption>
           <StyledOption value={categories[2].name}>
@@ -106,7 +115,7 @@ function AddEditCard() {
           </StyledOption>
           <StyledOption value={categories[5].name}>
             {categories[5].name}
-          </StyledOption>
+          </StyledOption> */}
         </StyledSelect>
         <p>Mindesbestand</p>
         <AmountStyle>
