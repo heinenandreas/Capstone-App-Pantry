@@ -23,10 +23,6 @@ function Category() {
 
   const [itemlist, setItemlist] = useState(productList);
 
-  const [fridgeItemlist, setFridgeItemlist] = useState(initialFridgeList);
-  const [shelfItemlist, setShelfItemlist] = useState(initialShelfList);
-  const [freezerItemlist, setFreezerItemlist] = useState(initialFreezerList);
-
   return (
     <>
       {products.data ? (
@@ -35,11 +31,7 @@ function Category() {
             <CategoryNameStyled>Gemüse</CategoryNameStyled>
           </CategoryStyled>
           <StyledList>
-            <StyledAmountHeadline>
-              <p>min</p>
-              <h3>aktuell</h3>
-              <p>max</p>
-            </StyledAmountHeadline>
+            <StyledAmountHeadline>aktueller Bestand</StyledAmountHeadline>
             {productList
               .filter((product) => product.category === "Gemüse")
               .map((product) => (
@@ -103,11 +95,7 @@ function Category() {
             <CategoryNameStyled>Obst</CategoryNameStyled>
           </CategoryStyled>
           <StyledList>
-            <StyledAmountHeadline>
-              <p>min</p>
-              <h3>aktuell</h3>
-              <p>max</p>
-            </StyledAmountHeadline>
+            <StyledAmountHeadline>aktueller Bestand</StyledAmountHeadline>
             {productList
               .filter((product) => product.category === "Obst")
               .map((product) => (
@@ -171,11 +159,7 @@ function Category() {
             <CategoryNameStyled>Kühlwaren</CategoryNameStyled>
           </CategoryStyled>
           <StyledList>
-            <StyledAmountHeadline>
-              <p>min</p>
-              <h3>aktuell</h3>
-              <p>max</p>
-            </StyledAmountHeadline>
+            <StyledAmountHeadline>aktueller Bestand</StyledAmountHeadline>
             {productList
               .filter((product) => product.category === "Kühlwaren")
               .map((product) => (
@@ -239,11 +223,7 @@ function Category() {
             <CategoryNameStyled>Tiefkühlwaren</CategoryNameStyled>
           </CategoryStyled>
           <StyledList>
-            <StyledAmountHeadline>
-              <p>min</p>
-              <h3>aktuell</h3>
-              <p>max</p>
-            </StyledAmountHeadline>
+            <StyledAmountHeadline>aktueller Bestand</StyledAmountHeadline>
             {productList
               .filter((product) => product.category === "Tiefkühlwaren")
               .map((product) => (
@@ -307,11 +287,7 @@ function Category() {
             <CategoryNameStyled>Lebensmittel</CategoryNameStyled>
           </CategoryStyled>
           <StyledList>
-            <StyledAmountHeadline>
-              <p>min</p>
-              <h3>aktuell</h3>
-              <p>max</p>
-            </StyledAmountHeadline>
+            <StyledAmountHeadline>aktueller Bestand</StyledAmountHeadline>
             {productList
               .filter((product) => product.category === "Lebensmittel")
               .map((product) => (
@@ -375,11 +351,7 @@ function Category() {
             <CategoryNameStyled>Getränke</CategoryNameStyled>
           </CategoryStyled>
           <StyledList>
-            <StyledAmountHeadline>
-              <p>min</p>
-              <h3>aktuell</h3>
-              <p>max</p>
-            </StyledAmountHeadline>
+            <StyledAmountHeadline>aktueller Bestand</StyledAmountHeadline>
             {productList
               .filter((product) => product.category === "Getränke")
               .map((product) => (
@@ -461,25 +433,8 @@ const CategoryNameStyled = styled.h3`
   font-size: 1.6rem;
   margin: 0;
   padding-left: 0.5rem;
-  color: white;
+  color: var(--darkblue);
   border-radius: 0 1em 1em 0;
-`;
-
-const AddProductButton = styled.a`
-  height: 2rem;
-  width: 2rem;
-  margin: 0;
-  padding-right: 0.5rem;
-  color: white;
-  font-size: 1.5rem;
-  border: 0;
-  border-radius: 999px;
-  background-color: var(--lightgreen);
-  cursor: pointer;
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-  align-content: center;
 `;
 
 // -------------------- //
@@ -490,8 +445,7 @@ const StyledAmountHeadline = styled.div`
   display: flex;
   flex-direction: row;
   justify-content: flex-end;
-  padding-right: 1em;
-  gap: 1.5em;
+  padding: 0.3em 1.5em 0.3em 0.3em;
   align-items: flex-end;
   color: var(--darkblue);
 `;
@@ -499,28 +453,30 @@ const StyledAmountHeadline = styled.div`
 /* Style for Itemlist*/
 
 const StyledList = styled.div`
+  display: grid;
   height: auto;
   width: 20.9rem;
-
   border: 2px solid var(--darkblue);
   border-top: 0px;
   border-left: 0px;
   border-radius: 0 0 22px 0;
+  background-color: #ffebd9;
 `;
 
 // -------------------- //
 //     Item-Style       //
 // -------------------- //
 const StyledItem = styled.div`
-  display: flex;
-  flex-wrap: nowrap;
-  flex-direction: row;
+  display: grid;
+  grid-template-columns: 1.5fr 1.5fr 0.6fr 0.5fr 1fr;
   justify-content: space-around;
   align-items: center;
+  border-top: 2px solid var(--lightblue);
 `;
 const StyledListName = styled.p`
   color: var(--darkblue);
   font-size: 20px;
+  padding-left: 0.5rem;
 `;
 const StyledListUnit = styled.p`
   color: var(--darkblue);

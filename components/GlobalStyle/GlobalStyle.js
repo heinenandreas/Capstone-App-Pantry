@@ -15,4 +15,6 @@ export const GlobalStyle = createGlobalStyle`
       margin: 0;
       color: var(--darkblue);
 }
+
+
 `;
