@@ -21,22 +21,14 @@ function Category() {
   const productList = products.data;
   console.log(productList);
 
+  const [itemlist, setItemlist] = useState(productList);
+
   const [fridgeItemlist, setFridgeItemlist] = useState(initialFridgeList);
   const [shelfItemlist, setShelfItemlist] = useState(initialShelfList);
   const [freezerItemlist, setFreezerItemlist] = useState(initialFreezerList);
 
   return (
     <>
-      {/* {products ? (
-        <div>
-          {productList.map((product) => (
-            <div key={product._id}> {product.productName} </div>
-          ))}
-        </div>
-      ) : (
-        <div>loading</div>
-      )} */}
-
       {products.data ? (
         <>
           <CategoryStyled>
@@ -55,6 +47,393 @@ function Category() {
                   <StyledItem key={product._id}>
                     <StyledListName>{product.productName}</StyledListName>
                     <StyledListUnit>{product.unit}</StyledListUnit>
+                    <DecrementButton
+                      type="button"
+                      amount={product.actualAmount}
+                      onClick={() => {
+                        setItemlist(
+                          itemlist.map((innerItem) => {
+                            if (
+                              innerItem.id === fridgeitem.id &&
+                              innerItem.actualAmount > 0
+                            ) {
+                              return {
+                                ...innerItem,
+                                actualAmount: innerItem.actualAmount - 1,
+                              };
+                            } else {
+                              return innerItem;
+                            }
+                          })
+                        );
+                      }}
+                    >
+                      <Remove />
+                    </DecrementButton>
+                    <StyledListActualAmount>
+                      {product.actualAmount}
+                    </StyledListActualAmount>
+                    <IncrementButton
+                      type="button"
+                      key={product.name}
+                      amount={product.actualAmount}
+                      onClick={() => {
+                        setItemlist(
+                          itemlist.map((innerItem) => {
+                            if (innerItem.id === fridgeitem.id) {
+                              return {
+                                ...innerItem,
+                                actualAmount: innerItem.actualAmount + 1,
+                              };
+                            } else {
+                              return innerItem;
+                            }
+                          })
+                        );
+                      }}
+                    >
+                      <Add />
+                    </IncrementButton>
+                  </StyledItem>
+                </>
+              ))}
+          </StyledList>
+
+          <CategoryStyled>
+            <CategoryNameStyled>Obst</CategoryNameStyled>
+          </CategoryStyled>
+          <StyledList>
+            <StyledAmountHeadline>
+              <p>min</p>
+              <h3>aktuell</h3>
+              <p>max</p>
+            </StyledAmountHeadline>
+            {productList
+              .filter((product) => product.category === "Obst")
+              .map((product) => (
+                <>
+                  <StyledItem key={product._id}>
+                    <StyledListName>{product.productName}</StyledListName>
+                    <StyledListUnit>{product.unit}</StyledListUnit>
+                    <DecrementButton
+                      type="button"
+                      amount={product.actualAmount}
+                      onClick={() => {
+                        setItemlist(
+                          itemlist.map((innerItem) => {
+                            if (
+                              innerItem.id === fridgeitem.id &&
+                              innerItem.actualAmount > 0
+                            ) {
+                              return {
+                                ...innerItem,
+                                actualAmount: innerItem.actualAmount - 1,
+                              };
+                            } else {
+                              return innerItem;
+                            }
+                          })
+                        );
+                      }}
+                    >
+                      <Remove />
+                    </DecrementButton>
+                    <StyledListActualAmount>
+                      {product.actualAmount}
+                    </StyledListActualAmount>
+                    <IncrementButton
+                      type="button"
+                      key={product.name}
+                      amount={product.actualAmount}
+                      onClick={() => {
+                        setItemlist(
+                          itemlist.map((innerItem) => {
+                            if (innerItem.id === fridgeitem.id) {
+                              return {
+                                ...innerItem,
+                                actualAmount: innerItem.actualAmount + 1,
+                              };
+                            } else {
+                              return innerItem;
+                            }
+                          })
+                        );
+                      }}
+                    >
+                      <Add />
+                    </IncrementButton>
+                  </StyledItem>
+                </>
+              ))}
+          </StyledList>
+
+          <CategoryStyled>
+            <CategoryNameStyled>Kühlwaren</CategoryNameStyled>
+          </CategoryStyled>
+          <StyledList>
+            <StyledAmountHeadline>
+              <p>min</p>
+              <h3>aktuell</h3>
+              <p>max</p>
+            </StyledAmountHeadline>
+            {productList
+              .filter((product) => product.category === "Kühlwaren")
+              .map((product) => (
+                <>
+                  <StyledItem key={product._id}>
+                    <StyledListName>{product.productName}</StyledListName>
+                    <StyledListUnit>{product.unit}</StyledListUnit>
+                    <DecrementButton
+                      type="button"
+                      amount={product.actualAmount}
+                      onClick={() => {
+                        setItemlist(
+                          itemlist.map((innerItem) => {
+                            if (
+                              innerItem.id === fridgeitem.id &&
+                              innerItem.actualAmount > 0
+                            ) {
+                              return {
+                                ...innerItem,
+                                actualAmount: innerItem.actualAmount - 1,
+                              };
+                            } else {
+                              return innerItem;
+                            }
+                          })
+                        );
+                      }}
+                    >
+                      <Remove />
+                    </DecrementButton>
+                    <StyledListActualAmount>
+                      {product.actualAmount}
+                    </StyledListActualAmount>
+                    <IncrementButton
+                      type="button"
+                      key={product.name}
+                      amount={product.actualAmount}
+                      onClick={() => {
+                        setItemlist(
+                          itemlist.map((innerItem) => {
+                            if (innerItem.id === fridgeitem.id) {
+                              return {
+                                ...innerItem,
+                                actualAmount: innerItem.actualAmount + 1,
+                              };
+                            } else {
+                              return innerItem;
+                            }
+                          })
+                        );
+                      }}
+                    >
+                      <Add />
+                    </IncrementButton>
+                  </StyledItem>
+                </>
+              ))}
+          </StyledList>
+
+          <CategoryStyled>
+            <CategoryNameStyled>Tiefkühlwaren</CategoryNameStyled>
+          </CategoryStyled>
+          <StyledList>
+            <StyledAmountHeadline>
+              <p>min</p>
+              <h3>aktuell</h3>
+              <p>max</p>
+            </StyledAmountHeadline>
+            {productList
+              .filter((product) => product.category === "Tiefkühlwaren")
+              .map((product) => (
+                <>
+                  <StyledItem key={product._id}>
+                    <StyledListName>{product.productName}</StyledListName>
+                    <StyledListUnit>{product.unit}</StyledListUnit>
+                    <DecrementButton
+                      type="button"
+                      amount={product.actualAmount}
+                      onClick={() => {
+                        setItemlist(
+                          itemlist.map((innerItem) => {
+                            if (
+                              innerItem.id === fridgeitem.id &&
+                              innerItem.actualAmount > 0
+                            ) {
+                              return {
+                                ...innerItem,
+                                actualAmount: innerItem.actualAmount - 1,
+                              };
+                            } else {
+                              return innerItem;
+                            }
+                          })
+                        );
+                      }}
+                    >
+                      <Remove />
+                    </DecrementButton>
+                    <StyledListActualAmount>
+                      {product.actualAmount}
+                    </StyledListActualAmount>
+                    <IncrementButton
+                      type="button"
+                      key={product.name}
+                      amount={product.actualAmount}
+                      onClick={() => {
+                        setItemlist(
+                          itemlist.map((innerItem) => {
+                            if (innerItem.id === fridgeitem.id) {
+                              return {
+                                ...innerItem,
+                                actualAmount: innerItem.actualAmount + 1,
+                              };
+                            } else {
+                              return innerItem;
+                            }
+                          })
+                        );
+                      }}
+                    >
+                      <Add />
+                    </IncrementButton>
+                  </StyledItem>
+                </>
+              ))}
+          </StyledList>
+
+          <CategoryStyled>
+            <CategoryNameStyled>Lebensmittel</CategoryNameStyled>
+          </CategoryStyled>
+          <StyledList>
+            <StyledAmountHeadline>
+              <p>min</p>
+              <h3>aktuell</h3>
+              <p>max</p>
+            </StyledAmountHeadline>
+            {productList
+              .filter((product) => product.category === "Lebensmittel")
+              .map((product) => (
+                <>
+                  <StyledItem key={product._id}>
+                    <StyledListName>{product.productName}</StyledListName>
+                    <StyledListUnit>{product.unit}</StyledListUnit>
+                    <DecrementButton
+                      type="button"
+                      amount={product.actualAmount}
+                      onClick={() => {
+                        setItemlist(
+                          itemlist.map((innerItem) => {
+                            if (
+                              innerItem.id === fridgeitem.id &&
+                              innerItem.actualAmount > 0
+                            ) {
+                              return {
+                                ...innerItem,
+                                actualAmount: innerItem.actualAmount - 1,
+                              };
+                            } else {
+                              return innerItem;
+                            }
+                          })
+                        );
+                      }}
+                    >
+                      <Remove />
+                    </DecrementButton>
+                    <StyledListActualAmount>
+                      {product.actualAmount}
+                    </StyledListActualAmount>
+                    <IncrementButton
+                      type="button"
+                      key={product.name}
+                      amount={product.actualAmount}
+                      onClick={() => {
+                        setItemlist(
+                          itemlist.map((innerItem) => {
+                            if (innerItem.id === fridgeitem.id) {
+                              return {
+                                ...innerItem,
+                                actualAmount: innerItem.actualAmount + 1,
+                              };
+                            } else {
+                              return innerItem;
+                            }
+                          })
+                        );
+                      }}
+                    >
+                      <Add />
+                    </IncrementButton>
+                  </StyledItem>
+                </>
+              ))}
+          </StyledList>
+
+          <CategoryStyled>
+            <CategoryNameStyled>Getränke</CategoryNameStyled>
+          </CategoryStyled>
+          <StyledList>
+            <StyledAmountHeadline>
+              <p>min</p>
+              <h3>aktuell</h3>
+              <p>max</p>
+            </StyledAmountHeadline>
+            {productList
+              .filter((product) => product.category === "Getränke")
+              .map((product) => (
+                <>
+                  <StyledItem key={product._id}>
+                    <StyledListName>{product.productName}</StyledListName>
+                    <StyledListUnit>{product.unit}</StyledListUnit>
+                    <DecrementButton
+                      type="button"
+                      amount={product.actualAmount}
+                      onClick={() => {
+                        setItemlist(
+                          itemlist.map((innerItem) => {
+                            if (
+                              innerItem.id === fridgeitem.id &&
+                              innerItem.actualAmount > 0
+                            ) {
+                              return {
+                                ...innerItem,
+                                actualAmount: innerItem.actualAmount - 1,
+                              };
+                            } else {
+                              return innerItem;
+                            }
+                          })
+                        );
+                      }}
+                    >
+                      <Remove />
+                    </DecrementButton>
+                    <StyledListActualAmount>
+                      {product.actualAmount}
+                    </StyledListActualAmount>
+                    <IncrementButton
+                      type="button"
+                      key={product.name}
+                      amount={product.actualAmount}
+                      onClick={() => {
+                        setItemlist(
+                          itemlist.map((innerItem) => {
+                            if (innerItem.id === fridgeitem.id) {
+                              return {
+                                ...innerItem,
+                                actualAmount: innerItem.actualAmount + 1,
+                              };
+                            } else {
+                              return innerItem;
+                            }
+                          })
+                        );
+                      }}
+                    >
+                      <Add />
+                    </IncrementButton>
                   </StyledItem>
                 </>
               ))}
@@ -63,238 +442,6 @@ function Category() {
       ) : (
         <div>loading</div>
       )}
-
-      {/* <CategoryStyled>
-        <CategoryNameStyled>Gemüse</CategoryNameStyled>
-      </CategoryStyled>
-      <StyledList>
-        <StyledAmountHeadline>
-          <p>min</p>
-          <h3>aktuell</h3>
-          <p>max</p>
-        </StyledAmountHeadline>
-
-        {fridgeItemlist.map((fridgeitem) => {
-          return (
-            <StyledItem key={fridgeitem.id}>
-              <StyledListName>{fridgeitem.name}</StyledListName>
-              <StyledListUnit>{fridgeitem.unit}</StyledListUnit>
-              <DecrementButton
-                type="button"
-                amount={fridgeitem.actualAmount}
-                onClick={() => {
-                  setFridgeItemlist(
-                    fridgeItemlist.map((innerItem) => {
-                      if (
-                        innerItem.id === fridgeitem.id &&
-                        innerItem.actualAmount > 0
-                      ) {
-                        return {
-                          ...innerItem,
-                          actualAmount: innerItem.actualAmount - 1,
-                        };
-                      } else {
-                        return innerItem;
-                      }
-                    })
-                  );
-                }}
-              >
-                <Remove />
-              </DecrementButton>
-              <StyledListActualAmount>
-                {fridgeitem.actualAmount}
-              </StyledListActualAmount>
-              <IncrementButton
-                type="button"
-                key={fridgeitem.name}
-                amount={fridgeitem.actualAmount}
-                onClick={() => {
-                  setFridgeItemlist(
-                    fridgeItemlist.map((innerItem) => {
-                      if (innerItem.id === fridgeitem.id) {
-                        return {
-                          ...innerItem,
-                          actualAmount: innerItem.actualAmount + 1,
-                        };
-                      } else {
-                        return innerItem;
-                      }
-                    })
-                  );
-                }}
-              >
-                <Add />
-              </IncrementButton>
-            </StyledItem>
-          );
-        })}
-      </StyledList> */}
-      <CategoryStyled>
-        <CategoryNameStyled>Obst</CategoryNameStyled>
-      </CategoryStyled>
-      <StyledList>
-        <StyledAmountHeadline>
-          <p>min</p>
-          <h3>aktuell</h3>
-          <p>max</p>
-        </StyledAmountHeadline>
-
-        {shelfItemlist.map((shelfitem) => {
-          return (
-            <StyledItem key={shelfitem.id}>
-              <StyledListName>{shelfitem.name}</StyledListName>
-              <StyledListUnit>{shelfitem.unit}</StyledListUnit>
-              <DecrementButton
-                type="button"
-                amount={shelfitem.actualAmount}
-                onClick={() => {
-                  setShelfItemlist(
-                    shelfItemlist.map((innerItem) => {
-                      if (
-                        innerItem.id === shelfitem.id &&
-                        innerItem.actualAmount > 0
-                      ) {
-                        return {
-                          ...innerItem,
-                          actualAmount: innerItem.actualAmount - 1,
-                        };
-                      } else {
-                        return innerItem;
-                      }
-                    })
-                  );
-                }}
-              >
-                <Remove />
-              </DecrementButton>
-              <StyledListActualAmount>
-                {shelfitem.actualAmount}
-              </StyledListActualAmount>
-              <IncrementButton
-                type="button"
-                key={shelfitem.name}
-                amount={shelfitem.actualAmount}
-                onClick={() => {
-                  setShelfItemlist(
-                    shelfItemlist.map((innerItem) => {
-                      if (innerItem.id === shelfitem.id) {
-                        return {
-                          ...innerItem,
-                          actualAmount: innerItem.actualAmount + 1,
-                        };
-                      } else {
-                        return innerItem;
-                      }
-                    })
-                  );
-                }}
-              >
-                <Add />
-              </IncrementButton>
-            </StyledItem>
-          );
-        })}
-      </StyledList>
-      <CategoryStyled>
-        <CategoryNameStyled>Kühlwaren</CategoryNameStyled>
-      </CategoryStyled>
-      <StyledList>
-        <StyledAmountHeadline>
-          <p>min</p>
-          <h3>aktuell</h3>
-          <p>max</p>
-        </StyledAmountHeadline>
-
-        {freezerItemlist.map((freezeritem) => {
-          return (
-            <StyledItem key={freezeritem.id}>
-              <StyledListName>{freezeritem.name}</StyledListName>
-              <StyledListUnit>{freezeritem.unit}</StyledListUnit>
-              <DecrementButton
-                type="button"
-                amount={freezeritem.actualAmount}
-                onClick={() => {
-                  setFreezerItemlist(
-                    freezerItemlist.map((innerItem) => {
-                      if (
-                        innerItem.id === freezeritem.id &&
-                        innerItem.actualAmount > 0
-                      ) {
-                        return {
-                          ...innerItem,
-                          actualAmount: innerItem.actualAmount - 1,
-                        };
-                      } else {
-                        return innerItem;
-                      }
-                    })
-                  );
-                }}
-              >
-                <Remove />
-              </DecrementButton>
-              <StyledListActualAmount>
-                {freezeritem.actualAmount}
-              </StyledListActualAmount>
-              <IncrementButton
-                type="button"
-                key={freezeritem.name}
-                amount={freezeritem.actualAmount}
-                onClick={() => {
-                  setFreezerItemlist(
-                    freezerItemlist.map((innerItem) => {
-                      if (innerItem.id === freezeritem.id) {
-                        return {
-                          ...innerItem,
-                          actualAmount: innerItem.actualAmount + 1,
-                        };
-                      } else {
-                        return innerItem;
-                      }
-                    })
-                  );
-                }}
-              >
-                <Add />
-              </IncrementButton>
-            </StyledItem>
-          );
-        })}
-      </StyledList>
-
-      <CategoryStyled>
-        <CategoryNameStyled>Lebensmittel</CategoryNameStyled>
-      </CategoryStyled>
-      <StyledList>
-        <StyledAmountHeadline>
-          <p>min</p>
-          <h3>aktuell</h3>
-          <p>max</p>
-        </StyledAmountHeadline>
-      </StyledList>
-
-      <CategoryStyled>
-        <CategoryNameStyled>Tiefkühlwaren</CategoryNameStyled>
-      </CategoryStyled>
-      <StyledList>
-        <StyledAmountHeadline>
-          <p>min</p>
-          <h3>aktuell</h3>
-          <p>max</p>
-        </StyledAmountHeadline>
-      </StyledList>
-
-      <CategoryStyled>
-        <CategoryNameStyled>Getränke</CategoryNameStyled>
-      </CategoryStyled>
-      <StyledList>
-        <StyledAmountHeadline>
-          <p>min</p>
-          <h3>aktuell</h3>
-          <p>max</p>
-        </StyledAmountHeadline>
-      </StyledList>
     </>
   );
 }
