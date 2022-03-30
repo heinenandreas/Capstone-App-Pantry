@@ -7,12 +7,13 @@ import { ButtonAddCategory } from "../components/Buttons/Buttons";
 
 export default function Home() {
   return (
-    <DeviceContainer>
+    // <DeviceContainer>
+    <>
       <Logo />
       <Category />
-      {/* <IncrementCounter /> */}
       <ButtonAddCategory />
-    </DeviceContainer>
+      {/* </DeviceContainer> */}
+    </>
   );
 }
 
