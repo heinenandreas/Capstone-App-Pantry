@@ -1,0 +1,21 @@
+GET http://localhost:3000/api/products
+###
+GET http://localhost:3000/api/products/624316884b9bd6de81351fd2
+###
+POST http://localhost:3000/api/products
+content-type: application/json
+
+{
+  "productName": "BrotApiTest" ,
+  "unit": "Stück",
+  "category": "Lebensmittel",
+  "minAmount":1,
+  "actualAmount":2,
+  "maxAmount": 3,
+}
+###
+DELETE http://localhost:3000/products/ hier die id
+###
+PATCH http://localhost:3000/api/products/hier die id
+content-type: application/json
+
