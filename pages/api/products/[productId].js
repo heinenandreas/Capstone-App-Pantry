@@ -9,7 +9,6 @@ export default async function handler(request, response) {
 
     switch (request.method) {
       case "GET":
-        // get the correct joke
         const product = await Product.findById(productId);
         if (product) {
           response.status(200).json(product);
@@ -19,7 +18,6 @@ export default async function handler(request, response) {
         break;
 
       case "PATCH":
-        // patch the correct joke
         const updatedProduct = await Product.findByIdAndUpdate(
           productId,
           {
