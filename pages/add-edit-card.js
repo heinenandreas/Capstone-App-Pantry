@@ -95,7 +95,7 @@ function AddEditCard({ product }) {
           value={unit}
           onChange={(event) => setUnit(event.target.value)}
         >
-          <StyledOption disabled defaultValue="selected">
+          <StyledOption value="" disabled hidden>
             Wähle eine Einheit
           </StyledOption>
 
@@ -113,7 +113,7 @@ function AddEditCard({ product }) {
           value={category}
           onChange={(event) => setCategory(event.target.value)}
         >
-          <StyledOption defaultValue="selected">
+          <StyledOption value="" disabled hidden>
             Wähle eine Kategorie
           </StyledOption>
           {categories.map((category) => {
