@@ -35,7 +35,7 @@ function Category() {
             {productList
               .filter((product) => product.category === "Gemüse")
               .map((product) => (
-                <>
+                <div key={product._id}>
                   <StyledItem key={product._id}>
                     <StyledListName>{product.productName}</StyledListName>
                     <StyledListUnit>{product.unit}</StyledListUnit>
@@ -410,7 +410,7 @@ function Category() {
                 </>
               ))}
           </StyledList>
-        </>
+        </div>
       ) : (
         <div>loading</div>
       )}
