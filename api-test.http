@@ -1,20 +1,21 @@
-GET http://localhost:3000/api/
+GET http://localhost:3000/api/products
 ###
-//GET http://localhost:3000/api/jokes/6231e0fd6db84695c87f76f7
+GET http://localhost:3000/api/products/624316884b9bd6de81351fd2
 ###
 POST http://localhost:3000/api/products
-content-type: application/product
-
-{
-  "text": "this is the joke text"
-}
-###
-DELETE http://localhost:3000/api/jokes/6231ee38aa719d1e879f1137
-###
-PATCH http://localhost:3000/api/jokes/6231e0fd6db84695c87f76f7
 content-type: application/json
 
 {
-  "text": "jlk"
+  "productName": "BrotApiTest" ,
+  "unit": "Stück",
+  "category": "Lebensmittel",
+  "minAmount":1,
+  "actualAmount":2,
+  "maxAmount": 3,
 }
+###
+DELETE http://localhost:3000/products/ hier die id
+###
+PATCH http://localhost:3000/api/products/hier die id
+content-type: application/json
 

@@ -8,15 +8,64 @@ import {
 import Add from "../../src/Icons/Add.svg";
 import Remove from "../../src/Icons/Remove.svg";
 import Link from "next/link";
+import useSWR from "swr";
+
+const fetcher = (resource, init) =>
+  fetch(resource, init).then((res) => res.json());
 
 function Category() {
+  const products = useSWR("/api/products", fetcher); //Die Daten fehlen zu beginn//
+
+  console.log(products);
+  console.log(products.data);
+  const productList = products.data;
+  console.log(productList);
+
   const [fridgeItemlist, setFridgeItemlist] = useState(initialFridgeList);
   const [shelfItemlist, setShelfItemlist] = useState(initialShelfList);
   const [freezerItemlist, setFreezerItemlist] = useState(initialFreezerList);
+
   return (
     <>
-      <CategoryStyled>
-        <CategoryNameStyled>Kühlschrank</CategoryNameStyled>
+      {/* {products ? (
+        <div>
+          {productList.map((product) => (
+            <div key={product._id}> {product.productName} </div>
+          ))}
+        </div>
+      ) : (
+        <div>loading</div>
+      )} */}
+
+      {products.data ? (
+        <>
+          <CategoryStyled>
+            <CategoryNameStyled>Gemüse</CategoryNameStyled>
+          </CategoryStyled>
+          <StyledList>
+            <StyledAmountHeadline>
+              <p>min</p>
+              <h3>aktuell</h3>
+              <p>max</p>
+            </StyledAmountHeadline>
+            {productList
+              .filter((product) => product.category === "Gemüse")
+              .map((product) => (
+                <>
+                  <StyledItem key={product._id}>
+                    <StyledListName>{product.productName}</StyledListName>
+                    <StyledListUnit>{product.unit}</StyledListUnit>
+                  </StyledItem>
+                </>
+              ))}
+          </StyledList>
+        </>
+      ) : (
+        <div>loading</div>
+      )}
+
+      {/* <CategoryStyled>
+        <CategoryNameStyled>Gemüse</CategoryNameStyled>
       </CategoryStyled>
       <StyledList>
         <StyledAmountHeadline>
@@ -80,9 +129,9 @@ function Category() {
             </StyledItem>
           );
         })}
-      </StyledList>
+      </StyledList> */}
       <CategoryStyled>
-        <CategoryNameStyled>Regal</CategoryNameStyled>
+        <CategoryNameStyled>Obst</CategoryNameStyled>
       </CategoryStyled>
       <StyledList>
         <StyledAmountHeadline>
@@ -148,7 +197,7 @@ function Category() {
         })}
       </StyledList>
       <CategoryStyled>
-        <CategoryNameStyled>Kühltruhe</CategoryNameStyled>
+        <CategoryNameStyled>Kühlwaren</CategoryNameStyled>
       </CategoryStyled>
       <StyledList>
         <StyledAmountHeadline>
@@ -212,6 +261,39 @@ function Category() {
             </StyledItem>
           );
         })}
+      </StyledList>
+
+      <CategoryStyled>
+        <CategoryNameStyled>Lebensmittel</CategoryNameStyled>
+      </CategoryStyled>
+      <StyledList>
+        <StyledAmountHeadline>
+          <p>min</p>
+          <h3>aktuell</h3>
+          <p>max</p>
+        </StyledAmountHeadline>
+      </StyledList>
+
+      <CategoryStyled>
+        <CategoryNameStyled>Tiefkühlwaren</CategoryNameStyled>
+      </CategoryStyled>
+      <StyledList>
+        <StyledAmountHeadline>
+          <p>min</p>
+          <h3>aktuell</h3>
+          <p>max</p>
+        </StyledAmountHeadline>
+      </StyledList>
+
+      <CategoryStyled>
+        <CategoryNameStyled>Getränke</CategoryNameStyled>
+      </CategoryStyled>
+      <StyledList>
+        <StyledAmountHeadline>
+          <p>min</p>
+          <h3>aktuell</h3>
+          <p>max</p>
+        </StyledAmountHeadline>
       </StyledList>
     </>
   );

@@ -9,17 +9,47 @@ import {
   ButtonSave,
 } from "../components/Buttons/Buttons";
 import Link from "next/link";
+import useSWR from "swr";
+import { useRouter } from "next/router";
+
+const fetcher = (resource, init) =>
+  fetch(resource, init).then((res) => res.json());
 
 // plus button fügt eine 1 hinzu wenn man vorher eine zahl eingetippt hat
 //maßeinheiten
 
 function AddEditCard({ product }) {
+  const products = useSWR("/api/products", fetcher);
+  const router = useRouter();
+
   const [productName, setProductName] = useState("");
   const [unit, setUnit] = useState("");
   const [category, setCategory] = useState("");
   const [minAmount, setMinAmount] = useState(0);
   const [actualAmount, setActualAmount] = useState(0);
   const [maxAmount, setMaxAmount] = useState(0);
+
+  async function handleCreateProduct(event) {
+    event.preventDefault();
+    const response = await fetch("/api/products", {
+      method: "POST",
+      headers: { "content-type": "application/json" },
+      body: JSON.stringify({
+        productName: productName,
+        unit: unit,
+        category: category,
+        minAmount: minAmount,
+        actualAmount: actualAmount,
+        maxAmount: maxAmount,
+      }),
+    });
+    const createdProduct = await response.json();
+    if (createdProduct.success) {
+      products.mutate();
+      router.push("/");
+    } else {
+    }
+  }
 
   const decrementMinAmount = () => {
     if (minAmount > 0) setMinAmount(minAmount - 1);
@@ -45,21 +75,9 @@ function AddEditCard({ product }) {
     setMaxAmount(maxAmount + 1);
   };
 
-  const handleSubmit = (event) => {
-    event.preventDefault();
-    alert("the form was submitted");
-    const product = {
-      productName,
-      unit,
-      category,
-      minAmount,
-      actualAmount,
-      maxAmount,
-    };
-  };
   return (
     <AddCardStyled>
-      <FormStyled onSubmit={handleSubmit}>
+      <FormStyled onSubmit={handleCreateProduct}>
         <LabelStyled>Neues Produkt</LabelStyled>
         <p>Produktname</p>
         <StyledInput
@@ -98,7 +116,6 @@ function AddEditCard({ product }) {
           <StyledOption defaultValue="selected">
             Wähle eine Kategorie
           </StyledOption>
-
           {categories.map((category) => {
             return (
               <StyledOption key={category.name} value={category.name}>
@@ -106,22 +123,6 @@ function AddEditCard({ product }) {
               </StyledOption>
             );
           })}
-
-          {/* <StyledOption value={categories[1].name}>
-            {categories[1].name}
-          </StyledOption>
-          <StyledOption value={categories[2].name}>
-            {categories[2].name}
-          </StyledOption>
-          <StyledOption value={categories[3].name}>
-            {categories[3].name}
-          </StyledOption>
-          <StyledOption value={categories[4].name}>
-            {categories[4].name}
-          </StyledOption>
-          <StyledOption value={categories[5].name}>
-            {categories[5].name}
-          </StyledOption> */}
         </StyledSelect>
         <p>Mindesbestand</p>
         <AmountStyle>
@@ -137,7 +138,6 @@ function AddEditCard({ product }) {
             value={minAmount}
             onChange={(event) => setMinAmount()}
           />
-
           <IncrementButton onClick={(event) => incrementMinAmount()}>
             <Add />
           </IncrementButton>
@@ -155,7 +155,6 @@ function AddEditCard({ product }) {
             value={actualAmount}
             onChange={(event) => setActualAmount()}
           />
-
           <IncrementButton onClick={(event) => incrementActualAmount()}>
             <Add />
           </IncrementButton>

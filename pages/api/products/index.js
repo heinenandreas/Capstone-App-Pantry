@@ -1,4 +1,4 @@
-import Product from "../../schema/Product";
+import Product from "../../../schema/Product";
 import { connectDb } from "../../../utils/db";
 
 export default async function handler(request, response) {
