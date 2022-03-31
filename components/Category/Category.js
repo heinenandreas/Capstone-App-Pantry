@@ -15,13 +15,11 @@ function Category() {
 
   const [itemlist, setItemlist] = useState(productList);
 
-  async function handleDeleteItemClick() {
+  async function handleDeleteItemClick(id, productname) {
     if (
-      confirm(
-        `Möchtest du \n\n"${productList.productName}"\n\n unwiederbringlich löschen?`
-      )
+      confirm(`Möchtest du \n\n${productname}\n\n unwiederbringlich löschen?`)
     ) {
-      const response = await fetch(`/api/products/${productList._id}`, {
+      const response = await fetch(`/api/products/${id}`, {
         method: "DELETE",
       });
       if (response.ok) {
@@ -43,7 +41,6 @@ function Category() {
               .map((product) => (
                 <StyledItem key={product._id}>
                   {console.log(productList)}
-                  {console.log(product.productName)}
                   {console.log(product._id)}
                   <StyledListName>{product.productName}</StyledListName>
                   <StyledListUnit>{product.unit}</StyledListUnit>
@@ -94,7 +91,11 @@ function Category() {
                   >
                     <Add />
                   </IncrementButton>
-                  <TrashcanSmall onClick={handleDeleteItemClick} />
+                  <TrashcanSmall
+                    onClick={() =>
+                      handleDeleteItemClick(product._id, product.productName)
+                    }
+                  />
                 </StyledItem>
               ))}
           </StyledList>
@@ -156,6 +157,11 @@ function Category() {
                   >
                     <Add />
                   </IncrementButton>
+                  <TrashcanSmall
+                    onClick={() =>
+                      handleDeleteItemClick(product._id, product.productName)
+                    }
+                  />
                 </StyledItem>
               ))}
           </StyledList>
@@ -217,6 +223,11 @@ function Category() {
                   >
                     <Add />
                   </IncrementButton>
+                  <TrashcanSmall
+                    onClick={() =>
+                      handleDeleteItemClick(product._id, product.productName)
+                    }
+                  />
                 </StyledItem>
               ))}
           </StyledList>
@@ -278,6 +289,11 @@ function Category() {
                   >
                     <Add />
                   </IncrementButton>
+                  <TrashcanSmall
+                    onClick={() =>
+                      handleDeleteItemClick(product._id, product.productName)
+                    }
+                  />
                 </StyledItem>
               ))}
           </StyledList>
@@ -339,6 +355,11 @@ function Category() {
                   >
                     <Add />
                   </IncrementButton>
+                  <TrashcanSmall
+                    onClick={() =>
+                      handleDeleteItemClick(product._id, product.productName)
+                    }
+                  />
                 </StyledItem>
               ))}
           </StyledList>
@@ -400,6 +421,11 @@ function Category() {
                   >
                     <Add />
                   </IncrementButton>
+                  <TrashcanSmall
+                    onClick={() =>
+                      handleDeleteItemClick(product._id, product.productName)
+                    }
+                  />
                 </StyledItem>
               ))}
           </StyledList>
