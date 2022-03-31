@@ -1,28 +1,32 @@
 import { useState } from "react";
 import styled from "styled-components";
-import {
-  initialFridgeList,
-  initialShelfList,
-  initialFreezerList,
-} from "../../itemlist";
 import Add from "../../src/Icons/Add.svg";
 import Remove from "../../src/Icons/Remove.svg";
 import Link from "next/link";
 import useSWR from "swr";
+import TrashcanSmall from "../../src/Icons/TrashcanSmall.svg";
 
 const fetcher = (resource, init) =>
   fetch(resource, init).then((res) => res.json());
 
 function Category() {
-  const products = useSWR("/api/products", fetcher); //Die Daten fehlen zu beginn//
-
-  console.log(products);
-  console.log(products.data);
+  const products = useSWR("/api/products", fetcher);
   const productList = products.data;
-  console.log(productList);
 
   const [itemlist, setItemlist] = useState(productList);
 
+  async function handleDeleteItemClick(id, productname) {
+    if (
+      confirm(`Möchtest du \n\n${productname}\n\n unwiederbringlich löschen?`)
+    ) {
+      const response = await fetch(`/api/products/${id}`, {
+        method: "DELETE",
+      });
+      if (response.ok) {
+        products.mutate();
+      }
+    }
+  }
   return (
     <>
       {products.data ? (
@@ -31,11 +35,12 @@ function Category() {
             <CategoryNameStyled>Gemüse</CategoryNameStyled>
           </CategoryStyled>
           <StyledList>
-            <StyledAmountHeadline>aktueller Bestand</StyledAmountHeadline>
             {productList
               .filter((product) => product.category === "Gemüse")
               .map((product) => (
                 <StyledItem key={product._id}>
+                  {console.log(productList)}
+                  {console.log(product._id)}
                   <StyledListName>{product.productName}</StyledListName>
                   <StyledListUnit>{product.unit}</StyledListUnit>
                   <DecrementButton
@@ -85,15 +90,20 @@ function Category() {
                   >
                     <Add />
                   </IncrementButton>
+                  <StyledTrash>
+                    <TrashcanSmall
+                      onClick={() =>
+                        handleDeleteItemClick(product._id, product.productName)
+                      }
+                    />
+                  </StyledTrash>
                 </StyledItem>
               ))}
           </StyledList>
-
           <CategoryStyled>
             <CategoryNameStyled>Obst</CategoryNameStyled>
           </CategoryStyled>
           <StyledList>
-            <StyledAmountHeadline>aktueller Bestand</StyledAmountHeadline>
             {productList
               .filter((product) => product.category === "Obst")
               .map((product) => (
@@ -147,15 +157,20 @@ function Category() {
                   >
                     <Add />
                   </IncrementButton>
+                  <StyledTrash>
+                    <TrashcanSmall
+                      onClick={() =>
+                        handleDeleteItemClick(product._id, product.productName)
+                      }
+                    />
+                  </StyledTrash>
                 </StyledItem>
               ))}
           </StyledList>
-
           <CategoryStyled>
             <CategoryNameStyled>Kühlwaren</CategoryNameStyled>
           </CategoryStyled>
           <StyledList>
-            <StyledAmountHeadline>aktueller Bestand</StyledAmountHeadline>
             {productList
               .filter((product) => product.category === "Kühlwaren")
               .map((product) => (
@@ -209,15 +224,20 @@ function Category() {
                   >
                     <Add />
                   </IncrementButton>
+                  <StyledTrash>
+                    <TrashcanSmall
+                      onClick={() =>
+                        handleDeleteItemClick(product._id, product.productName)
+                      }
+                    />
+                  </StyledTrash>
                 </StyledItem>
               ))}
           </StyledList>
-
           <CategoryStyled>
             <CategoryNameStyled>Tiefkühlwaren</CategoryNameStyled>
           </CategoryStyled>
           <StyledList>
-            <StyledAmountHeadline>aktueller Bestand</StyledAmountHeadline>
             {productList
               .filter((product) => product.category === "Tiefkühlwaren")
               .map((product) => (
@@ -271,15 +291,20 @@ function Category() {
                   >
                     <Add />
                   </IncrementButton>
+                  <StyledTrash>
+                    <TrashcanSmall
+                      onClick={() =>
+                        handleDeleteItemClick(product._id, product.productName)
+                      }
+                    />
+                  </StyledTrash>
                 </StyledItem>
               ))}
           </StyledList>
-
           <CategoryStyled>
             <CategoryNameStyled>Lebensmittel</CategoryNameStyled>
           </CategoryStyled>
           <StyledList>
-            <StyledAmountHeadline>aktueller Bestand</StyledAmountHeadline>
             {productList
               .filter((product) => product.category === "Lebensmittel")
               .map((product) => (
@@ -333,15 +358,20 @@ function Category() {
                   >
                     <Add />
                   </IncrementButton>
+                  <StyledTrash>
+                    <TrashcanSmall
+                      onClick={() =>
+                        handleDeleteItemClick(product._id, product.productName)
+                      }
+                    />
+                  </StyledTrash>
                 </StyledItem>
               ))}
           </StyledList>
-
           <CategoryStyled>
             <CategoryNameStyled>Getränke</CategoryNameStyled>
           </CategoryStyled>
           <StyledList>
-            <StyledAmountHeadline>aktueller Bestand</StyledAmountHeadline>
             {productList
               .filter((product) => product.category === "Getränke")
               .map((product) => (
@@ -395,6 +425,13 @@ function Category() {
                   >
                     <Add />
                   </IncrementButton>
+                  <StyledTrash>
+                    <TrashcanSmall
+                      onClick={() =>
+                        handleDeleteItemClick(product._id, product.productName)
+                      }
+                    />
+                  </StyledTrash>
                 </StyledItem>
               ))}
           </StyledList>
@@ -408,7 +445,7 @@ function Category() {
 
 const CategoryStyled = styled.div`
   height: 2rem;
-  width: 95%;
+  width: 95vw;
   background-color: var(--lightgreen);
   border-radius: 0 1em 1em 0;
   display: flex;
@@ -425,25 +462,10 @@ const CategoryNameStyled = styled.h3`
   border-radius: 0 1em 1em 0;
 `;
 
-// -------------------- //
-//      Itemlist        //
-// -------------------- //
-/* Style for amount-Headline */
-const StyledAmountHeadline = styled.div`
-  display: flex;
-  flex-direction: row;
-  justify-content: flex-end;
-  padding: 0.3em 1.5em 0.3em 0.3em;
-  align-items: flex-end;
-  color: var(--darkblue);
-`;
-
-/* Style for Itemlist*/
-
 const StyledList = styled.div`
   display: grid;
   height: auto;
-  width: 20.9rem;
+  width: 92vw;
   border: 2px solid var(--darkblue);
   border-top: 0px;
   border-left: 0px;
@@ -451,27 +473,29 @@ const StyledList = styled.div`
   background-color: #ffebd9;
 `;
 
-// -------------------- //
-//     Item-Style       //
-// -------------------- //
 const StyledItem = styled.div`
-  display: grid;
-  grid-template-columns: 1.5fr 1.5fr 0.6fr 0.5fr 1fr;
-  justify-content: space-around;
+  height: 3rem;
+  display: flex;
   align-items: center;
   border-top: 2px solid var(--lightblue);
 `;
 const StyledListName = styled.p`
+  position: absolute;
+  left: 1vw;
   color: var(--darkblue);
   font-size: 20px;
-  padding-left: 0.5rem;
+  padding-left: 1rem;
 `;
 const StyledListUnit = styled.p`
+  position: absolute;
+  left: 75vw;
   color: var(--darkblue);
-  font-size: 12px;
+  font-size: 10px;
 `;
 
 const IncrementButton = styled.button`
+  position: absolute;
+  left: 67vw;
   color: white;
   background-color: var(--lightgreen);
   border: 2px solid var(--green);
@@ -494,6 +518,8 @@ const IncrementButton = styled.button`
 `;
 
 const DecrementButton = styled.button`
+  position: absolute;
+  left: 48vw;
   color: white;
   background-color: var(--neonpink);
   border: 2px solid var(--pink);
@@ -516,8 +542,15 @@ const DecrementButton = styled.button`
 `;
 
 const StyledListActualAmount = styled.p`
+  position: absolute;
+  left: 58vw;
   color: var(--darkblue);
   font-size: 40px;
+`;
+
+const StyledTrash = styled.div`
+  position: absolute;
+  left: 83vw;
 `;
 
 export default Category;

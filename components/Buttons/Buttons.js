@@ -4,7 +4,14 @@ import Remove from "../../src/Icons/Remove.svg";
 import Add from "../../src/Icons/Add.svg";
 import ArrowLeft from "../../src/Icons/ArrowLeft.svg";
 import Trashcan from "../../src/Icons/Trashcan.svg";
+import TrashcanSmall from "../../src/Icons/TrashcanSmall.svg";
 import Link from "next/link";
+
+export function DeleteItem() {
+  <DeleteItemStyles>
+    <TrashcanSmall />
+  </DeleteItemStyles>;
+}
 
 export function ButtonAddCategory() {
   return (
@@ -55,6 +62,11 @@ export function Increment() {
     </IncrementButton>
   );
 }
+
+const DeleteItemStyles = styled.button`
+  width: 1rem;
+  height: 1rem;
+`;
 
 const RoundButton = styled.div`
   display: flex;

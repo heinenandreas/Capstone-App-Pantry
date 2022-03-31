@@ -7,21 +7,9 @@ import { ButtonAddCategory } from "../components/Buttons/Buttons";
 
 export default function Home() {
   return (
-    // <DeviceContainer>
     <>
-      <Logo />
       <Category />
       <ButtonAddCategory />
-      {/* </DeviceContainer> */}
     </>
   );
 }
-
-/* Device-Container, remove later */
-const DeviceContainer = styled.div`
-  position: relative;
-  width: 23.44rem;
-  height: 50.75rem;
-  border: 2px solid black;
-  border-radius: 15px;
-`;
