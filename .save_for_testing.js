@@ -1,5 +1,3 @@
-import { DeleteItem } from "./components/Buttons/Buttons";
-
 async function handleDeleteItemClick() {
   if (
     confirm(
@@ -14,5 +12,3 @@ async function handleDeleteItemClick() {
     }
   }
 }
-
-<DeleteItem onClick={handleDeleteItemClick}></DeleteItem>;

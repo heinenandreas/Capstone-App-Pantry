@@ -1,28 +1,34 @@
 import { useState } from "react";
 import styled from "styled-components";
-import {
-  initialFridgeList,
-  initialShelfList,
-  initialFreezerList,
-} from "../../itemlist";
 import Add from "../../src/Icons/Add.svg";
 import Remove from "../../src/Icons/Remove.svg";
 import Link from "next/link";
 import useSWR from "swr";
+import TrashcanSmall from "../../src/Icons/TrashcanSmall.svg";
 
 const fetcher = (resource, init) =>
   fetch(resource, init).then((res) => res.json());
 
 function Category() {
-  const products = useSWR("/api/products", fetcher); //Die Daten fehlen zu beginn//
-
-  console.log(products);
-  console.log(products.data);
+  const products = useSWR("/api/products", fetcher);
   const productList = products.data;
-  console.log(productList);
 
   const [itemlist, setItemlist] = useState(productList);
 
+  async function handleDeleteItemClick() {
+    if (
+      confirm(
+        `Möchtest du \n\n"${productList.productName}"\n\n unwiederbringlich löschen?`
+      )
+    ) {
+      const response = await fetch(`/api/products/${productList._id}`, {
+        method: "DELETE",
+      });
+      if (response.ok) {
+        products.mutate();
+      }
+    }
+  }
   return (
     <>
       {products.data ? (
@@ -36,6 +42,9 @@ function Category() {
               .filter((product) => product.category === "Gemüse")
               .map((product) => (
                 <StyledItem key={product._id}>
+                  {console.log(productList)}
+                  {console.log(product.productName)}
+                  {console.log(product._id)}
                   <StyledListName>{product.productName}</StyledListName>
                   <StyledListUnit>{product.unit}</StyledListUnit>
                   <DecrementButton
@@ -85,10 +94,10 @@ function Category() {
                   >
                     <Add />
                   </IncrementButton>
+                  <TrashcanSmall onClick={handleDeleteItemClick} />
                 </StyledItem>
               ))}
           </StyledList>
-
           <CategoryStyled>
             <CategoryNameStyled>Obst</CategoryNameStyled>
           </CategoryStyled>
@@ -150,7 +159,6 @@ function Category() {
                 </StyledItem>
               ))}
           </StyledList>
-
           <CategoryStyled>
             <CategoryNameStyled>Kühlwaren</CategoryNameStyled>
           </CategoryStyled>
@@ -212,7 +220,6 @@ function Category() {
                 </StyledItem>
               ))}
           </StyledList>
-
           <CategoryStyled>
             <CategoryNameStyled>Tiefkühlwaren</CategoryNameStyled>
           </CategoryStyled>
@@ -274,7 +281,6 @@ function Category() {
                 </StyledItem>
               ))}
           </StyledList>
-
           <CategoryStyled>
             <CategoryNameStyled>Lebensmittel</CategoryNameStyled>
           </CategoryStyled>
@@ -336,7 +342,6 @@ function Category() {
                 </StyledItem>
               ))}
           </StyledList>
-
           <CategoryStyled>
             <CategoryNameStyled>Getränke</CategoryNameStyled>
           </CategoryStyled>
@@ -433,7 +438,7 @@ const StyledAmountHeadline = styled.div`
   display: flex;
   flex-direction: row;
   justify-content: flex-end;
-  padding: 0.3em 1.5em 0.3em 0.3em;
+  padding: 0.3rem 2.5rem 0.3rem 0.3rem;
   align-items: flex-end;
   color: var(--darkblue);
 `;
@@ -456,7 +461,7 @@ const StyledList = styled.div`
 // -------------------- //
 const StyledItem = styled.div`
   display: grid;
-  grid-template-columns: 1.5fr 1.5fr 0.6fr 0.5fr 1fr;
+  grid-template-columns: 1.5fr 1.5fr 0.65fr 0.5fr 1fr 0.6fr;
   justify-content: space-around;
   align-items: center;
   border-top: 2px solid var(--lightblue);
@@ -464,7 +469,7 @@ const StyledItem = styled.div`
 const StyledListName = styled.p`
   color: var(--darkblue);
   font-size: 20px;
-  padding-left: 0.5rem;
+  padding-left: 1rem;
 `;
 const StyledListUnit = styled.p`
   color: var(--darkblue);
