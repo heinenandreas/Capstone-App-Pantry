@@ -27,6 +27,19 @@ function Category() {
       }
     }
   }
+
+  async function handleIncrementProductAmount(id) {
+    const response = await fetch(`/api/products/${id}`, {
+      method: "PATCH",
+      headers: { "content-type": "application/json" },
+      body: JSON.stringify({ actualAmount: actualAmount }),
+    });
+    const updatedJoke = await response.json();
+    if (response.ok) {
+      products.mutate();
+    }
+  }
+
   return (
     <>
       {products.data ? (
@@ -549,6 +562,7 @@ const StyledListActualAmount = styled.p`
 `;
 
 const StyledTrash = styled.div`
+  cursor: pointer;
   position: absolute;
   left: 83vw;
 `;

@@ -4,8 +4,8 @@ import Logo from "../components/Logo/Logo";
 function MyApp({ Component, pageProps }) {
   return (
     <>
-      <Logo />
       <GlobalStyle />
+      <Logo />
       <Component {...pageProps} />
     </>
   );
