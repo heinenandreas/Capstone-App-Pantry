@@ -464,7 +464,7 @@ const StyledAmountHeadline = styled.div`
   display: flex;
   flex-direction: row;
   justify-content: flex-end;
-  padding: 0.3rem 2.5rem 0.3rem 0.3rem;
+  padding: 0.3rem 2.9rem 0.3rem 0.3rem;
   align-items: flex-end;
   color: var(--darkblue);
 `;
