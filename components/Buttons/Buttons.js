@@ -91,8 +91,8 @@ const RoundButtonFixedPos = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
-  bottom: 3rem;
-  right: 3rem;
+  top: 2.5rem;
+  right: 5vw;
   background-color: white;
   width: 4rem;
   height: 4rem;

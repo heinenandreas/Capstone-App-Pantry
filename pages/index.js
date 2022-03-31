@@ -8,8 +8,8 @@ import { ButtonAddCategory } from "../components/Buttons/Buttons";
 export default function Home() {
   return (
     <>
-      <Category />
       <ButtonAddCategory />
+      <Category />
     </>
   );
 }
