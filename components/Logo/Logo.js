@@ -16,10 +16,16 @@ function Logo() {
 export default Logo;
 
 const LogoContainer = styled.h2`
+  width: 100vw;
+  height: 8rem;
   display: flex;
   justify-content: center;
-  font-size: 2.5rem;
-  margin: 1.5rem 0;
+  align-items: center;
+  font-size: 4rem;
+  box-shadow: 0 5px 5px 0px rgba(0, 0, 0, 0.3) inset;
+  color: #ffffff;
+  text-shadow: 2px 2px 2px #474747;
+  border-radius: 0 0 50px 0;
 `;
 
 const LogoOrange = styled.span`

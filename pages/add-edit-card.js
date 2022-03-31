@@ -76,7 +76,7 @@ function AddEditCard({ product }) {
   };
 
   return (
-    <AddCardStyled>
+    <>
       <FormStyled onSubmit={handleCreateProduct}>
         <LabelStyled>Neues Produkt</LabelStyled>
         <p>Produktname</p>
@@ -189,7 +189,7 @@ function AddEditCard({ product }) {
           <ButtonDelete />
         </ButtonBar>
       </FormStyled>
-    </AddCardStyled>
+    </>
   );
 }
 
