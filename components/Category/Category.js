@@ -62,8 +62,6 @@ function Category() {
                   .filter((product) => product.category === "Gemüse")
                   .map((product) => (
                     <StyledItem key={product._id}>
-                      {console.log(productList)}
-                      {console.log(product._id)}
                       <StyledListName>{product.productName}</StyledListName>
                       <StyledListUnit>{product.unit}</StyledListUnit>
                       <DecrementButton
