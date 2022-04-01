@@ -6,6 +6,7 @@ import Link from "next/link";
 import useSWR from "swr";
 import TrashcanSmall from "../../src/Icons/TrashcanSmall.svg";
 import { categories } from "../../itemlist";
+import { HighlightActualAmount } from "../HighlightAmount/HighlightAmount";
 
 const fetcher = (resource, init) =>
   fetch(resource, init).then((res) => res.json());
@@ -17,13 +18,6 @@ function Category() {
   const [itemlist, setItemlist] = useState(productList);
 
   const [categoryHidden, setCategoryHidden] = useState(true);
-
-  const [vegetableHidden, setVegetableHidden] = useState(true);
-  const [fruitHidden, setFruitHidden] = useState(true);
-  const [fridgeHidden, setFridgeHidden] = useState(true);
-  const [freezerHidden, setFreezerHidden] = useState(true);
-  const [foodHidden, setFoodHidden] = useState(true);
-  const [beverageHidden, setBeverageHidden] = useState(true);
 
   async function handleDeleteItemClick(id, productname) {
     if (
@@ -91,8 +85,9 @@ function Category() {
         <>
           {categories.map((category) => {
             return (
-              <>
+              <div key={category.id}>
                 <CategoryStyled
+
                 // key={category.id}
                 // onClick={() => {
                 //   category.filter((category) => {
@@ -108,10 +103,10 @@ function Category() {
                 </CategoryStyled>
                 {/* {!categoryHidden ? ( */}
                 <>
-                  {productList
-                    .filter((product) => product.category === category.name)
-                    .map((product) => (
-                      <StyledList>
+                  <StyledList>
+                    {productList
+                      .filter((product) => product.category === category.name)
+                      .map((product) => (
                         <StyledItem key={product._id}>
                           <StyledListName>{product.productName}</StyledListName>
                           <StyledListUnit>{product.unit}</StyledListUnit>
@@ -125,9 +120,12 @@ function Category() {
                           >
                             <Remove />
                           </DecrementButton>
-                          <StyledListActualAmount>
-                            {product.actualAmount}
-                          </StyledListActualAmount>
+                          <HighlightActualAmount
+                            product={product}
+                            actualAmount={product.actualAmount}
+                            minAmount={product.minAmount}
+                          />
+
                           <IncrementButton
                             type="button"
                             key={product.name}
@@ -150,11 +148,11 @@ function Category() {
                             />
                           </StyledTrash>
                         </StyledItem>
-                      </StyledList>
-                    ))}
+                      ))}
+                  </StyledList>
                 </>
                 {/* ) : null} */}
-              </>
+              </div>
             );
           })}
         </>
@@ -273,7 +271,16 @@ const DecrementButton = styled.button`
 const StyledListActualAmount = styled.p`
   position: absolute;
   left: 58vw;
-  color: var(--darkblue);
+  color: ${(props) => (props.color ? props.color : "var(--darkblue)")};
+
+  font-size: 40px;
+`;
+
+const StyledListNegativeActualAmount = styled.p`
+  position: absolute;
+  left: 58vw;
+  color: ${(props) => (props.color ? props.color : "var(--pink)")};
+
   font-size: 40px;
 `;
 
