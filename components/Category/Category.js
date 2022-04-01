@@ -268,22 +268,6 @@ const DecrementButton = styled.button`
   }
 `;
 
-const StyledListActualAmount = styled.p`
-  position: absolute;
-  left: 58vw;
-  color: ${(props) => (props.color ? props.color : "var(--darkblue)")};
-
-  font-size: 40px;
-`;
-
-const StyledListNegativeActualAmount = styled.p`
-  position: absolute;
-  left: 58vw;
-  color: ${(props) => (props.color ? props.color : "var(--pink)")};
-
-  font-size: 40px;
-`;
-
 const StyledTrash = styled.div`
   cursor: pointer;
   position: absolute;
