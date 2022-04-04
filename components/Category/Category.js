@@ -7,7 +7,6 @@ import useSWR from "swr";
 import TrashcanSmall from "../../src/Icons/TrashcanSmall.svg";
 import { categories } from "../../itemlist";
 import { HighlightActualAmount } from "../HighlightAmount/HighlightAmount";
-import Product from "../../schema/Product";
 
 const fetcher = (resource, init) =>
   fetch(resource, init).then((res) => res.json());
@@ -17,7 +16,6 @@ function Category() {
   const productList = products.data;
 
   const [categoryHidden, setCategoryHidden] = useState(true);
-  // const [itemlist, setItemlist] = useState(productList);
 
   async function handleDeleteItemClick(id, productname) {
     if (
@@ -39,9 +37,6 @@ function Category() {
       body: JSON.stringify({ actualAmount: actualAmount }),
     });
     const updatedProduct = await response.json();
-    // if (response.ok) {
-    //   products.mutate();
-    // }
     if (updatedProduct.success) {
       products.mutate();
     }
