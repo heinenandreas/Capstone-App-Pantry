@@ -46,6 +46,7 @@ function Category() {
     <>
       {categories.map((category) => {
         // --- USESTATE GOES HERE ---
+        const [categoryHidden, setCategoryHidden] = useState(true);
 
         return (
           <div key={category.id}>
@@ -67,12 +68,14 @@ function Category() {
                         <DecrementButton
                           type="button"
                           amount={product.actualAmount}
-                          onClick={() =>
-                            handleProductAmount(
-                              product._id,
-                              product.actualAmount - 1
-                            )
-                          }
+                          onClick={() => {
+                            if (product.actualAmount > 0) {
+                              handleProductAmount(
+                                product._id,
+                                product.actualAmount - 1
+                              );
+                            }
+                          }}
                         >
                           <Remove />
                         </DecrementButton>
