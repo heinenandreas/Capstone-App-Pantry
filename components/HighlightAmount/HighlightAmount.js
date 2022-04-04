@@ -1,7 +1,7 @@
 import styled from "styled-components";
 
 export function HighlightActualAmount(product, actualAmount, minAmount) {
-  if (product.actualAmount < product.minAmount) {
+  if (product.actualAmount <= product.minAmount) {
     return (
       <StyledListNegativeActualAmount>
         {product.actualAmount}

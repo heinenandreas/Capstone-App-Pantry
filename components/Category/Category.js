@@ -46,7 +46,6 @@ function Category() {
     <>
       {categories.map((category) => {
         // --- USESTATE GOES HERE ---
-        const [categoryHidden, setCategoryHidden] = useState(true);
 
         return (
           <div key={category.id}>
