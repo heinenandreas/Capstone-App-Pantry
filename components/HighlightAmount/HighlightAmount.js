@@ -1,7 +1,6 @@
 import styled from "styled-components";
 
 export function HighlightActualAmount(product, actualAmount, minAmount) {
-  console.log(product);
   if (product.actualAmount < product.minAmount) {
     return (
       <StyledListNegativeActualAmount>

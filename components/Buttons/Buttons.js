@@ -98,6 +98,7 @@ const RoundButtonFixedPos = styled.div`
   height: 4rem;
   border-radius: 999px;
   box-shadow: 0 5px 5px 0px rgba(0, 0, 0, 0.3) inset;
+  z-index: 2;
   cursor: pointer;
 `;
 

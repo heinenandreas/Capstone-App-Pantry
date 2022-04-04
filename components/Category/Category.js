@@ -7,6 +7,7 @@ import useSWR from "swr";
 import TrashcanSmall from "../../src/Icons/TrashcanSmall.svg";
 import { categories } from "../../itemlist";
 import { HighlightActualAmount } from "../HighlightAmount/HighlightAmount";
+import Product from "../../schema/Product";
 
 const fetcher = (resource, init) =>
   fetch(resource, init).then((res) => res.json());
@@ -15,9 +16,9 @@ function Category() {
   const products = useSWR("/api/products", fetcher);
   const productList = products.data;
 
-  const [itemlist, setItemlist] = useState(productList);
-
   const [categoryHidden, setCategoryHidden] = useState(true);
+  const [itemlist, setItemlist] = useState(productList);
+  console.log(itemlist);
 
   async function handleDeleteItemClick(id, productname) {
     if (
@@ -36,7 +37,7 @@ function Category() {
     const response = await fetch(`/api/products/${id}`, {
       method: "PATCH",
       headers: { "content-type": "application/json" },
-      body: JSON.stringify({ actualAmount: actualAmount }),
+      body: JSON.stringify({ actualAmount: actualAmount + 1 }),
     });
     const updatedProduct = await response.json();
     // if (response.ok) {
@@ -47,119 +48,121 @@ function Category() {
     }
   }
 
-  function decrementAmount(product) {
-    setItemlist(
-      productList.map((innerItem) => {
-        console.log(productList);
-        if (innerItem._id === productList._id && innerItem.actualAmount > 0) {
-          return {
-            ...innerItem,
-            actualAmount: innerItem.actualAmount - 1,
-          };
-        } else {
-          return innerItem;
-        }
-      })
-    );
-  }
+  // function decrementAmount(product) {
+  //   setItemlist(
+  //     productList.map((innerItem) => {
+  //       console.log(productList);
+  //       if (innerItem._id === product._id && innerItem.actualAmount > 0) {
+  //         return {
+  //           ...innerItem,
+  //           actualAmount: innerItem.actualAmount - 1,
+  //         };
+  //       } else {
+  //         return innerItem;
+  //       }
+  //     })
+  //   );
+  // }
 
-  function incrementAmount(product) {
-    setItemlist(
-      productList.map((innerItem) => {
-        console.log(productList);
-        if (innerItem._id === productList._id && innerItem.actualAmount > 0) {
-          return {
-            ...innerItem,
-            actualAmount: innerItem.actualAmount + 1,
-          };
-        } else {
-          return innerItem;
-        }
-      })
-    );
-  }
+  // function incrementAmount(product) {
+  //   setItemlist(
+  //     productList.map((innerItem) => {
+  //       console.log(productList);
+  //       if (innerItem._id === productList._id && innerItem.actualAmount > 0) {
+  //         return {
+  //           ...innerItem,
+  //           actualAmount: innerItem.actualAmount + 1,
+  //         };
+  //       } else {
+  //         return innerItem;
+  //       }
+  //     })
+  //   );
+  // }
 
-  return (
+  return products.data ? (
     <>
-      {products.data ? (
-        <>
-          {categories.map((category) => {
-            return (
-              <div key={category.id}>
-                <CategoryStyled
+      {categories.map((category) => {
+        // --- USESTATE GOES HERE ---
 
-                // key={category.id}
-                // onClick={() => {
-                //   category.filter((category) => {
-                //     if (category.id === category.id) {
-                //       setCategoryHidden(false);
-                //     } else {
-                //       setCategoryHidden(true);
-                //     }
-                //   });
-                // }}
-                >
-                  <CategoryNameStyled>{category.name}</CategoryNameStyled>
-                </CategoryStyled>
-                {/* {!categoryHidden ? ( */}
-                <>
-                  <StyledList>
-                    {productList
-                      .filter((product) => product.category === category.name)
-                      .map((product) => (
-                        <StyledItem key={product._id}>
-                          <StyledListName>{product.productName}</StyledListName>
-                          <StyledListUnit>{product.unit}</StyledListUnit>
-                          <DecrementButton
-                            type="button"
-                            amount={product.actualAmount}
-                            onClick={() => [
-                              handleProductAmount(),
-                              decrementAmount(),
-                            ]}
-                          >
-                            <Remove />
-                          </DecrementButton>
-                          <HighlightActualAmount
-                            product={product}
-                            actualAmount={product.actualAmount}
-                            minAmount={product.minAmount}
+        return (
+          <div key={category.id}>
+            <CategoryStyled
+              key={category.id}
+              onClick={() => setCategoryHidden((s) => !s)}
+            >
+              <CategoryNameStyled>{category.name}</CategoryNameStyled>
+            </CategoryStyled>
+            {!categoryHidden ? (
+              <>
+                <StyledList>
+                  {productList
+                    .filter((product) => product.category === category.name)
+                    .map((product) => (
+                      <StyledItem key={product._id}>
+                        <StyledListName>{product.productName}</StyledListName>
+                        <StyledListUnit>{product.unit}</StyledListUnit>
+                        <DecrementButton
+                          type="button"
+                          amount={product.actualAmount}
+                          onClick={() => [
+                            setItemlist(
+                              itemlist.map((innerItem) => {
+                                console.log(itemlist);
+                                console.log(product.productName);
+                                console.log(innerItem.productName);
+                                if (
+                                  innerItem._id === itemlist._id &&
+                                  innerItem.actualAmount > 0
+                                ) {
+                                  return {
+                                    ...innerItem,
+                                    actualAmount: innerItem.actualAmount - 1,
+                                  };
+                                } else {
+                                  return innerItem;
+                                }
+                              })
+                            ),
+                            handleProductAmount(),
+                          ]}
+                        >
+                          <Remove />
+                        </DecrementButton>
+                        <HighlightActualAmount
+                          product={product}
+                          actualAmount={product.actualAmount}
+                          minAmount={product.minAmount}
+                        />
+                        <IncrementButton
+                          type="button"
+                          key={product.name}
+                          amount={product.actualAmount}
+                          onClick={() => [handleProductAmount()]}
+                        >
+                          <Add />
+                        </IncrementButton>
+                        <StyledTrash>
+                          <TrashcanSmall
+                            onClick={() =>
+                              handleDeleteItemClick(
+                                product._id,
+                                product.productName
+                              )
+                            }
                           />
-
-                          <IncrementButton
-                            type="button"
-                            key={product.name}
-                            amount={product.actualAmount}
-                            onClick={() => [
-                              handleProductAmount(),
-                              incrementAmount(),
-                            ]}
-                          >
-                            <Add />
-                          </IncrementButton>
-                          <StyledTrash>
-                            <TrashcanSmall
-                              onClick={() =>
-                                handleDeleteItemClick(
-                                  product._id,
-                                  product.productName
-                                )
-                              }
-                            />
-                          </StyledTrash>
-                        </StyledItem>
-                      ))}
-                  </StyledList>
-                </>
-                {/* ) : null} */}
-              </div>
-            );
-          })}
-        </>
-      ) : (
-        <div>loading</div>
-      )}
+                        </StyledTrash>
+                      </StyledItem>
+                    ))}
+                </StyledList>
+              </>
+            ) : null}
+          </div>
+        );
+      })}
     </>
+  ) : (
+    <div>loading</div>
   );
 }
 
