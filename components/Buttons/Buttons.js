@@ -7,12 +7,6 @@ import Trashcan from "../../src/Icons/Trashcan.svg";
 import TrashcanSmall from "../../src/Icons/TrashcanSmall.svg";
 import Link from "next/link";
 
-export function DeleteItem() {
-  <DeleteItemStyles>
-    <TrashcanSmall />
-  </DeleteItemStyles>;
-}
-
 export function ButtonAddCategory() {
   return (
     <Link href="/add-edit-card">
@@ -62,11 +56,6 @@ export function Increment() {
     </IncrementButton>
   );
 }
-
-const DeleteItemStyles = styled.button`
-  width: 1rem;
-  height: 1rem;
-`;
 
 const RoundButton = styled.div`
   display: flex;

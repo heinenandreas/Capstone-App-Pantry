@@ -50,73 +50,12 @@ export const categories = [
     id: 5,
     name: "Getränke",
   },
-];
-
-export const initialFridgeList = [
   {
-    id: 0,
-    name: "Eier",
-    unit: "Stück",
-    unitCount: 1,
-    measurement: 1,
-    minAmount: 4,
-    actualAmount: 6,
-    maxAmount: 10,
+    id: 6,
+    name: "Hygieneartikel",
   },
   {
-    id: 1,
-    name: "Milch",
-    unit: "Pack",
-    unitCount: 1,
-    measurement: 1,
-    minAmount: 4,
-    actualAmount: 6,
-    maxAmount: 3,
-  },
-];
-
-export const initialShelfList = [
-  {
-    id: 0,
-    name: "Erbsen",
-    unit: "Dose",
-    unitCount: 1,
-    measurement: 1,
-    minAmount: 5,
-    actualAmount: 8,
-    maxAmount: 9,
-  },
-  {
-    id: 1,
-    name: "Möhren",
-    unit: "Dose",
-    unitCount: 1,
-    measurement: 1,
-    minAmount: 4,
-    actualAmount: 6,
-    maxAmount: 3,
-  },
-];
-
-export const initialFreezerList = [
-  {
-    id: 0,
-    name: "Pizza",
-    unit: "Stück",
-    unitCount: 1,
-    measurement: 1,
-    minAmount: 4,
-    actualAmount: 6,
-    maxAmount: 10,
-  },
-  {
-    id: 1,
-    name: "Spinat",
-    unit: "Pack",
-    unitCount: 1,
-    measurement: 1,
-    minAmount: 4,
-    actualAmount: 6,
-    maxAmount: 3,
+    id: 7,
+    name: "Haushaltswaren",
   },
 ];
