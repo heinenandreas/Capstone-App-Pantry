@@ -17,8 +17,7 @@ function Category() {
   const productList = products.data;
 
   const [categoryHidden, setCategoryHidden] = useState(true);
-  const [itemlist, setItemlist] = useState(productList);
-  console.log(itemlist);
+  // const [itemlist, setItemlist] = useState(productList);
 
   async function handleDeleteItemClick(id, productname) {
     if (
@@ -37,7 +36,7 @@ function Category() {
     const response = await fetch(`/api/products/${id}`, {
       method: "PATCH",
       headers: { "content-type": "application/json" },
-      body: JSON.stringify({ actualAmount: actualAmount + 1 }),
+      body: JSON.stringify({ actualAmount: actualAmount }),
     });
     const updatedProduct = await response.json();
     // if (response.ok) {
@@ -47,38 +46,6 @@ function Category() {
       products.mutate();
     }
   }
-
-  // function decrementAmount(product) {
-  //   setItemlist(
-  //     productList.map((innerItem) => {
-  //       console.log(productList);
-  //       if (innerItem._id === product._id && innerItem.actualAmount > 0) {
-  //         return {
-  //           ...innerItem,
-  //           actualAmount: innerItem.actualAmount - 1,
-  //         };
-  //       } else {
-  //         return innerItem;
-  //       }
-  //     })
-  //   );
-  // }
-
-  // function incrementAmount(product) {
-  //   setItemlist(
-  //     productList.map((innerItem) => {
-  //       console.log(productList);
-  //       if (innerItem._id === productList._id && innerItem.actualAmount > 0) {
-  //         return {
-  //           ...innerItem,
-  //           actualAmount: innerItem.actualAmount + 1,
-  //         };
-  //       } else {
-  //         return innerItem;
-  //       }
-  //     })
-  //   );
-  // }
 
   return products.data ? (
     <>
@@ -105,27 +72,12 @@ function Category() {
                         <DecrementButton
                           type="button"
                           amount={product.actualAmount}
-                          onClick={() => [
-                            setItemlist(
-                              itemlist.map((innerItem) => {
-                                console.log(itemlist);
-                                console.log(product.productName);
-                                console.log(innerItem.productName);
-                                if (
-                                  innerItem._id === itemlist._id &&
-                                  innerItem.actualAmount > 0
-                                ) {
-                                  return {
-                                    ...innerItem,
-                                    actualAmount: innerItem.actualAmount - 1,
-                                  };
-                                } else {
-                                  return innerItem;
-                                }
-                              })
-                            ),
-                            handleProductAmount(),
-                          ]}
+                          onClick={() =>
+                            handleProductAmount(
+                              product._id,
+                              product.actualAmount - 1
+                            )
+                          }
                         >
                           <Remove />
                         </DecrementButton>
@@ -138,7 +90,12 @@ function Category() {
                           type="button"
                           key={product.name}
                           amount={product.actualAmount}
-                          onClick={() => [handleProductAmount()]}
+                          onClick={() =>
+                            handleProductAmount(
+                              product._id,
+                              product.actualAmount + 1
+                            )
+                          }
                         >
                           <Add />
                         </IncrementButton>
