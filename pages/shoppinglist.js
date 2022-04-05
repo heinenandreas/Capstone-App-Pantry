@@ -24,6 +24,16 @@ function Shoppinglist() {
     }
   }
 
+  function handleClickDecrement(product) {
+    if (product.actualAmount > 0) {
+      handleProductAmount(product._id, product.actualAmount - 1);
+    }
+  }
+
+  function handleClickIncrement(product) {
+    handleProductAmount(product._id, product.actualAmount + 1);
+  }
+
   return products.data ? (
     <StyledCategory>
       <ShoppinglistStyled>
@@ -39,14 +49,7 @@ function Shoppinglist() {
                 <DecrementButton
                   type="button"
                   amount={product.actualAmount}
-                  onClick={() => {
-                    if (product.actualAmount > 0) {
-                      handleProductAmount(
-                        product._id,
-                        product.actualAmount - 1
-                      );
-                    }
-                  }}
+                  onClick={() => handleClickDecrement(product)}
                 >
                   <Remove />
                 </DecrementButton>
@@ -59,9 +62,7 @@ function Shoppinglist() {
                   type="button"
                   key={product.name}
                   amount={product.actualAmount}
-                  onClick={() =>
-                    handleProductAmount(product._id, product.actualAmount + 1)
-                  }
+                  onClick={() => handleClickIncrement(product)}
                 >
                   <Add />
                 </IncrementButton>
