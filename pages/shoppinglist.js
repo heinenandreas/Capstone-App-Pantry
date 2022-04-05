@@ -25,56 +25,61 @@ function Shoppinglist() {
   }
 
   return products.data ? (
-    <>
+    <StyledCategory>
       <ShoppinglistStyled>
         <CategoryNameStyled>Shoppinglist</CategoryNameStyled>
       </ShoppinglistStyled>
       <StyledList>
-        {productList.map((product) => (
-          <StyledItem key={product._id}>
-            <StyledListName>{product.productName}</StyledListName>
-            <StyledListUnit>{product.unit}</StyledListUnit>
-            <DecrementButton
-              type="button"
-              amount={product.actualAmount}
-              onClick={() => {
-                if (product.actualAmount > 0) {
-                  handleProductAmount(product._id, product.actualAmount - 1);
-                }
-              }}
-            >
-              <Remove />
-            </DecrementButton>
-            <HighlightActualAmountPositive
-              product={product}
-              actualAmount={product.actualAmount}
-              maxAmount={product.maxAmount}
-            />
-            <IncrementButton
-              type="button"
-              key={product.name}
-              amount={product.actualAmount}
-              onClick={() =>
-                handleProductAmount(product._id, product.actualAmount + 1)
-              }
-            >
-              <Add />
-            </IncrementButton>
-            <StyledListActualAmount>{product.maxAmount}</StyledListActualAmount>
-          </StyledItem>
-        ))}
+        {productList
+          .filter((product) => product.actualAmount <= product.maxAmount)
+          .map((product) => (
+            <StyledItem key={product._id}>
+              <StyledListName>{product.productName}</StyledListName>
+              <ElementContainer>
+                <DecrementButton
+                  type="button"
+                  amount={product.actualAmount}
+                  onClick={() => {
+                    if (product.actualAmount > 0) {
+                      handleProductAmount(
+                        product._id,
+                        product.actualAmount - 1
+                      );
+                    }
+                  }}
+                >
+                  <Remove />
+                </DecrementButton>
+                <HighlightActualAmountPositive
+                  product={product}
+                  actualAmount={product.actualAmount}
+                  maxAmount={product.maxAmount}
+                />
+                <IncrementButton
+                  type="button"
+                  key={product.name}
+                  amount={product.actualAmount}
+                  onClick={() =>
+                    handleProductAmount(product._id, product.actualAmount + 1)
+                  }
+                >
+                  <Add />
+                </IncrementButton>
+                <StyledListMaxAmount>{product.maxAmount}</StyledListMaxAmount>
+                <StyledListUnit>{product.unit}</StyledListUnit>
+              </ElementContainer>
+            </StyledItem>
+          ))}
       </StyledList>
-    </>
+    </StyledCategory>
   ) : (
     <div>loading</div>
   );
 }
 
-const StyledListActualAmount = styled.p`
-  position: absolute;
-  left: 58vw;
+const StyledListMaxAmount = styled.p`
   color: var(--darkblue);
-  font-size: 40px;
+  font-size: 30px;
 `;
 
 const CategoryNameStyled = styled.h3`
@@ -82,31 +87,22 @@ const CategoryNameStyled = styled.h3`
   margin: 0;
   padding-left: 0.5rem;
   color: var(--darkblue);
-  border-radius: 0 1em 1em 0;
 `;
 
 const ShoppinglistStyled = styled.div`
-  height: 2.5rem;
+  height: 3rem;
   width: 95vw;
   background-color: var(--lightgreen);
-  border-radius: 0 1em 1em 0;
+  border-radius: 0 1em 0 0;
   display: flex;
-  flex-direction: row;
-  justify-content: space-between;
   align-items: center;
   cursor: pointer;
   transition: 0.5s;
   border-bottom: 3px solid var(--green);
-
-  &:hover {
-    background-color: var(--green);
-  }
 `;
 
 const StyledList = styled.div`
-  display: grid;
-  height: auto;
-  width: 92vw;
+  width: 95vw;
   border: 2px solid var(--darkblue);
   border-top: 0px;
   border-left: 0px;
@@ -115,29 +111,23 @@ const StyledList = styled.div`
 `;
 
 const StyledItem = styled.div`
-  height: 3rem;
   display: flex;
+  justify-content: space-between;
   align-items: center;
+  height: 3rem;
   border-top: 2px solid var(--lightblue);
 `;
 const StyledListName = styled.p`
-  position: absolute;
-  left: 1vw;
   color: var(--darkblue);
   font-size: 20px;
   padding-left: 1rem;
 `;
 const StyledListUnit = styled.p`
-  position: absolute;
-  left: 80vw;
   color: var(--darkblue);
   font-size: 10px;
 `;
 
 const IncrementButton = styled.button`
-  position: absolute;
-  left: 57vw;
-  color: white;
   background-color: var(--lightgreen);
   border: 2px solid var(--green);
   border-radius: 999px;
@@ -159,9 +149,6 @@ const IncrementButton = styled.button`
 `;
 
 const DecrementButton = styled.button`
-  position: absolute;
-  left: 38vw;
-  color: white;
   background-color: var(--neonpink);
   border: 2px solid var(--pink);
   border-radius: 999px;
@@ -180,6 +167,19 @@ const DecrementButton = styled.button`
     background-color: var(--pink);
     border: 2px solid var(--neonpink);
   }
+`;
+
+const StyledCategory = styled.div`
+  margin-bottom: 5.5rem;
+`;
+
+const ElementContainer = styled.div`
+  width: 16rem;
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
+  align-items: center;
+  justify-items: center;
+  gap: 0.2rem;
 `;
 
 export default Shoppinglist;
