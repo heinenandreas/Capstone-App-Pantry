@@ -6,7 +6,8 @@ import Link from "next/link";
 import useSWR from "swr";
 import TrashcanSmall from "../../src/Icons/TrashcanSmall.svg";
 import { categories } from "../../itemlist";
-import { HighlightActualAmount } from "../HighlightAmount/HighlightAmount";
+import { HighlightActualAmountNegative } from "../HighlightAmount/HighlightAmount";
+import Collapsible from "react-collapsible";
 
 const fetcher = (resource, init) =>
   fetch(resource, init).then((res) => res.json());
@@ -43,143 +44,113 @@ function Category() {
   }
 
   return products.data ? (
-    <>
+    <StyledCategory>
       {categories.map((category) => {
-        // --- USESTATE GOES HERE ---
-
         return (
-          <div key={category.id}>
-            <CategoryStyled
-              key={category.id}
-              onClick={() => setCategoryHidden((s) => !s)}
-            >
-              <CategoryNameStyled>{category.name}</CategoryNameStyled>
-            </CategoryStyled>
-            {!categoryHidden ? (
-              <>
-                <StyledList>
-                  {productList
-                    .filter((product) => product.category === category.name)
-                    .map((product) => (
-                      <StyledItem key={product._id}>
-                        <StyledListName>{product.productName}</StyledListName>
-                        <StyledListUnit>{product.unit}</StyledListUnit>
-                        <DecrementButton
-                          type="button"
-                          amount={product.actualAmount}
-                          onClick={() => {
-                            if (product.actualAmount > 0) {
-                              handleProductAmount(
-                                product._id,
-                                product.actualAmount - 1
-                              );
-                            }
-                          }}
-                        >
-                          <Remove />
-                        </DecrementButton>
-                        <HighlightActualAmount
-                          product={product}
-                          actualAmount={product.actualAmount}
-                          minAmount={product.minAmount}
-                        />
-                        <IncrementButton
-                          type="button"
-                          key={product.name}
-                          amount={product.actualAmount}
-                          onClick={() =>
+          <Collapsible trigger={category.name} key={category.id}>
+            <StyledList>
+              {productList
+                .filter((product) => product.category === category.name)
+                .map((product) => (
+                  <StyledItem key={product._id}>
+                    <StyledListName>{product.productName}</StyledListName>
+                    <ElementContainer>
+                      <DecrementButton
+                        type="button"
+                        amount={product.actualAmount}
+                        onClick={() => {
+                          if (product.actualAmount > 0) {
                             handleProductAmount(
                               product._id,
-                              product.actualAmount + 1
+                              product.actualAmount - 1
+                            );
+                          }
+                        }}
+                      >
+                        <Remove />
+                      </DecrementButton>
+                      <HighlightActualAmountNegative
+                        product={product}
+                        actualAmount={product.actualAmount}
+                        minAmount={product.minAmount}
+                      />
+                      <IncrementButton
+                        type="button"
+                        key={product.name}
+                        amount={product.actualAmount}
+                        onClick={() =>
+                          handleProductAmount(
+                            product._id,
+                            product.actualAmount + 1
+                          )
+                        }
+                      >
+                        <Add />
+                      </IncrementButton>
+                      <StyledListUnit>{product.unit}</StyledListUnit>
+                      <StyledTrash>
+                        <TrashcanSmall
+                          onClick={() =>
+                            handleDeleteItemClick(
+                              product._id,
+                              product.productName
                             )
                           }
-                        >
-                          <Add />
-                        </IncrementButton>
-                        <StyledTrash>
-                          <TrashcanSmall
-                            onClick={() =>
-                              handleDeleteItemClick(
-                                product._id,
-                                product.productName
-                              )
-                            }
-                          />
-                        </StyledTrash>
-                      </StyledItem>
-                    ))}
-                </StyledList>
-              </>
-            ) : null}
-          </div>
+                        />
+                      </StyledTrash>
+                    </ElementContainer>
+                  </StyledItem>
+                ))}
+            </StyledList>
+          </Collapsible>
         );
       })}
-    </>
+    </StyledCategory>
   ) : (
     <div>loading</div>
   );
 }
 
-const CategoryStyled = styled.div`
-  height: 2.5rem;
-  width: 95vw;
-  background-color: var(--lightgreen);
-  border-radius: 0 1em 1em 0;
-  display: flex;
-  flex-direction: row;
-  justify-content: space-between;
-  align-items: center;
-  cursor: pointer;
-  transition: 0.5s;
-  border-bottom: 3px solid var(--green);
-
-  &:hover {
-    background-color: var(--green);
-  }
-`;
-
-const CategoryNameStyled = styled.h3`
-  font-size: 1.6rem;
-  margin: 0;
-  padding-left: 0.5rem;
-  color: var(--darkblue);
-  border-radius: 0 1em 1em 0;
+const StyledCategory = styled.div`
+  margin-bottom: 5.5rem;
 `;
 
 const StyledList = styled.div`
-  display: grid;
-  height: auto;
-  width: 92vw;
+  width: 100%;
   border: 2px solid var(--darkblue);
   border-top: 0px;
   border-left: 0px;
-  border-radius: 0 0 22px 0;
   background-color: #ffebd9;
 `;
 
-const StyledItem = styled.div`
-  height: 3rem;
-  display: flex;
+const ElementContainer = styled.div`
+  width: 15rem;
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
   align-items: center;
+  justify-items: center;
+  gap: 0.5rem;
+`;
+
+const StyledItem = styled.div`
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  height: 3rem;
   border-top: 2px solid var(--lightblue);
 `;
 const StyledListName = styled.p`
-  position: absolute;
-  left: 1vw;
   color: var(--darkblue);
   font-size: 20px;
   padding-left: 1rem;
 `;
 const StyledListUnit = styled.p`
-  position: absolute;
   left: 75vw;
   color: var(--darkblue);
   font-size: 10px;
 `;
 
 const IncrementButton = styled.button`
-  position: absolute;
-  left: 67vw;
   color: white;
   background-color: var(--lightgreen);
   border: 2px solid var(--green);
@@ -202,8 +173,6 @@ const IncrementButton = styled.button`
 `;
 
 const DecrementButton = styled.button`
-  position: absolute;
-  left: 48vw;
   color: white;
   background-color: var(--neonpink);
   border: 2px solid var(--pink);
@@ -227,8 +196,6 @@ const DecrementButton = styled.button`
 
 const StyledTrash = styled.div`
   cursor: pointer;
-  position: absolute;
-  left: 83vw;
 `;
 
 export default Category;

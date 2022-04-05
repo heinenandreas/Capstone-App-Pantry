@@ -15,4 +15,28 @@ export const GlobalStyle = createGlobalStyle`
       margin: 0;
       color: var(--darkblue);
 }
+
+
+.Collapsible{
+background-color: var(--lightgreen);
+width: 95vw;
+border-radius: 0 20px 0 0;
+padding: 1rem 0 0 0; 
+cursor: pointer;
+transition: 0.5s;
+border-bottom: 3px solid var(--green);
+
+&:hover {
+    background-color: var(--green);
+  }
+
+}
+
+.Collapsible__trigger {
+  font-size: 1.6rem;
+  margin: 0;
+  padding-left: 0.5rem;
+  color: var(--darkblue);
+}
+
 `;

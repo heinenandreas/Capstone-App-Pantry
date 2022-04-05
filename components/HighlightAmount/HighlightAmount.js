@@ -1,6 +1,10 @@
 import styled from "styled-components";
 
-export function HighlightActualAmount(product, actualAmount, minAmount) {
+export function HighlightActualAmountNegative(
+  product,
+  actualAmount,
+  minAmount
+) {
   if (product.actualAmount <= product.minAmount) {
     return (
       <StyledListNegativeActualAmount>
@@ -14,16 +18,42 @@ export function HighlightActualAmount(product, actualAmount, minAmount) {
   }
 }
 
+export function HighlightActualAmountPositive(
+  product,
+  actualAmount,
+  maxAmount
+) {
+  if (product.actualAmount >= product.maxAmount) {
+    return (
+      <StyledListPositiveActualAmount>
+        {product.actualAmount}
+      </StyledListPositiveActualAmount>
+    );
+  } else {
+    return (
+      <StyledListShoppingAmount>
+        {product.actualAmount}
+      </StyledListShoppingAmount>
+    );
+  }
+}
+
 const StyledListActualAmount = styled.p`
-  position: absolute;
-  left: 58vw;
+  color: var(--darkblue);
+  font-size: 40px;
+`;
+
+const StyledListShoppingAmount = styled.p`
   color: var(--darkblue);
   font-size: 40px;
 `;
 
 const StyledListNegativeActualAmount = styled.p`
-  position: absolute;
-  left: 58vw;
   color: var(--pink);
+  font-size: 40px;
+`;
+
+const StyledListPositiveActualAmount = styled.p`
+  color: var(--green);
   font-size: 40px;
 `;

@@ -5,14 +5,36 @@ import Add from "../../src/Icons/Add.svg";
 import ArrowLeft from "../../src/Icons/ArrowLeft.svg";
 import Trashcan from "../../src/Icons/Trashcan.svg";
 import TrashcanSmall from "../../src/Icons/TrashcanSmall.svg";
+import Home from "../../src/Icons/Home.svg";
+import ShoppingCart from "../../src/Icons/ShoppingCart.svg";
 import Link from "next/link";
 
 export function ButtonAddCategory() {
   return (
     <Link href="/add-edit-card">
-      <RoundButtonFixedPos>
+      <RoundButtonBig>
         <AddBig />
-      </RoundButtonFixedPos>
+      </RoundButtonBig>
+    </Link>
+  );
+}
+
+export function ButtonHome() {
+  return (
+    <Link href="/">
+      <RoundButtonBig>
+        <Home />
+      </RoundButtonBig>
+    </Link>
+  );
+}
+
+export function ButtonShoppinglist() {
+  return (
+    <Link href="/shoppinglist">
+      <RoundButtonBig>
+        <ShoppingCart />
+      </RoundButtonBig>
     </Link>
   );
 }
@@ -73,6 +95,21 @@ const RoundButton = styled.div`
   &:hover {
     transform: scale(1.2);
   }
+`;
+
+const RoundButtonBig = styled.div`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  top: 2.5rem;
+  right: 5vw;
+  background-color: white;
+  width: 4rem;
+  height: 4rem;
+  border-radius: 999px;
+  box-shadow: 0 5px 5px 0px rgba(0, 0, 0, 0.3) inset;
+  z-index: 2;
+  cursor: pointer;
 `;
 
 const RoundButtonFixedPos = styled.div`
