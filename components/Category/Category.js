@@ -1,8 +1,6 @@
-import { useState } from "react";
 import styled from "styled-components";
 import Add from "../../src/Icons/Add.svg";
 import Remove from "../../src/Icons/Remove.svg";
-import Link from "next/link";
 import useSWR from "swr";
 import TrashcanSmall from "../../src/Icons/TrashcanSmall.svg";
 import { categories } from "../../itemlist";
@@ -15,8 +13,6 @@ const fetcher = (resource, init) =>
 function Category() {
   const products = useSWR("/api/products", fetcher);
   const productList = products.data;
-
-  const [categoryHidden, setCategoryHidden] = useState(true);
 
   async function handleDeleteItemClick(id, productname) {
     if (

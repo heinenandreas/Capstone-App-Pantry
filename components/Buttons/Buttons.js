@@ -4,7 +4,6 @@ import Remove from "../../src/Icons/Remove.svg";
 import Add from "../../src/Icons/Add.svg";
 import ArrowLeft from "../../src/Icons/ArrowLeft.svg";
 import Trashcan from "../../src/Icons/Trashcan.svg";
-import TrashcanSmall from "../../src/Icons/TrashcanSmall.svg";
 import Home from "../../src/Icons/Home.svg";
 import ShoppingCart from "../../src/Icons/ShoppingCart.svg";
 import Link from "next/link";

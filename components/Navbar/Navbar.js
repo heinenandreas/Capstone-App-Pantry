@@ -1,5 +1,4 @@
 import styled from "styled-components";
-import Link from "next/link";
 import { ButtonHome } from "../Buttons/Buttons";
 import { ButtonAddCategory } from "../Buttons/Buttons";
 import { ButtonShoppinglist } from "../Buttons/Buttons";
