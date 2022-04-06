@@ -210,6 +210,7 @@ const FormStyled = styled.form`
   display: flex;
   flex-direction: column;
   align-items: center;
+  margin-bottom: 5.5rem;
 `;
 
 const StyledInput = styled.input`
