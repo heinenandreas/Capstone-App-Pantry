@@ -16,28 +16,26 @@ const fetcher = (resource, init) =>
   fetch(resource, init).then((res) => res.json());
 
 function ProductId(product) {
+  const router = useRouter();
+  const { productId } = router.query;
   const products = useSWR("/api/products", fetcher);
+  const productList = products.data;
 
-  async function handleProductEdit(
-    id,
-    productName,
-    unit,
-    category,
-    minAmount,
-    actualAmount,
-    maxAmount
-  ) {
-    const response = await fetch(`/api/products/${id}`, {
+  const [productName, setProductName] = useState("");
+
+  async function handleProductEdit(event) {
+    event.preventDefault();
+    //const response = await fetch (`/api/products/${productId}`),{
+    const response = await fetch(`/api/products/${productId}`, {
       method: "PATCH",
       headers: { "content-type": "application/json" },
       body: JSON.stringify({
-        id: id,
         productName: productName,
-        unit: unit,
-        category: category,
-        minAmount: minAmount,
-        actualAmount: actualAmount,
-        maxAmount: maxAmount,
+        // unit: unit,
+        // category: category,
+        // minAmount: minAmount,
+        // actualAmount: actualAmount,
+        // maxAmount: maxAmount,
       }),
     });
     const updatedProduct = await response.json();
@@ -49,133 +47,139 @@ function ProductId(product) {
 
   return products.data ? (
     <>
-      {console.log(products.data)}
       <FormStyled onSubmit={handleProductEdit}>
-        <LabelStyled>Produkt bearbeiten</LabelStyled>
-        <p>{product._id}</p>
-        <StyledInput
-          type="text"
-          required
-          name="productName"
-          placeholder="Produktname"
-          onChange={(product) =>
-            handleProductEdit(product._id, product.productName)
-          }
-        />
-        {/* <p>Maßeinheit</p>
-        <StyledSelect
-          required
-          placeholder="Maß z.B. kg, Pkg, Flasche, Stk"
-          onChange={(product) => handleProductEdit(product._id, product.unit)}
-        >
-          <StyledOption value="" disabled hidden>
-            Wähle eine Einheit
-          </StyledOption>
+        {productList
+          .filter((product) => product._id === productId)
+          .map((product) => (
+            <>
+              <LabelStyled>Produkt bearbeiten</LabelStyled>
+              <h1>{product.productName}</h1>
 
-          {units.map((unit) => {
-            return (
-              <StyledOption key={unit.name} value={unit.name}>
-                {unit.name}
-              </StyledOption>
-            );
-          })}
-        </StyledSelect>
-        <p>Kategorie</p>
-        <StyledSelect
-          required
-          onChange={(product) =>
-            handleProductEdit(product._id, product.category)
-          }
-        >
-          <StyledOption value="" disabled hidden>
-            Wähle eine Kategorie
-          </StyledOption>
-          {categories.map((category) => {
-            return (
-              <StyledOption key={category.name} value={category.name}>
-                {category.name}
-              </StyledOption>
-            );
-          })}
-        </StyledSelect>
-        <p>Mindesbestand</p>
-        <AmountStyle>
-          <DecrementButton
-            onClick={(product) => {
-              if (product.minAmount > 0) {
-                handleProductEdit(product._id, product.minAmount - 1);
-              }
-            }}
-          >
-            <Remove />
-          </DecrementButton>
-          <StyledInput
+              <StyledInput
+                type="text"
+                required
+                name="productName"
+                placeholder="Produktname"
+                value={productName}
+                onChange={(event) => setProductName(event.target.value)}
+              />
+              {/* <p>Maßeinheit</p>
+          <StyledSelect
             required
-            type="number"
-            pattern="/d*"
-            name="minAmount"
-            placeholder="Min"
-            onChange={(product) => handleProductEdit()}
-          />
-          <IncrementButton
-            onClick={(product) =>
-              handleProductEdit(product._id, product.actualAmount + 1)
+            placeholder="Maß z.B. kg, Pkg, Flasche, Stk"
+            onChange={(product) => handleProductEdit(product._id, product.unit)}
+          >
+            <StyledOption value="" disabled hidden>
+              Wähle eine Einheit
+            </StyledOption>
+  
+            {units.map((unit) => {
+              return (
+                <StyledOption key={unit.name} value={unit.name}>
+                  {unit.name}
+                </StyledOption>
+              );
+            })}
+          </StyledSelect>
+          <p>Kategorie</p>
+          <StyledSelect
+            required
+            onChange={(product) =>
+              handleProductEdit(product._id, product.category)
             }
           >
-            <Add />
-          </IncrementButton>
-        </AmountStyle>
-        <p>aktueller Bestand</p>
-        <AmountStyle>
-          <DecrementButton
-            onClick={(product) => {
-              if (product.actualAmount > 0) {
-                handleProductEdit(product._id, product.actualAmount - 1);
+            <StyledOption value="" disabled hidden>
+              Wähle eine Kategorie
+            </StyledOption>
+            {categories.map((category) => {
+              return (
+                <StyledOption key={category.name} value={category.name}>
+                  {category.name}
+                </StyledOption>
+              );
+            })}
+          </StyledSelect>
+          <p>Mindesbestand</p>
+          <AmountStyle>
+            <DecrementButton
+              onClick={(product) => {
+                if (product.minAmount > 0) {
+                  handleProductEdit(product._id, product.minAmount - 1);
+                }
+              }}
+            >
+              <Remove />
+            </DecrementButton>
+            <StyledInput
+              required
+              type="number"
+              pattern="/d*"
+              name="minAmount"
+              placeholder="Min"
+              onChange={(product) => handleProductEdit()}
+            />
+            <IncrementButton
+              onClick={(product) =>
+                handleProductEdit(product._id, product.actualAmount + 1)
               }
-            }}
-          >
-            <Remove />
-          </DecrementButton>
-          <StyledInput
-            required
-            type="number"
-            name="actualAmount"
-            placeholder="Aktuell"
-            onChange={(product) => handleProductEdit()}
-          />
-          <IncrementButton
-            onClick={(product) =>
-              handleProductEdit(product._id, product.actualAmount + 1)
-            }
-          >
-            <Add />
-          </IncrementButton>
-        </AmountStyle>
-        <p>Maximalbestand</p>
-        <AmountStyle>
-          <DecrementButton
-            onClick={(product) => {
-              if (product.maxAmount > 0) {
-                handleProductEdit(product._id, product.maxAmount - 1);
+            >
+              <Add />
+            </IncrementButton>
+          </AmountStyle>
+          <p>aktueller Bestand</p>
+          <AmountStyle>
+            <DecrementButton
+              onClick={(product) => {
+                if (product.actualAmount > 0) {
+                  handleProductEdit(product._id, product.actualAmount - 1);
+                }
+              }}
+            >
+              <Remove />
+            </DecrementButton>
+            <StyledInput
+              required
+              type="number"
+              name="actualAmount"
+              placeholder="Aktuell"
+              onChange={(product) => handleProductEdit()}
+            />
+            <IncrementButton
+              onClick={(product) =>
+                handleProductEdit(product._id, product.actualAmount + 1)
               }
-            }}
-          >
-            <Remove />
-          </DecrementButton>
-          <StyledInput
-            required
-            type="number"
-            name="maxAmount"
-            placeholder="Max"
-            onChange={(product) => handleProductEdit(event.target.value)}
-          />
+            >
+              <Add />
+            </IncrementButton>
+          </AmountStyle>
+          <p>Maximalbestand</p>
+          <AmountStyle>
+            <DecrementButton
+              onClick={(product) => {
+                if (product.maxAmount > 0) {
+                  handleProductEdit(product._id, product.maxAmount - 1);
+                }
+              }}
+            >
+              <Remove />
+            </DecrementButton>
+            <StyledInput
+              required
+              type="number"
+              name="maxAmount"
+              placeholder="Max"
+              onChange={(product) => handleProductEdit(event.target.value)}
+            />
+  
+            <IncrementButton
+              onClick={(product) => handleProductEdit(event.target.value)}
+            >
+              <Add />
+            </IncrementButton>
+          </AmountStyle> */}
+            </>
+          ))}
 
-          <IncrementButton
-            onClick={(product) => handleProductEdit(event.target.value)}
-          >
-            <Add />
-          </IncrementButton>
-        </AmountStyle> */}
         <ButtonBar>
           <Link href="/">
             <a>
