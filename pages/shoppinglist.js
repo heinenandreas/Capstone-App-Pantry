@@ -40,7 +40,7 @@ function Shoppinglist() {
       </ShoppinglistStyled>
       <StyledList>
         {productList
-          .filter((product) => product.actualAmount <= product.maxAmount)
+          .filter((product) => product.actualAmount < product.maxAmount)
           .map((product) => (
             <StyledItem key={product._id}>
               <StyledListName>{product.productName}</StyledListName>

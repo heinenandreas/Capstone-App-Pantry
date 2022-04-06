@@ -18,7 +18,6 @@ function Navbar() {
 export default Navbar;
 
 const NavbarStyled = styled.div`
-  z-index: 2;
   display: flex;
   justify-content: center;
   position: fixed;
