@@ -90,9 +90,11 @@ const RoundButton = styled.div`
   border-radius: 999px;
   box-shadow: 0 5px 5px 0px rgba(0, 0, 0, 0.3) inset;
   cursor: pointer;
+  transition: 0.6s;
 
   &:hover {
     transform: scale(1.2);
+    background-color: var(--lightorange);
   }
 `;
 
@@ -109,6 +111,13 @@ const RoundButtonBig = styled.div`
   box-shadow: 0 5px 5px 0px rgba(0, 0, 0, 0.3) inset;
   z-index: 2;
   cursor: pointer;
+  transition: 0.6s;
+
+  &:hover {
+    transform: scale(1.15);
+    background-color: var(--lightorange);
+    box-shadow: 0 5px 5px 0px rgba(0, 0, 0, 0.3) inset;
+  }
 `;
 
 const SaveButtonStyled = styled.button`
@@ -119,10 +128,11 @@ const SaveButtonStyled = styled.button`
   cursor: pointer;
   background-color: white;
   box-shadow: 0 5px 5px 0px rgba(0, 0, 0, 0.3) inset;
+  transition: 0.6s;
 
   &:hover {
     transform: scale(1.15);
-    background-color: var(--green);
+    background-color: var(--lightgreen);
     box-shadow: 0 5px 5px 0px rgba(0, 0, 0, 0.3) inset;
   }
 `;

@@ -19,13 +19,13 @@ function DeleteId() {
     });
     const deletedProduct = await response.json();
     if (deletedProduct.success) {
-      products.mutate();
       router.push("/");
+      products.mutate();
     }
   }
 
   return products.data ? (
-    <FormStyled>
+    <div>
       {productList
         .filter((product) => product._id === deleteId)
         .map((product) => (
@@ -50,7 +50,7 @@ function DeleteId() {
             </ButtonBar>
           </Container>
         ))}
-    </FormStyled>
+    </div>
   ) : (
     <div>loading</div>
   );
@@ -79,11 +79,8 @@ const StyledDeleteQuestion = styled.div`
   justify-content: center;
   align-items: center;
   margin: 3rem 0;
-  //border: 3px solid var(--pink);
   border-radius: 25px;
-  -moz-box-shadow: 1px 1px 3px 2px #d6007e;
-  -webkit-box-shadow: 1px 1px 3px 2px #d6007e;
-  box-shadow: 1px 1px 3px 2px #d6007e;
+  box-shadow: 0 5px 5px 2px rgba(0, 0, 0, 0.3) inset;
 `;
 
 const StyledButton = styled.button`
@@ -93,12 +90,6 @@ const StyledButton = styled.button`
 const LabelStyled = styled.label`
   margin: 1rem 0;
   font-size: 40px;
-`;
-const FormStyled = styled.form`
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  margin-bottom: 5.5rem;
 `;
 
 const ButtonBar = styled.div`

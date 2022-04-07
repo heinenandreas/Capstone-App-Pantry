@@ -105,7 +105,7 @@ const StyledList = styled.div`
   border: 2px solid var(--darkblue);
   border-top: 0px;
   border-left: 0px;
-  background-color: #ffebd9;
+  background-color: var(--lightorange);
 `;
 
 const ElementContainer = styled.div`
