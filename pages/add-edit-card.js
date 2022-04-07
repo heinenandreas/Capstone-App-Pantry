@@ -186,7 +186,6 @@ function AddEditCard({ product }) {
             </a>
           </Link>
           <ButtonSave type="submit" />
-          <ButtonDelete />
         </ButtonBar>
       </FormStyled>
     </>

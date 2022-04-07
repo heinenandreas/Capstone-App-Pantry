@@ -111,39 +111,26 @@ const RoundButtonBig = styled.div`
   cursor: pointer;
 `;
 
-const RoundButtonFixedPos = styled.div`
-  position: fixed;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  top: 2.5rem;
-  right: 5vw;
-  background-color: white;
-  width: 4rem;
-  height: 4rem;
-  border-radius: 999px;
-  box-shadow: 0 5px 5px 0px rgba(0, 0, 0, 0.3) inset;
-  z-index: 2;
-  cursor: pointer;
-`;
-
 const SaveButtonStyled = styled.button`
   width: 8rem;
   height: 3rem;
   border-radius: 1rem;
   border: 0;
   cursor: pointer;
-  background-color: var(--green);
+  background-color: white;
+  box-shadow: 0 5px 5px 0px rgba(0, 0, 0, 0.3) inset;
 
   &:hover {
     transform: scale(1.15);
+    background-color: var(--green);
+    box-shadow: 0 5px 5px 0px rgba(0, 0, 0, 0.3) inset;
   }
 `;
 
 const SaveButtonText = styled.p`
   font-size: 1.2rem;
   font-weight: 500;
-  color: white;
+  color: var(--darkblue);
 `;
 
 const IncrementButton = styled.button`

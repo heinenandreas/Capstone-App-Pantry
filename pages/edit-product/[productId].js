@@ -86,7 +86,7 @@ function ProductId(product) {
                 type="text"
                 required
                 name="productName"
-                value={productName}
+                defaultValue={product.productName}
                 onChange={(event) => setProductName(event.target.value)}
               />
               <p>Maßeinheit</p>
