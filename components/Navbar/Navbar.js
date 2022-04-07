@@ -1,5 +1,4 @@
 import styled from "styled-components";
-import Link from "next/link";
 import { ButtonHome } from "../Buttons/Buttons";
 import { ButtonAddCategory } from "../Buttons/Buttons";
 import { ButtonShoppinglist } from "../Buttons/Buttons";
@@ -19,7 +18,6 @@ function Navbar() {
 export default Navbar;
 
 const NavbarStyled = styled.div`
-  z-index: 2;
   display: flex;
   justify-content: center;
   position: fixed;

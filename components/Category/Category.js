@@ -1,10 +1,10 @@
-import { useState } from "react";
 import styled from "styled-components";
+import Link from "next/link";
 import Add from "../../src/Icons/Add.svg";
 import Remove from "../../src/Icons/Remove.svg";
-import Link from "next/link";
 import useSWR from "swr";
 import TrashcanSmall from "../../src/Icons/TrashcanSmall.svg";
+import Settings from "../../src/Icons/Settings.svg";
 import { categories } from "../../itemlist";
 import { HighlightActualAmountNegative } from "../HighlightAmount/HighlightAmount";
 import Collapsible from "react-collapsible";
@@ -15,8 +15,6 @@ const fetcher = (resource, init) =>
 function Category() {
   const products = useSWR("/api/products", fetcher);
   const productList = products.data;
-
-  const [categoryHidden, setCategoryHidden] = useState(true);
 
   async function handleDeleteItemClick(id, productname) {
     if (
@@ -88,6 +86,11 @@ function Category() {
                         <Add />
                       </IncrementButton>
                       <StyledListUnit>{product.unit}</StyledListUnit>
+                      <Link href={"/edit-product/" + product._id}>
+                        <StyledSettings>
+                          <Settings />
+                        </StyledSettings>
+                      </Link>
                       <StyledTrash>
                         <TrashcanSmall
                           onClick={() =>
@@ -126,7 +129,7 @@ const StyledList = styled.div`
 const ElementContainer = styled.div`
   width: 15rem;
   display: grid;
-  grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
+  grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr;
   align-items: center;
   justify-items: center;
   gap: 0.5rem;
@@ -193,6 +196,9 @@ const DecrementButton = styled.button`
 `;
 
 const StyledTrash = styled.div`
+  cursor: pointer;
+`;
+const StyledSettings = styled.div`
   cursor: pointer;
 `;
 

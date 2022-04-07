@@ -1,6 +1,5 @@
 import useSWR from "swr";
 import styled from "styled-components";
-
 import Add from "../src/Icons/Add.svg";
 import Remove from "../src/Icons/Remove.svg";
 import { HighlightActualAmountPositive } from "../components/HighlightAmount/HighlightAmount";
@@ -41,7 +40,7 @@ function Shoppinglist() {
       </ShoppinglistStyled>
       <StyledList>
         {productList
-          .filter((product) => product.actualAmount <= product.maxAmount)
+          .filter((product) => product.actualAmount < product.maxAmount)
           .map((product) => (
             <StyledItem key={product._id}>
               <StyledListName>{product.productName}</StyledListName>

@@ -193,15 +193,6 @@ function AddEditCard({ product }) {
   );
 }
 
-const AddCardStyled = styled.div`
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  width: 23.44rem;
-  height: 40rem;
-  border: 2px solid var(--darkblue);
-`;
-
 const LabelStyled = styled.label`
   margin: 1rem 0;
   font-size: 40px;
@@ -210,6 +201,7 @@ const FormStyled = styled.form`
   display: flex;
   flex-direction: column;
   align-items: center;
+  margin-bottom: 5.5rem;
 `;
 
 const StyledInput = styled.input`
@@ -269,7 +261,6 @@ const ButtonBar = styled.div`
 `;
 
 const IncrementButton = styled.div`
-  color: white;
   background-color: var(--lightgreen);
   border: 2px solid var(--green);
   border-radius: 999px;
@@ -292,7 +283,6 @@ const IncrementButton = styled.div`
 `;
 
 const DecrementButton = styled.div`
-  color: white;
   background-color: var(--neonpink);
   border: 2px solid var(--pink);
   border-radius: 999px;
