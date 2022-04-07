@@ -20,7 +20,7 @@ export function ButtonAddCategory() {
 
 export function ButtonHome() {
   return (
-    <Link href="/">
+    <Link href="/" passHref>
       <RoundButtonBig>
         <Home />
       </RoundButtonBig>
