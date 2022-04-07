@@ -99,5 +99,3 @@ const ButtonBar = styled.div`
   justify-content: space-evenly;
   align-items: center;
 `;
-
-export default DeleteId;
