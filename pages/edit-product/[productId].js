@@ -24,9 +24,9 @@ function ProductId(product) {
   const [productName, setProductName] = useState(product.name);
   const [unit, setUnit] = useState(product.unit);
   const [category, setCategory] = useState(product.category);
-  const [minAmount, setMinAmount] = useState(product.minAmount);
-  const [actualAmount, setActualAmount] = useState(product.actualAmount);
-  const [maxAmount, setMaxAmount] = useState(product.maxAmount);
+  const [minAmount, setMinAmount] = useState(0);
+  const [actualAmount, setActualAmount] = useState(0);
+  const [maxAmount, setMaxAmount] = useState(0);
 
   async function handleProductEdit(event) {
     event.preventDefault();
@@ -132,7 +132,7 @@ function ProductId(product) {
                   required
                   type="number"
                   name="minAmount"
-                  defaultValue={product.minAmount}
+                  value={minAmount}
                   onChange={(event) =>
                     setMinAmount(parseInt(event.target.value))
                   }
@@ -151,7 +151,7 @@ function ProductId(product) {
                   type="number"
                   pattern="/d*"
                   name="actualAmount"
-                  defaultValue={product.actualAmount}
+                  value={actualAmount}
                   onChange={(event) =>
                     setActualAmount(parseInt(event.target.value))
                   }
@@ -169,7 +169,7 @@ function ProductId(product) {
                   required
                   type="number"
                   name="maxAmount"
-                  defaultValue={product.maxAmount}
+                  value={maxAmount}
                   onChange={(event) =>
                     setMaxAmount(parseInt(event.target.value))
                   }
