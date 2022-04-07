@@ -73,12 +73,12 @@ function Category() {
                         <Add />
                       </IncrementButton>
                       <StyledListUnit>{product.unit}</StyledListUnit>
-                      <Link href={"/edit-product/" + product._id}>
+                      <Link href={"/edit-product/" + product._id} passHref>
                         <StyledSettings>
                           <Settings />
                         </StyledSettings>
                       </Link>
-                      <Link href={"/delete-product/" + product._id}>
+                      <Link href={"/delete-product/" + product._id} passHref>
                         <StyledTrash>
                           <TrashcanSmall />
                         </StyledTrash>

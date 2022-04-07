@@ -10,7 +10,7 @@ import Link from "next/link";
 
 export function ButtonAddCategory() {
   return (
-    <Link href="/add-edit-card">
+    <Link href="/add-edit-card" passHref>
       <RoundButtonBig>
         <AddBig />
       </RoundButtonBig>
@@ -30,7 +30,7 @@ export function ButtonHome() {
 
 export function ButtonShoppinglist() {
   return (
-    <Link href="/shoppinglist">
+    <Link href="/shoppinglist" passHref>
       <RoundButtonBig>
         <ShoppingCart />
       </RoundButtonBig>
