@@ -47,7 +47,6 @@ function AddEditCard({ product }) {
     if (createdProduct.success) {
       products.mutate();
       router.push("/");
-    } else {
     }
   }
 

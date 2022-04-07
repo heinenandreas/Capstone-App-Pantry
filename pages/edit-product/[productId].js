@@ -21,12 +21,12 @@ function ProductId(product) {
   const products = useSWR("/api/products", fetcher);
   const productList = products.data;
 
-  const [productName, setProductName] = useState("");
-  const [unit, setUnit] = useState("");
-  const [category, setCategory] = useState("");
-  const [minAmount, setMinAmount] = useState(0);
-  const [actualAmount, setActualAmount] = useState(0);
-  const [maxAmount, setMaxAmount] = useState(0);
+  const [productName, setProductName] = useState(product.name);
+  const [unit, setUnit] = useState(product.unit);
+  const [category, setCategory] = useState(product.category);
+  const [minAmount, setMinAmount] = useState(product.minAmount);
+  const [actualAmount, setActualAmount] = useState(product.actualAmount);
+  const [maxAmount, setMaxAmount] = useState(product.maxAmount);
 
   async function handleProductEdit(event) {
     event.preventDefault();
@@ -92,7 +92,7 @@ function ProductId(product) {
               <p>Maßeinheit</p>
               <StyledSelect
                 required
-                value={unit}
+                defaultValue={product.unit}
                 onChange={(event) => setUnit(event.target.value)}
               >
                 <StyledOption value="" disabled hidden>
@@ -109,7 +109,7 @@ function ProductId(product) {
               <p>Kategorie</p>
               <StyledSelect
                 required
-                value={category}
+                defaultValue={product.category}
                 onChange={(event) => setCategory(event.target.value)}
               >
                 <StyledOption value="" disabled hidden>
@@ -132,7 +132,7 @@ function ProductId(product) {
                   required
                   type="number"
                   name="minAmount"
-                  value={minAmount}
+                  defaultValue={product.minAmount}
                   onChange={(event) =>
                     setMinAmount(parseInt(event.target.value))
                   }
@@ -151,7 +151,7 @@ function ProductId(product) {
                   type="number"
                   pattern="/d*"
                   name="actualAmount"
-                  value={actualAmount}
+                  defaultValue={product.actualAmount}
                   onChange={(event) =>
                     setActualAmount(parseInt(event.target.value))
                   }
@@ -169,7 +169,7 @@ function ProductId(product) {
                   required
                   type="number"
                   name="maxAmount"
-                  value={maxAmount}
+                  defaultValue={product.maxAmount}
                   onChange={(event) =>
                     setMaxAmount(parseInt(event.target.value))
                   }

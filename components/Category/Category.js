@@ -16,19 +16,6 @@ function Category() {
   const products = useSWR("/api/products", fetcher);
   const productList = products.data;
 
-  async function handleDeleteItemClick(id, productname) {
-    if (
-      confirm(`Möchtest du \n\n${productname}\n\n unwiederbringlich löschen?`)
-    ) {
-      const response = await fetch(`/api/products/${id}`, {
-        method: "DELETE",
-      });
-      if (response.ok) {
-        products.mutate();
-      }
-    }
-  }
-
   async function handleProductAmount(id, actualAmount) {
     const response = await fetch(`/api/products/${id}`, {
       method: "PATCH",
@@ -91,16 +78,11 @@ function Category() {
                           <Settings />
                         </StyledSettings>
                       </Link>
-                      <StyledTrash>
-                        <TrashcanSmall
-                          onClick={() =>
-                            handleDeleteItemClick(
-                              product._id,
-                              product.productName
-                            )
-                          }
-                        />
-                      </StyledTrash>
+                      <Link href={"/delete-product/" + product._id}>
+                        <StyledTrash>
+                          <TrashcanSmall />
+                        </StyledTrash>
+                      </Link>
                     </ElementContainer>
                   </StyledItem>
                 ))}
