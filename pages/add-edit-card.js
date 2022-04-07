@@ -124,7 +124,7 @@ function AddEditCard({ product }) {
             );
           })}
         </StyledSelect>
-        <p>Mindesbestand</p>
+        <p>Mindestbestand</p>
         <AmountStyle>
           <DecrementButton onClick={(event) => decrementMinAmount()}>
             <Remove />
