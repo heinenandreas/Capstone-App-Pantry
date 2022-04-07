@@ -125,24 +125,25 @@ function ProductId(product) {
               </StyledSelect>
               <p>Mindestbestand</p>
               <AmountStyle>
-                <DecrementButton onClick={(event) => decrementMinAmount()}>
+                <DecrementButton onClick={() => decrementMinAmount()}>
                   <Remove />
                 </DecrementButton>
                 <StyledInput
                   required
                   type="number"
-                  pattern="/d*"
                   name="minAmount"
                   value={minAmount}
-                  onChange={(event) => setMinAmount()}
+                  onChange={(event) =>
+                    setMinAmount(parseInt(event.target.value))
+                  }
                 />
-                <IncrementButton onClick={(event) => incrementMinAmount()}>
+                <IncrementButton onClick={() => incrementMinAmount()}>
                   <Add />
                 </IncrementButton>
               </AmountStyle>
               <p>aktueller Bestand</p>
               <AmountStyle>
-                <DecrementButton onClick={(event) => decrementActualAmount()}>
+                <DecrementButton onClick={() => decrementActualAmount()}>
                   <Remove />
                 </DecrementButton>
                 <StyledInput
@@ -151,29 +152,30 @@ function ProductId(product) {
                   pattern="/d*"
                   name="actualAmount"
                   value={actualAmount}
-                  onChange={(event) => setActualAmount()}
+                  onChange={(event) =>
+                    setActualAmount(parseInt(event.target.value))
+                  }
                 />
-                <IncrementButton onClick={(event) => incrementActualAmount()}>
+                <IncrementButton onClick={() => incrementActualAmount()}>
                   <Add />
                 </IncrementButton>
               </AmountStyle>
               <p>Maximalbestand</p>
               <AmountStyle>
-                <DecrementButton onClick={(event) => decrementMaxAmount()}>
+                <DecrementButton onClick={() => decrementMaxAmount()}>
                   <Remove />
                 </DecrementButton>
                 <StyledInput
                   required
                   type="number"
-                  pattern="/d*"
                   name="maxAmount"
                   value={maxAmount}
-                  onChange={(event) => setMaxAmount(event.target.value)}
+                  onChange={(event) =>
+                    setMaxAmount(parseInt(event.target.value))
+                  }
                 />
 
-                <IncrementButton
-                  onClick={(event) => incrementMaxAmount(event.target.value)}
-                >
+                <IncrementButton onClick={() => incrementMaxAmount()}>
                   <Add />
                 </IncrementButton>
               </AmountStyle>
@@ -187,7 +189,6 @@ function ProductId(product) {
             </a>
           </Link>
           <ButtonSave type="submit" />
-          <ButtonDelete />
         </ButtonBar>
       </FormStyled>
     </>
