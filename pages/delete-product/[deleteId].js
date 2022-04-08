@@ -32,7 +32,7 @@ function DeleteId() {
           <Container key={deleteId}>
             <LabelStyled>Produkt löschen</LabelStyled>
             <StyledDeleteQuestion>
-              <StyledQuestion>Möchtest du </StyledQuestion>
+              <StyledQuestion>Möchtest du</StyledQuestion>
               <StyledProductname>{product.productName} </StyledProductname>
               <StyledQuestion>wirklich löschen?</StyledQuestion>
             </StyledDeleteQuestion>

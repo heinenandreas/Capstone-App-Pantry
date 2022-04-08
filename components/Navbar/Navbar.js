@@ -1,18 +1,29 @@
+import { useSession } from "next-auth/react";
 import styled from "styled-components";
 import { ButtonHome } from "../Buttons/Buttons";
-import { ButtonAddCategory } from "../Buttons/Buttons";
-import { ButtonShoppinglist } from "../Buttons/Buttons";
+import {
+  ButtonAddCategory,
+  SignOutButton,
+  ButtonShoppinglist,
+} from "../Buttons/Buttons";
+import { signOut } from "next-auth/react";
 
 function Navbar() {
-  return (
-    <NavbarStyled>
-      <ButtonContainerStyled>
-        <ButtonHome />
-        <ButtonAddCategory />
-        <ButtonShoppinglist />
-      </ButtonContainerStyled>
-    </NavbarStyled>
-  );
+  const { data: session } = useSession();
+  if (session) {
+    return (
+      <NavbarStyled>
+        <ButtonContainerStyled>
+          <ButtonHome />
+          <ButtonAddCategory />
+          <ButtonShoppinglist />
+          <SignOutButton />
+        </ButtonContainerStyled>
+      </NavbarStyled>
+    );
+  }
+
+  return <div></div>;
 }
 
 export default Navbar;
@@ -29,7 +40,7 @@ const NavbarStyled = styled.div`
 `;
 
 const ButtonContainerStyled = styled.div`
-  width: 16rem;
+  min-width: 20.5rem;
   height: 5.5rem;
   display: flex;
   flex-direction: row;
