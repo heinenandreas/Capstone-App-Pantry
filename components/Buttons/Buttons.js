@@ -10,7 +10,7 @@ import Link from "next/link";
 
 export function ButtonAddCategory() {
   return (
-    <Link href="/add-edit-card">
+    <Link href="/add-edit-card" passHref>
       <RoundButtonBig>
         <AddBig />
       </RoundButtonBig>
@@ -20,7 +20,7 @@ export function ButtonAddCategory() {
 
 export function ButtonHome() {
   return (
-    <Link href="/">
+    <Link href="/" passHref>
       <RoundButtonBig>
         <Home />
       </RoundButtonBig>
@@ -30,7 +30,7 @@ export function ButtonHome() {
 
 export function ButtonShoppinglist() {
   return (
-    <Link href="/shoppinglist">
+    <Link href="/shoppinglist" passHref>
       <RoundButtonBig>
         <ShoppingCart />
       </RoundButtonBig>
@@ -90,9 +90,11 @@ const RoundButton = styled.div`
   border-radius: 999px;
   box-shadow: 0 5px 5px 0px rgba(0, 0, 0, 0.3) inset;
   cursor: pointer;
+  transition: 0.6s;
 
   &:hover {
     transform: scale(1.2);
+    background-color: var(--lightorange);
   }
 `;
 
@@ -109,22 +111,13 @@ const RoundButtonBig = styled.div`
   box-shadow: 0 5px 5px 0px rgba(0, 0, 0, 0.3) inset;
   z-index: 2;
   cursor: pointer;
-`;
+  transition: 0.6s;
 
-const RoundButtonFixedPos = styled.div`
-  position: fixed;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  top: 2.5rem;
-  right: 5vw;
-  background-color: white;
-  width: 4rem;
-  height: 4rem;
-  border-radius: 999px;
-  box-shadow: 0 5px 5px 0px rgba(0, 0, 0, 0.3) inset;
-  z-index: 2;
-  cursor: pointer;
+  &:hover {
+    transform: scale(1.15);
+    background-color: var(--lightorange);
+    box-shadow: 0 5px 5px 0px rgba(0, 0, 0, 0.3) inset;
+  }
 `;
 
 const SaveButtonStyled = styled.button`
@@ -133,17 +126,21 @@ const SaveButtonStyled = styled.button`
   border-radius: 1rem;
   border: 0;
   cursor: pointer;
-  background-color: var(--green);
+  background-color: white;
+  box-shadow: 0 5px 5px 0px rgba(0, 0, 0, 0.3) inset;
+  transition: 0.6s;
 
   &:hover {
     transform: scale(1.15);
+    background-color: var(--lightgreen);
+    box-shadow: 0 5px 5px 0px rgba(0, 0, 0, 0.3) inset;
   }
 `;
 
 const SaveButtonText = styled.p`
   font-size: 1.2rem;
   font-weight: 500;
-  color: white;
+  color: var(--darkblue);
 `;
 
 const IncrementButton = styled.button`

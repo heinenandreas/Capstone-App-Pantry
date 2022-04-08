@@ -16,19 +16,6 @@ function Category() {
   const products = useSWR("/api/products", fetcher);
   const productList = products.data;
 
-  async function handleDeleteItemClick(id, productname) {
-    if (
-      confirm(`Möchtest du \n\n${productname}\n\n unwiederbringlich löschen?`)
-    ) {
-      const response = await fetch(`/api/products/${id}`, {
-        method: "DELETE",
-      });
-      if (response.ok) {
-        products.mutate();
-      }
-    }
-  }
-
   async function handleProductAmount(id, actualAmount) {
     const response = await fetch(`/api/products/${id}`, {
       method: "PATCH",
@@ -86,21 +73,16 @@ function Category() {
                         <Add />
                       </IncrementButton>
                       <StyledListUnit>{product.unit}</StyledListUnit>
-                      <Link href={"/edit-product/" + product._id}>
+                      <Link href={"/edit-product/" + product._id} passHref>
                         <StyledSettings>
                           <Settings />
                         </StyledSettings>
                       </Link>
-                      <StyledTrash>
-                        <TrashcanSmall
-                          onClick={() =>
-                            handleDeleteItemClick(
-                              product._id,
-                              product.productName
-                            )
-                          }
-                        />
-                      </StyledTrash>
+                      <Link href={"/delete-product/" + product._id} passHref>
+                        <StyledTrash>
+                          <TrashcanSmall />
+                        </StyledTrash>
+                      </Link>
                     </ElementContainer>
                   </StyledItem>
                 ))}
@@ -123,7 +105,7 @@ const StyledList = styled.div`
   border: 2px solid var(--darkblue);
   border-top: 0px;
   border-left: 0px;
-  background-color: #ffebd9;
+  background-color: var(--lightorange);
 `;
 
 const ElementContainer = styled.div`

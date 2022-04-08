@@ -12,6 +12,7 @@ export const GlobalStyle = createGlobalStyle`
       --lightgreen: #8ad234;
       --pink: #d6007e;
       --neonpink: #fc008b;
+      --lightorange: #ffebd9;
       margin: 0;
       color: var(--darkblue);
 }
@@ -23,11 +24,11 @@ width: 95vw;
 border-radius: 0 20px 0 0;
 padding: 1rem 0 0 0; 
 cursor: pointer;
-transition: 0.5s;
 border-bottom: 3px solid var(--green);
+transition: 0.7s;
 
 &:hover {
-    background-color: var(--green);
+    background-color: var(--lightorange);
   }
 
 }
