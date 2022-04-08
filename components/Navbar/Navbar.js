@@ -2,6 +2,7 @@ import styled from "styled-components";
 import { ButtonHome } from "../Buttons/Buttons";
 import { ButtonAddCategory } from "../Buttons/Buttons";
 import { ButtonShoppinglist } from "../Buttons/Buttons";
+import { signOut } from "next-auth/react";
 
 function Navbar() {
   return (
@@ -10,6 +11,7 @@ function Navbar() {
         <ButtonHome />
         <ButtonAddCategory />
         <ButtonShoppinglist />
+        <button onClick={() => signOut()}>Sign out</button>
       </ButtonContainerStyled>
     </NavbarStyled>
   );
