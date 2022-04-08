@@ -6,8 +6,17 @@ import ArrowLeft from "../../src/Icons/ArrowLeft.svg";
 import Trashcan from "../../src/Icons/Trashcan.svg";
 import Home from "../../src/Icons/Home.svg";
 import ShoppingCart from "../../src/Icons/ShoppingCart.svg";
+import Logout from "../../src/Icons/Logout.svg";
 import Link from "next/link";
+import { signOut } from "next-auth/react";
 
+export function SignOutButton() {
+  return (
+    <RoundButtonBig onClick={() => signOut()}>
+      <Logout />
+    </RoundButtonBig>
+  );
+}
 export function ButtonAddCategory() {
   return (
     <Link href="/add-edit-card" passHref>
