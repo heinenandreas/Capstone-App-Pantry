@@ -3,20 +3,14 @@ import { units, categories } from "../itemlist";
 import styled from "styled-components";
 import Remove from "../src/Icons/Remove.svg";
 import Add from "../src/Icons/Add.svg";
-import {
-  ButtonBack,
-  ButtonDelete,
-  ButtonSave,
-} from "../components/Buttons/Buttons";
+import { ButtonBack, ButtonSave } from "../components/Buttons/Buttons";
 import Link from "next/link";
 import useSWR from "swr";
 import { useRouter } from "next/router";
+import { getSession } from "next-auth/react";
 
 const fetcher = (resource, init) =>
   fetch(resource, init).then((res) => res.json());
-
-// plus button fügt eine 1 hinzu wenn man vorher eine zahl eingetippt hat
-//maßeinheiten
 
 function AddEditCard({ product }) {
   const products = useSWR("/api/products", fetcher);
@@ -186,6 +180,26 @@ function AddEditCard({ product }) {
       </FormStyled>
     </>
   );
+}
+
+export async function getServerSideProps(context) {
+  const session = await getSession(context);
+
+  // this page is not available for unauthenticated users
+  if (!session) {
+    return {
+      redirect: {
+        destination: "/",
+        permanent: false,
+      },
+    };
+  }
+
+  return {
+    props: {
+      session,
+    },
+  };
 }
 
 const LabelStyled = styled.label`

@@ -2,6 +2,7 @@ import useSWR from "swr";
 import styled from "styled-components";
 import Add from "../src/Icons/Add.svg";
 import Remove from "../src/Icons/Remove.svg";
+import { getSession } from "next-auth/react";
 import { HighlightActualAmountPositive } from "../components/HighlightAmount/HighlightAmount";
 
 const fetcher = (resource, init) =>
@@ -75,6 +76,26 @@ function Shoppinglist() {
   ) : (
     <div>loading</div>
   );
+}
+
+export async function getServerSideProps(context) {
+  const session = await getSession(context);
+
+  // this page is not available for unauthenticated users
+  if (!session) {
+    return {
+      redirect: {
+        destination: "/",
+        permanent: false,
+      },
+    };
+  }
+
+  return {
+    props: {
+      session,
+    },
+  };
 }
 
 const StyledListMaxAmount = styled.p`

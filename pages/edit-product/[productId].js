@@ -6,11 +6,8 @@ import { units, categories } from "../../itemlist";
 import Remove from "../../src/Icons/Remove.svg";
 import Add from "../../src/Icons/Add.svg";
 import Link from "next/link";
-import {
-  ButtonBack,
-  ButtonSave,
-  ButtonDelete,
-} from "../../components/Buttons/Buttons";
+import { ButtonBack, ButtonSave } from "../../components/Buttons/Buttons";
+import { getSession } from "next-auth/react";
 
 const fetcher = (resource, init) =>
   fetch(resource, init).then((res) => res.json());
@@ -195,6 +192,26 @@ function ProductId(product) {
   ) : (
     <div>loading</div>
   );
+}
+
+export async function getServerSideProps(context) {
+  const session = await getSession(context);
+
+  // this page is not available for unauthenticated users
+  if (!session) {
+    return {
+      redirect: {
+        destination: "/",
+        permanent: false,
+      },
+    };
+  }
+
+  return {
+    props: {
+      session,
+    },
+  };
 }
 
 const StyledEditProduct = styled.div`

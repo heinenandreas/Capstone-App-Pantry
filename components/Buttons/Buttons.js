@@ -12,7 +12,7 @@ import { signOut } from "next-auth/react";
 
 export function SignOutButton() {
   return (
-    <RoundButtonBig onClick={() => signOut()}>
+    <RoundButtonBig onClick={() => [signOut(), "/"]}>
       <Logout />
     </RoundButtonBig>
   );
