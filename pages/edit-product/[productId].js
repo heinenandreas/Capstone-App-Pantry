@@ -222,7 +222,7 @@ const StyledEditProduct = styled.div`
 
 const LabelStyled = styled.label`
   margin: 1rem 0;
-  font-size: 40px;
+  font-size: 2.5rem;
 `;
 const FormStyled = styled.form`
   display: flex;
@@ -291,10 +291,10 @@ const IncrementButton = styled.div`
   background-color: var(--lightgreen);
   border: 2px solid var(--green);
   border-radius: 999px;
-  height: 30px;
-  width: 30px;
+  height: 1.87rem;
+  width: 1.87rem;
   transition: 0.2s;
-  font-size: 30px;
+  font-size: 1.87rem;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -302,7 +302,7 @@ const IncrementButton = styled.div`
   margin: 0 1rem;
 
   &:hover {
-    font-size: 20px;
+    font-size: 1.25rem;
     transform: scale(1.1) rotate(90deg);
     background-color: var(--green);
     border: 2px solid var(--lightgreen);
@@ -313,10 +313,10 @@ const DecrementButton = styled.div`
   background-color: var(--neonpink);
   border: 2px solid var(--pink);
   border-radius: 999px;
-  height: 30px;
-  width: 30px;
+  height: 1.87rem;
+  width: 1.87rem;
   transition: 0.2s;
-  font-size: 30px;
+  font-size: 1.87rem;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -324,7 +324,7 @@ const DecrementButton = styled.div`
   margin: 0 1rem;
 
   &:hover {
-    font-size: 20px;
+    font-size: 1.25rem;
     transform: scale(1.1) rotate(180deg);
     background-color: var(--pink);
     border: 2px solid var(--neonpink);
