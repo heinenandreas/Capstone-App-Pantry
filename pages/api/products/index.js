@@ -1,21 +1,37 @@
 import Product from "../../../schema/Product";
 import { connectDb } from "../../../utils/db";
+import { getSession } from "next-auth/react";
 
 export default async function handler(request, response) {
   try {
     connectDb();
 
+    const session = await getSession({ req: request });
+
     switch (request.method) {
       case "GET":
-        const products = await Product.find()
-          .sort({ createdAt: -1 })
-          .limit(100);
-        response.status(200).json(products);
+        if (session) {
+          const products = await Product.find()
+            .where({
+              userId: session.user.id,
+            })
+            .populate("userId");
+          response.status(200).json(products);
+        } else {
+          response.status(401).json({ error: "Not authenticated" });
+        }
         break;
 
       case "POST":
-        const createdProduct = await Product.create(request.body);
-        response.status(200).json({ success: true, data: createdProduct });
+        if (session) {
+          const createdProduct = await Product.create({
+            ...request.body,
+            userId: session.user.id,
+          });
+          response.status(200).json({ success: true, data: createdProduct });
+        } else {
+          response.status(401).json({ error: "Not authenticated" });
+        }
         break;
 
       default:

@@ -2,6 +2,7 @@ import useSWR from "swr";
 import styled from "styled-components";
 import Add from "../src/Icons/Add.svg";
 import Remove from "../src/Icons/Remove.svg";
+import { getSession } from "next-auth/react";
 import { HighlightActualAmountPositive } from "../components/HighlightAmount/HighlightAmount";
 
 const fetcher = (resource, init) =>
@@ -77,6 +78,26 @@ function Shoppinglist() {
   );
 }
 
+export async function getServerSideProps(context) {
+  const session = await getSession(context);
+
+  // this page is not available for unauthenticated users
+  if (!session) {
+    return {
+      redirect: {
+        destination: "/",
+        permanent: false,
+      },
+    };
+  }
+
+  return {
+    props: {
+      session,
+    },
+  };
+}
+
 const StyledListMaxAmount = styled.p`
   color: var(--darkblue);
   font-size: 30px;
@@ -119,29 +140,29 @@ const StyledItem = styled.div`
 `;
 const StyledListName = styled.p`
   color: var(--darkblue);
-  font-size: 20px;
+  font-size: 1.25rem;
   padding-left: 1rem;
 `;
 const StyledListUnit = styled.p`
   color: var(--darkblue);
-  font-size: 10px;
+  font-size: 0.625rem;
 `;
 
 const IncrementButton = styled.button`
   background-color: var(--lightgreen);
   border: 2px solid var(--green);
   border-radius: 999px;
-  height: 30px;
-  width: 30px;
+  height: 1.87rem;
+  width: 1.87rem;
   transition: 0.2s;
-  font-size: 30px;
+  font-size: 1.87rem;
   display: flex;
   justify-content: center;
   align-items: center;
   cursor: pointer;
 
   &:hover {
-    font-size: 20px;
+    font-size: 1.25rem;
     transform: scale(1.1) rotate(90deg);
     background-color: var(--green);
     border: 2px solid var(--lightgreen);
@@ -152,17 +173,17 @@ const DecrementButton = styled.button`
   background-color: var(--neonpink);
   border: 2px solid var(--pink);
   border-radius: 999px;
-  height: 30px;
-  width: 30px;
+  height: 1.87rem;
+  width: 1.87rem;
   transition: 0.2s;
-  font-size: 30px;
+  font-size: 1.87rem;
   display: flex;
   justify-content: center;
   align-items: center;
   cursor: pointer;
 
   &:hover {
-    font-size: 20px;
+    font-size: 1.25rem;
     transform: scale(1.1) rotate(180deg);
     background-color: var(--pink);
     border: 2px solid var(--neonpink);

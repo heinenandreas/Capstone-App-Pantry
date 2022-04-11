@@ -6,7 +6,6 @@ import {
   SignOutButton,
   ButtonShoppinglist,
 } from "../Buttons/Buttons";
-import { signOut } from "next-auth/react";
 
 function Navbar() {
   const { data: session } = useSession();

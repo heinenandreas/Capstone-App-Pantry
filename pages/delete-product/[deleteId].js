@@ -3,6 +3,7 @@ import useSWR from "swr";
 import styled from "styled-components";
 import Link from "next/link";
 import { ButtonBack, ButtonDelete } from "../../components/Buttons/Buttons";
+import { getSession } from "next-auth/react";
 
 const fetcher = (resource, init) =>
   fetch(resource, init).then((res) => res.json());
@@ -99,5 +100,25 @@ const ButtonBar = styled.div`
   justify-content: space-evenly;
   align-items: center;
 `;
+
+export async function getServerSideProps(context) {
+  const session = await getSession(context);
+
+  // this page is not available for unauthenticated users
+  if (!session) {
+    return {
+      redirect: {
+        destination: "/",
+        permanent: false,
+      },
+    };
+  }
+
+  return {
+    props: {
+      session,
+    },
+  };
+}
 
 export default DeleteId;

@@ -21,7 +21,7 @@ export const GlobalStyle = createGlobalStyle`
 .Collapsible{
 background-color: var(--lightgreen);
 width: 95vw;
-border-radius: 0 20px 0 0;
+border-radius: 0 1.25rem 0 0;
 padding: 1rem 0 0 0; 
 cursor: pointer;
 border-bottom: 3px solid var(--green);

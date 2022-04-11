@@ -3,24 +3,19 @@ import { units, categories } from "../itemlist";
 import styled from "styled-components";
 import Remove from "../src/Icons/Remove.svg";
 import Add from "../src/Icons/Add.svg";
-import {
-  ButtonBack,
-  ButtonDelete,
-  ButtonSave,
-} from "../components/Buttons/Buttons";
+import { ButtonBack, ButtonSave } from "../components/Buttons/Buttons";
 import Link from "next/link";
 import useSWR from "swr";
 import { useRouter } from "next/router";
+import { getSession, useSession } from "next-auth/react";
 
 const fetcher = (resource, init) =>
   fetch(resource, init).then((res) => res.json());
 
-// plus button fügt eine 1 hinzu wenn man vorher eine zahl eingetippt hat
-//maßeinheiten
-
 function AddEditCard({ product }) {
   const products = useSWR("/api/products", fetcher);
   const router = useRouter();
+  const { data: session } = useSession();
 
   const [productName, setProductName] = useState("");
   const [unit, setUnit] = useState("");
@@ -41,6 +36,7 @@ function AddEditCard({ product }) {
         minAmount: minAmount,
         actualAmount: actualAmount,
         maxAmount: maxAmount,
+        userId: session.user.id,
       }),
     });
     const createdProduct = await response.json();
@@ -188,9 +184,29 @@ function AddEditCard({ product }) {
   );
 }
 
+export async function getServerSideProps(context) {
+  const session = await getSession(context);
+
+  // this page is not available for unauthenticated users
+  if (!session) {
+    return {
+      redirect: {
+        destination: "/",
+        permanent: false,
+      },
+    };
+  }
+
+  return {
+    props: {
+      session,
+    },
+  };
+}
+
 const LabelStyled = styled.label`
   margin: 1rem 0;
-  font-size: 40px;
+  font-size: 2.5rem;
 `;
 const FormStyled = styled.form`
   display: flex;
@@ -259,10 +275,10 @@ const IncrementButton = styled.div`
   background-color: var(--lightgreen);
   border: 2px solid var(--green);
   border-radius: 999px;
-  height: 30px;
-  width: 30px;
+  height: 1.87rem;
+  width: 1.87rem;
   transition: 0.2s;
-  font-size: 30px;
+  font-size: 1.87rem;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -270,7 +286,7 @@ const IncrementButton = styled.div`
   margin: 0 1rem;
 
   &:hover {
-    font-size: 20px;
+    font-size: 1.25rem;
     transform: scale(1.1) rotate(90deg);
     background-color: var(--green);
     border: 2px solid var(--lightgreen);
@@ -281,10 +297,10 @@ const DecrementButton = styled.div`
   background-color: var(--neonpink);
   border: 2px solid var(--pink);
   border-radius: 999px;
-  height: 30px;
-  width: 30px;
+  height: 1.87rem;
+  width: 1.87rem;
   transition: 0.2s;
-  font-size: 30px;
+  font-size: 1.87rem;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -292,7 +308,7 @@ const DecrementButton = styled.div`
   margin: 0 1rem;
 
   &:hover {
-    font-size: 20px;
+    font-size: 1.25rem;
     transform: scale(1.1) rotate(180deg);
     background-color: var(--pink);
     border: 2px solid var(--neonpink);

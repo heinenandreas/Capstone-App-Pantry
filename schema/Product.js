@@ -1,4 +1,5 @@
 import { Schema, model } from "mongoose";
+import "./User";
 
 const productSchema = new Schema(
   {
@@ -8,6 +9,7 @@ const productSchema = new Schema(
     minAmount: { type: Number, required: true },
     actualAmount: { type: Number, required: true },
     maxAmount: { type: Number, required: true },
+    userId: { type: Schema.Types.ObjectId, ref: "User" },
   },
   { timestamps: true }
 );
