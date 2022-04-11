@@ -1,7 +1,6 @@
 import { SessionProvider } from "next-auth/react";
 import { SWRConfig } from "swr";
 import { GlobalStyle } from "../components/GlobalStyle/GlobalStyle";
-import Logo from "../components/Logo/Logo";
 import Navbar from "../components/Navbar/Navbar";
 import { Header } from "../components/Header/Header";
 

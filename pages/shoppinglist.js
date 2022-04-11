@@ -2,7 +2,7 @@ import useSWR from "swr";
 import styled from "styled-components";
 import Add from "../src/Icons/Add.svg";
 import Remove from "../src/Icons/Remove.svg";
-import { getSession, useSession } from "next-auth/react";
+import { getSession } from "next-auth/react";
 import { HighlightActualAmountPositive } from "../components/HighlightAmount/HighlightAmount";
 
 const fetcher = (resource, init) =>

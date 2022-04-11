@@ -1,6 +1,6 @@
 import Product from "../../../schema/Product";
 import { connectDb } from "../../../utils/db";
-import { getSession, useSession } from "next-auth/react";
+import { getSession } from "next-auth/react";
 
 export default async function handler(request, response) {
   try {
