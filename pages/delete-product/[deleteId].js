@@ -3,7 +3,7 @@ import useSWR from "swr";
 import styled from "styled-components";
 import Link from "next/link";
 import { ButtonBack, ButtonDelete } from "../../components/Buttons/Buttons";
-import { getSession } from "next-auth/react";
+import { getSession, useSession } from "next-auth/react";
 
 const fetcher = (resource, init) =>
   fetch(resource, init).then((res) => res.json());

@@ -7,7 +7,7 @@ import { ButtonBack, ButtonSave } from "../components/Buttons/Buttons";
 import Link from "next/link";
 import useSWR from "swr";
 import { useRouter } from "next/router";
-import { getSession } from "next-auth/react";
+import { getSession, useSession } from "next-auth/react";
 
 const fetcher = (resource, init) =>
   fetch(resource, init).then((res) => res.json());
@@ -15,6 +15,7 @@ const fetcher = (resource, init) =>
 function AddEditCard({ product }) {
   const products = useSWR("/api/products", fetcher);
   const router = useRouter();
+  const { data: session } = useSession();
 
   const [productName, setProductName] = useState("");
   const [unit, setUnit] = useState("");
@@ -35,6 +36,7 @@ function AddEditCard({ product }) {
         minAmount: minAmount,
         actualAmount: actualAmount,
         maxAmount: maxAmount,
+        userId: session.user.id,
       }),
     });
     const createdProduct = await response.json();

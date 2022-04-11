@@ -1,3 +1,4 @@
+import { getSession, useSession } from "next-auth/react";
 import Product from "../../../schema/Product";
 import { connectDb } from "../../../utils/db";
 
@@ -7,13 +8,19 @@ export default async function handler(request, response) {
   try {
     connectDb();
 
+    const session = await getSession({ req: request });
+
     switch (request.method) {
       case "GET":
-        const product = await Product.findById(productId);
-        if (product) {
-          response.status(200).json(product);
+        if (session) {
+          const products = await Product.find()
+            .where({
+              userId: session.user.id,
+            })
+            .populate("userId");
+          response.status(200).json(products);
         } else {
-          response.status(404).json({ error: "Not found" });
+          response.status(401).json({ error: "Not authenticated" });
         }
         break;
 
@@ -24,7 +31,7 @@ export default async function handler(request, response) {
             $set: request.body,
           },
           { returnDocument: "after", runValidators: true }
-        );
+        ).where({ userId: session.user.id });
         if (updatedProduct) {
           response.status(200).json({
             success: true,
@@ -37,7 +44,9 @@ export default async function handler(request, response) {
         break;
 
       case "DELETE":
-        const deletedProduct = await Product.findByIdAndDelete(productId);
+        const deletedProduct = await Product.findByIdAndDelete(productId).where(
+          { userId: session.user.id }
+        );
         if (deletedProduct) {
           response.status(200).json({
             success: true,

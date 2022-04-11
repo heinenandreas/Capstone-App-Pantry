@@ -1,5 +1,5 @@
 import Logo from "../Logo/Logo";
-import { useSession, signIn, signOut } from "next-auth/react";
+import { useSession } from "next-auth/react";
 import styled from "styled-components";
 
 export function Header() {
