@@ -5,7 +5,7 @@ export function Login() {
   return (
     <LoginContainer>
       <LoginButton onClick={() => signIn()}>
-        <LoginText>Login test</LoginText>
+        <LoginText>Login</LoginText>
       </LoginButton>
     </LoginContainer>
   );
