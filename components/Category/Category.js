@@ -8,6 +8,11 @@ import Settings from "../../src/Icons/Settings.svg";
 import { categories } from "../../itemlist";
 import { HighlightActualAmountNegative } from "../HighlightAmount/HighlightAmount";
 import Collapsible from "react-collapsible";
+import Image from "next/image";
+
+const LoadingGif = () => {
+  return <Image priority src="/loading.gif" alt="" width={300} height={300} />;
+};
 
 const fetcher = (resource, init) =>
   fetch(resource, init).then((res) => res.json());
@@ -92,9 +97,18 @@ function Category() {
       })}
     </StyledCategory>
   ) : (
-    <div>loading</div>
+    <LoadingContainer>
+      <LoadingGif />
+      <div>loading</div>
+    </LoadingContainer>
   );
 }
+
+const LoadingContainer = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+`;
 
 const StyledCategory = styled.div`
   margin-bottom: 5.5rem;
