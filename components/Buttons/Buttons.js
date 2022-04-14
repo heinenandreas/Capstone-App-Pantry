@@ -71,17 +71,17 @@ export function ButtonSave() {
   );
 }
 
-export function Decrement() {
+export function Decrement(props) {
   return (
-    <DecrementButton>
+    <DecrementButton onClick={props.decrement} amount={props.actualAmount}>
       <Remove />
     </DecrementButton>
   );
 }
 
-export function Increment() {
+export function Increment(props) {
   return (
-    <IncrementButton>
+    <IncrementButton onClick={props.increment}>
       <Add />
     </IncrementButton>
   );
@@ -153,7 +153,6 @@ const SaveButtonText = styled.p`
 `;
 
 const IncrementButton = styled.button`
-  color: white;
   background-color: var(--lightgreen);
   border: 2px solid var(--green);
   border-radius: 999px;
@@ -164,8 +163,8 @@ const IncrementButton = styled.button`
   display: flex;
   justify-content: center;
   align-items: center;
+  margin: 0 0.5rem;
   cursor: pointer;
-  margin: 0 1rem;
 
   &:hover {
     font-size: 1.25rem;
@@ -176,7 +175,6 @@ const IncrementButton = styled.button`
 `;
 
 const DecrementButton = styled.button`
-  color: white;
   background-color: var(--neonpink);
   border: 2px solid var(--pink);
   border-radius: 999px;
@@ -187,8 +185,8 @@ const DecrementButton = styled.button`
   display: flex;
   justify-content: center;
   align-items: center;
+  margin: 0 0.5rem;
   cursor: pointer;
-  margin: 0 1rem;
 
   &:hover {
     font-size: 1.25rem;

@@ -3,11 +3,24 @@ import useSWR from "swr";
 import styled from "styled-components";
 import { useState } from "react";
 import { units, categories } from "../../itemlist";
-import Remove from "../../src/Icons/Remove.svg";
-import Add from "../../src/Icons/Add.svg";
 import Link from "next/link";
-import { ButtonBack, ButtonSave } from "../../components/Buttons/Buttons";
+import {
+  ButtonBack,
+  ButtonSave,
+  Decrement,
+  Increment,
+} from "../../components/Buttons/Buttons";
+import {
+  AmountStyle,
+  ButtonBar,
+  LabelStyled,
+  FormStyled,
+  StyledInput,
+  StyledOption,
+  StyledSelect,
+} from "../../components/Styles/Styles";
 import { getSession } from "next-auth/react";
+import { MinAmountInput } from "../../components/AmountInputs/MinAmountInput";
 
 const fetcher = (resource, init) =>
   fetch(resource, init).then((res) => res.json());
@@ -52,6 +65,10 @@ function ProductId(product) {
 
   const incrementMinAmount = () => {
     setMinAmount(minAmount + 1);
+  };
+
+  const typeMinAmount = (event) => {
+    setMinAmount(parseInt(event.target.value));
   };
 
   const decrementActualAmount = () => {
@@ -120,11 +137,15 @@ function ProductId(product) {
                   );
                 })}
               </StyledSelect>
-              <p>Mindestbestand</p>
+              <MinAmountInput
+                decrementMinAmount={decrementMinAmount}
+                incrementMinAmount={incrementMinAmount}
+                typeMinAmount={typeMinAmount}
+                myvalue={minAmount}
+              />
+              {/* <p>Mindestbestand</p>
               <AmountStyle>
-                <DecrementButton onClick={() => decrementMinAmount()}>
-                  <Remove />
-                </DecrementButton>
+                <Decrement decrement={decrementMinAmount} />
                 <StyledInput
                   required
                   type="number"
@@ -134,15 +155,11 @@ function ProductId(product) {
                     setMinAmount(parseInt(event.target.value))
                   }
                 />
-                <IncrementButton onClick={() => incrementMinAmount()}>
-                  <Add />
-                </IncrementButton>
-              </AmountStyle>
+                <Increment increment={incrementMinAmount} />
+              </AmountStyle> */}
               <p>aktueller Bestand</p>
               <AmountStyle>
-                <DecrementButton onClick={() => decrementActualAmount()}>
-                  <Remove />
-                </DecrementButton>
+                <Decrement decrement={decrementActualAmount} />
                 <StyledInput
                   required
                   type="number"
@@ -153,15 +170,11 @@ function ProductId(product) {
                     setActualAmount(parseInt(event.target.value))
                   }
                 />
-                <IncrementButton onClick={() => incrementActualAmount()}>
-                  <Add />
-                </IncrementButton>
+                <Increment increment={incrementActualAmount} />
               </AmountStyle>
               <p>Maximalbestand</p>
               <AmountStyle>
-                <DecrementButton onClick={() => decrementMaxAmount()}>
-                  <Remove />
-                </DecrementButton>
+                <Decrement decrement={decrementMaxAmount} />
                 <StyledInput
                   required
                   type="number"
@@ -171,10 +184,7 @@ function ProductId(product) {
                     setMaxAmount(parseInt(event.target.value))
                   }
                 />
-
-                <IncrementButton onClick={() => incrementMaxAmount()}>
-                  <Add />
-                </IncrementButton>
+                <Increment increment={incrementMaxAmount} />
               </AmountStyle>
             </StyledEditProduct>
           ))}
@@ -218,117 +228,6 @@ const StyledEditProduct = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
-`;
-
-const LabelStyled = styled.label`
-  margin: 1rem 0;
-  font-size: 2.5rem;
-`;
-const FormStyled = styled.form`
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  margin-bottom: 5.5rem;
-`;
-
-const StyledInput = styled.input`
-  border-radius: 0.6rem;
-  border: 2px solid var(--darkblue);
-  width: 12rem;
-  height: 2rem;
-  margin: 0.6rem 0;
-
-  &::placeholder {
-    text-align: center;
-    color: var(--lightblue);
-  }
-`;
-
-const StyledOption = styled.option`
-  text-align: center;
-  color: var(--lightblue);
-`;
-const StyledSelect = styled.select`
-  border-radius: 0.6rem;
-  border: 2px solid var(--darkblue);
-  width: 12rem;
-  height: 2rem;
-  margin: 0.6rem 0;
-
-  &::placeholder {
-    text-align: center;
-    color: var(--lightblue);
-  }
-`;
-
-const AmountStyle = styled.div`
-  text-align: center;
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-  margin: 0 0 1rem 0;
-  color: var(--darkblue);
-  input[type="number"] {
-    text-align: center;
-    -moz-appearance: textfield;
-  }
-  input[type="number"]::-webkit-inner-spin-button,
-  input[type="number"]::-webkit-outer-spin-button {
-    -webkit-appearance: none;
-    margin: 0;
-  }
-`;
-
-const ButtonBar = styled.div`
-  width: 23.44rem;
-  display: flex;
-  flex-direction: row;
-  justify-content: space-evenly;
-  align-items: center;
-`;
-
-const IncrementButton = styled.div`
-  background-color: var(--lightgreen);
-  border: 2px solid var(--green);
-  border-radius: 999px;
-  height: 1.87rem;
-  width: 1.87rem;
-  transition: 0.2s;
-  font-size: 1.87rem;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  cursor: pointer;
-  margin: 0 1rem;
-
-  &:hover {
-    font-size: 1.25rem;
-    transform: scale(1.1) rotate(90deg);
-    background-color: var(--green);
-    border: 2px solid var(--lightgreen);
-  }
-`;
-
-const DecrementButton = styled.div`
-  background-color: var(--neonpink);
-  border: 2px solid var(--pink);
-  border-radius: 999px;
-  height: 1.87rem;
-  width: 1.87rem;
-  transition: 0.2s;
-  font-size: 1.87rem;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  cursor: pointer;
-  margin: 0 1rem;
-
-  &:hover {
-    font-size: 1.25rem;
-    transform: scale(1.1) rotate(180deg);
-    background-color: var(--pink);
-    border: 2px solid var(--neonpink);
-  }
 `;
 
 export default ProductId;
