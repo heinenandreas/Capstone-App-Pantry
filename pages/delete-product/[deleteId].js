@@ -11,11 +11,11 @@ const fetcher = (resource, init) =>
 function DeleteId() {
   const router = useRouter();
   const { deleteId } = router.query;
+  const product = useSWR(`/api/products/${deleteId}`, fetcher);
   const products = useSWR("/api/products", fetcher);
-  const productList = products.data;
 
-  async function handleDeleteItemClick(id) {
-    const response = await fetch(`/api/products/${id}`, {
+  async function handleDeleteItemClick() {
+    const response = await fetch(`/api/products/${deleteId}`, {
       method: "DELETE",
     });
     const deletedProduct = await response.json();
@@ -25,32 +25,28 @@ function DeleteId() {
     }
   }
 
-  return products.data ? (
+  return product.data ? (
     <div>
-      {productList
-        .filter((product) => product._id === deleteId)
-        .map((product) => (
-          <Container key={deleteId}>
-            <LabelStyled>Produkt löschen</LabelStyled>
-            <StyledDeleteQuestion>
-              <StyledQuestion>Möchtest du</StyledQuestion>
-              <StyledProductname>{product.productName} </StyledProductname>
-              <StyledQuestion>wirklich löschen?</StyledQuestion>
-            </StyledDeleteQuestion>
+      <Container key={deleteId}>
+        <LabelStyled>Produkt löschen</LabelStyled>
+        <StyledDeleteQuestion>
+          <StyledQuestion>Möchtest du</StyledQuestion>
+          <StyledProductname> {product.data.productName}</StyledProductname>
+          <StyledQuestion>wirklich löschen?</StyledQuestion>
+        </StyledDeleteQuestion>
 
-            <ButtonBar>
-              <Link href="/">
-                <a>
-                  <ButtonBack />
-                </a>
-              </Link>
+        <ButtonBar>
+          <Link href="/">
+            <a>
+              <ButtonBack />
+            </a>
+          </Link>
 
-              <StyledButton onClick={() => handleDeleteItemClick(product._id)}>
-                <ButtonDelete />
-              </StyledButton>
-            </ButtonBar>
-          </Container>
-        ))}
+          <StyledButton onClick={() => handleDeleteItemClick()}>
+            <ButtonDelete />
+          </StyledButton>
+        </ButtonBar>
+      </Container>
     </div>
   ) : (
     <div>loading</div>

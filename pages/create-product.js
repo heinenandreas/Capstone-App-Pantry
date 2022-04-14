@@ -1,18 +1,11 @@
 import { useState } from "react";
 import { units, categories } from "../itemlist";
-import styled from "styled-components";
-import {
-  ButtonBack,
-  ButtonSave,
-  Decrement,
-  Increment,
-} from "../components/Buttons/Buttons";
+import { ButtonBack, ButtonSave } from "../components/Buttons/Buttons";
 import Link from "next/link";
 import useSWR from "swr";
 import { useRouter } from "next/router";
 import { getSession, useSession } from "next-auth/react";
 import {
-  AmountStyle,
   ButtonBar,
   LabelStyled,
   FormStyled,
@@ -20,11 +13,12 @@ import {
   StyledOption,
   StyledSelect,
 } from "../components/Styles/Styles";
+import { AmountInput } from "../components/AmountInputs/AmountInput";
 
 const fetcher = (resource, init) =>
   fetch(resource, init).then((res) => res.json());
 
-function AddEditCard({ product }) {
+function CreateProduct() {
   const products = useSWR("/api/products", fetcher);
   const router = useRouter();
   const { data: session } = useSession();
@@ -58,30 +52,6 @@ function AddEditCard({ product }) {
     }
   }
 
-  const decrementMinAmount = () => {
-    if (minAmount > 0) setMinAmount(minAmount - 1);
-  };
-
-  const incrementMinAmount = () => {
-    setMinAmount(minAmount + 1);
-  };
-
-  const decrementActualAmount = () => {
-    if (actualAmount > 0) setActualAmount(actualAmount - 1);
-  };
-
-  const incrementActualAmount = () => {
-    setActualAmount(actualAmount + 1);
-  };
-
-  const decrementMaxAmount = () => {
-    if (maxAmount > 0) setMaxAmount(maxAmount - 1);
-  };
-
-  const incrementMaxAmount = () => {
-    setMaxAmount(maxAmount + 1);
-  };
-
   return (
     <>
       <FormStyled onSubmit={handleCreateProduct}>
@@ -98,7 +68,7 @@ function AddEditCard({ product }) {
         <p>Maßeinheit</p>
         <StyledSelect
           required
-          placeholder="Maß z.B. kg, Pkg, Flasche, Stk"
+          name="unit"
           value={unit}
           onChange={(event) => setUnit(event.target.value)}
         >
@@ -117,6 +87,7 @@ function AddEditCard({ product }) {
         <p>Kategorie</p>
         <StyledSelect
           required
+          name="category"
           value={category}
           onChange={(event) => setCategory(event.target.value)}
         >
@@ -131,45 +102,25 @@ function AddEditCard({ product }) {
             );
           })}
         </StyledSelect>
-        <p>Mindestbestand</p>
-        <AmountStyle>
-          <Decrement decrement={decrementMinAmount} />
-          <StyledInput
-            required
-            type="number"
-            name="minAmount"
-            placeholder="Min"
-            value={minAmount}
-            onChange={(event) => setMinAmount(parseInt(event.target.value))}
-          />
-          <Increment increment={incrementMinAmount} />
-        </AmountStyle>
-        <p>aktueller Bestand</p>
-        <AmountStyle>
-          <Decrement decrement={decrementActualAmount} />
-          <StyledInput
-            required
-            type="number"
-            name="actualAmount"
-            placeholder="Aktuell"
-            value={actualAmount}
-            onChange={(event) => setActualAmount(parseInt(event.target.value))}
-          />
-          <Increment increment={incrementActualAmount} />
-        </AmountStyle>
-        <p>Maximalbestand</p>
-        <AmountStyle>
-          <Decrement decrement={decrementMaxAmount} />
-          <StyledInput
-            required
-            type="number"
-            name="maxAmount"
-            placeholder="Max"
-            value={maxAmount}
-            onChange={(event) => setMaxAmount(parseInt(event.target.value))}
-          />
-          <Increment increment={incrementMaxAmount} />
-        </AmountStyle>
+        <AmountInput
+          label="Mindestbestand"
+          name="minAmount"
+          value={minAmount}
+          onChange={(event) => setMinAmount(event)}
+        />
+        <AmountInput
+          label="Aktueller Bestand"
+          name="actualAmount"
+          value={actualAmount}
+          onChange={(event) => setActualAmount(event)}
+        />
+        <AmountInput
+          label="Mindestbestand"
+          name="maxAmount"
+          value={maxAmount}
+          onChange={(event) => setMaxAmount(event)}
+        />
+
         <ButtonBar>
           <Link href="/">
             <a>
@@ -203,4 +154,4 @@ export async function getServerSideProps(context) {
   };
 }
 
-export default AddEditCard;
+export default CreateProduct;

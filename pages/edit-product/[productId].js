@@ -4,14 +4,8 @@ import styled from "styled-components";
 import { useState, useEffect } from "react";
 import { units, categories } from "../../itemlist";
 import Link from "next/link";
+import { ButtonBack, ButtonSave } from "../../components/Buttons/Buttons";
 import {
-  ButtonBack,
-  ButtonSave,
-  Decrement,
-  Increment,
-} from "../../components/Buttons/Buttons";
-import {
-  AmountStyle,
   ButtonBar,
   LabelStyled,
   FormStyled,

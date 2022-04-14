@@ -19,7 +19,7 @@ export function SignOutButton() {
 }
 export function ButtonAddCategory() {
   return (
-    <Link href="/add-edit-card" passHref>
+    <Link href="/create-product" passHref>
       <RoundButtonBig>
         <AddBig />
       </RoundButtonBig>
