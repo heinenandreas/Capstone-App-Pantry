@@ -1,4 +1,3 @@
-import { useState } from "react";
 import { Decrement, Increment } from "../Buttons/Buttons";
 import { StyledInput, AmountStyle } from "../Styles/Styles";
 
