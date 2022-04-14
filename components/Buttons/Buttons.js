@@ -152,7 +152,7 @@ const SaveButtonText = styled.p`
   color: var(--darkblue);
 `;
 
-const IncrementButton = styled.button`
+const IncrementButton = styled.div`
   background-color: var(--lightgreen);
   border: 2px solid var(--green);
   border-radius: 999px;
@@ -174,7 +174,7 @@ const IncrementButton = styled.button`
   }
 `;
 
-const DecrementButton = styled.button`
+const DecrementButton = styled.div`
   background-color: var(--neonpink);
   border: 2px solid var(--pink);
   border-radius: 999px;
