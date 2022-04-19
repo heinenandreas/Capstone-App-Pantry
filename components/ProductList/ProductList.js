@@ -1,10 +1,16 @@
 import styled from "styled-components";
 import Link from "next/link";
 import useSWR from "swr";
-import TrashcanSmall from "../../src/Icons/TrashcanSmall.svg";
 import Settings from "../../src/Icons/Settings.svg";
-import { HighlightActualAmountNegative } from "../HighlightAmount/HighlightAmount";
+import { HighlightActualAmount } from "../HighlightAmount/HighlightAmount";
 import { Increment, Decrement } from "../Buttons/Buttons";
+import {
+  AmountBar,
+  ElementContainer,
+  StyledItem,
+  StyledListName,
+  StyledListUnit,
+} from "../../components/Styles/Styles";
 
 const fetcher = (resource, init) =>
   fetch(resource, init).then((res) => res.json());
@@ -28,7 +34,7 @@ export function ProductList(category) {
   return (
     <StyledList>
       {productlist
-        .filter((product, name) => product.category === category.name)
+        .filter((product) => product.category === category.name)
         .map((product) => (
           <StyledItem key={product._id}>
             <StyledListName>{product.productName}</StyledListName>
@@ -44,9 +50,10 @@ export function ProductList(category) {
                     }
                   }}
                 />
-                <HighlightActualAmountNegative
+                <HighlightActualAmount
                   product={product}
                   actualAmount={product.actualAmount}
+                  maxAmount={product.maxAmount}
                   minAmount={product.minAmount}
                 />
                 <Increment
@@ -68,44 +75,11 @@ export function ProductList(category) {
   );
 }
 
-const AmountBar = styled.div`
-  display: flex;
-  align-items: center;
-  justify-content: flex-end;
-  gap: 0.2rem;
-`;
-
 const StyledList = styled.div`
-  width: 100%;
   border: 2px solid var(--darkblue);
   border-top: 0px;
   border-left: 0px;
   background-color: var(--lightorange);
-`;
-
-const ElementContainer = styled.div`
-  width: 17rem;
-  display: grid;
-  grid-template-columns: 1fr 1fr 1fr;
-  align-items: center;
-`;
-
-const StyledItem = styled.div`
-  display: flex;
-  align-items: center;
-  height: 3rem;
-  border-top: 2px solid var(--lightblue);
-`;
-const StyledListName = styled.p`
-  width: 50%;
-  color: var(--darkblue);
-  font-size: 1.1rem;
-  padding-left: 1rem;
-`;
-const StyledListUnit = styled.p`
-  left: 75vw;
-  color: var(--darkblue);
-  font-size: 0.625rem;
 `;
 
 const StyledSettings = styled.div`

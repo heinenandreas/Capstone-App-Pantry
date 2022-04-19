@@ -27,28 +27,18 @@ function DeleteId() {
   }
 
   return product.data ? (
-    <div>
-      <Container key={deleteId}>
-        <LabelStyled>Produkt löschen</LabelStyled>
-        <StyledDeleteQuestion>
-          <StyledQuestion>Möchtest du</StyledQuestion>
-          <StyledProductname> {product.data.productName}</StyledProductname>
-          <StyledQuestion>wirklich löschen?</StyledQuestion>
-        </StyledDeleteQuestion>
-
-        <ButtonBar>
-          <Link href="/">
-            <a>
-              <ButtonBack />
-            </a>
-          </Link>
-
-          <StyledButton onClick={() => handleDeleteItemClick()}>
-            <ButtonDelete />
-          </StyledButton>
-        </ButtonBar>
-      </Container>
-    </div>
+    <Container key={deleteId}>
+      <LabelStyled>Produkt löschen</LabelStyled>
+      <StyledDeleteQuestion>
+        <StyledQuestion>Möchtest du</StyledQuestion>
+        <StyledProductname> {product.data.productName}</StyledProductname>
+        <StyledQuestion>wirklich löschen?</StyledQuestion>
+      </StyledDeleteQuestion>
+      <ButtonBar>
+        <ButtonBack />
+        <ButtonDelete deletefunction={handleDeleteItemClick} />
+      </ButtonBar>
+    </Container>
   ) : (
     <Loading />
   );
@@ -81,10 +71,6 @@ const StyledDeleteQuestion = styled.div`
   box-shadow: 0 5px 5px 2px rgba(0, 0, 0, 0.3) inset;
 `;
 
-const StyledButton = styled.button`
-  border: none;
-  background-color: white;
-`;
 const LabelStyled = styled.label`
   margin: 1rem 0;
   font-size: 40px;

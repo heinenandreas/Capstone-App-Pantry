@@ -2,8 +2,15 @@ import useSWR from "swr";
 import styled from "styled-components";
 import { Decrement, Increment } from "../components/Buttons/Buttons";
 import { getSession } from "next-auth/react";
-import { HighlightActualAmountPositive } from "../components/HighlightAmount/HighlightAmount";
 import { StyledCategory } from "../components/Styles/Styles";
+import { Header } from "../components/Header/Header";
+import {
+  AmountBar,
+  ElementContainer,
+  StyledItem,
+  StyledListName,
+  StyledListUnit,
+} from "../components/Styles/Styles";
 
 const fetcher = (resource, init) =>
   fetch(resource, init).then((res) => res.json());
@@ -35,29 +42,36 @@ function Shoppinglist() {
   }
 
   return products.data ? (
-    <StyledCategory>
-      <ShoppinglistStyled>
-        <CategoryNameStyled>Shoppinglist</CategoryNameStyled>
-      </ShoppinglistStyled>
-      <StyledList>
-        {productList
-          .filter((product) => product.actualAmount < product.maxAmount)
-          .map((product) => (
-            <StyledItem key={product._id}>
-              <StyledListName>{product.productName}</StyledListName>
-              <ElementContainer>
-                <Decrement decrement={() => handleClickDecrement(product)} />
-                <HighlightActualAmountPositive
-                  actualAmount={product.actualAmount}
-                />
-                <Increment increment={() => handleClickIncrement(product)} />
-                <StyledListMaxAmount>{product.maxAmount}</StyledListMaxAmount>
-                <StyledListUnit>{product.unit}</StyledListUnit>
-              </ElementContainer>
-            </StyledItem>
-          ))}
-      </StyledList>
-    </StyledCategory>
+    <>
+      <Header />
+      <StyledCategory>
+        <ShoppinglistStyled>
+          <ListTitle>Shoppinglist</ListTitle>
+        </ShoppinglistStyled>
+        <StyledList>
+          {productList
+            .filter((product) => product.actualAmount < product.maxAmount)
+            .map((product) => (
+              <StyledItem key={product._id}>
+                <StyledListName>{product.productName}</StyledListName>
+                <ElementContainer>
+                  <AmountBar>
+                    <Decrement
+                      decrement={() => handleClickDecrement(product)}
+                    />
+                    <StyledListAmount>{product.actualAmount}</StyledListAmount>
+                    <Increment
+                      increment={() => handleClickIncrement(product)}
+                    />
+                  </AmountBar>
+                  <StyledListUnit>{product.unit}</StyledListUnit>
+                  <StyledListAmount>{product.maxAmount}</StyledListAmount>
+                </ElementContainer>
+              </StyledItem>
+            ))}
+        </StyledList>
+      </StyledCategory>
+    </>
   ) : (
     <div>loading</div>
   );
@@ -83,13 +97,13 @@ export async function getServerSideProps(context) {
   };
 }
 
-const StyledListMaxAmount = styled.p`
+const StyledListAmount = styled.p`
   color: var(--darkblue);
   font-size: 30px;
 `;
 
-const CategoryNameStyled = styled.h3`
-  font-size: 1.6rem;
+const ListTitle = styled.h3`
+  font-size: 1.5rem;
   margin: 0;
   padding-left: 0.5rem;
   color: var(--darkblue);
@@ -114,32 +128,6 @@ const StyledList = styled.div`
   border-left: 0px;
   border-radius: 0 0 22px 0;
   background-color: #ffebd9;
-`;
-
-const StyledItem = styled.div`
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  height: 3rem;
-  border-top: 2px solid var(--lightblue);
-`;
-const StyledListName = styled.p`
-  color: var(--darkblue);
-  font-size: 1.25rem;
-  padding-left: 1rem;
-`;
-const StyledListUnit = styled.p`
-  color: var(--darkblue);
-  font-size: 0.625rem;
-`;
-
-const ElementContainer = styled.div`
-  width: 16rem;
-  display: grid;
-  grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
-  align-items: center;
-  justify-items: center;
-  gap: 0.2rem;
 `;
 
 export default Shoppinglist;

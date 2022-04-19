@@ -53,84 +53,78 @@ function CreateProduct() {
   }
 
   return (
-    <>
-      <FormStyled onSubmit={handleCreateProduct}>
-        <LabelStyled>Neues Produkt</LabelStyled>
-        <p>Produktname</p>
-        <StyledInput
-          type="text"
-          required
-          name="productName"
-          placeholder="Produktname"
-          value={productName}
-          onChange={(event) => setProductName(event.target.value)}
-        />
-        <p>Maßeinheit</p>
-        <StyledSelect
-          required
-          name="unit"
-          value={unit}
-          onChange={(event) => setUnit(event.target.value)}
-        >
-          <StyledOption value="" disabled hidden>
-            Wähle eine Einheit
-          </StyledOption>
+    <FormStyled onSubmit={handleCreateProduct}>
+      <LabelStyled>Neues Produkt</LabelStyled>
+      <p>Produktname</p>
+      <StyledInput
+        type="text"
+        required
+        name="productName"
+        placeholder="Produktname"
+        value={productName}
+        onChange={(event) => setProductName(event.target.value)}
+      />
+      <p>Maßeinheit</p>
+      <StyledSelect
+        required
+        name="unit"
+        value={unit}
+        onChange={(event) => setUnit(event.target.value)}
+      >
+        <StyledOption value="" disabled hidden>
+          Wähle eine Einheit
+        </StyledOption>
 
-          {units.map((unit) => {
-            return (
-              <StyledOption key={unit.name} value={unit.name}>
-                {unit.name}
-              </StyledOption>
-            );
-          })}
-        </StyledSelect>
-        <p>Kategorie</p>
-        <StyledSelect
-          required
-          name="category"
-          value={category}
-          onChange={(event) => setCategory(event.target.value)}
-        >
-          <StyledOption value="" disabled hidden>
-            Wähle eine Kategorie
-          </StyledOption>
-          {categories.map((category) => {
-            return (
-              <StyledOption key={category.name} value={category.name}>
-                {category.name}
-              </StyledOption>
-            );
-          })}
-        </StyledSelect>
-        <AmountInput
-          label="Mindestbestand"
-          name="minAmount"
-          value={minAmount}
-          onChange={(event) => setMinAmount(event)}
-        />
-        <AmountInput
-          label="Aktueller Bestand"
-          name="actualAmount"
-          value={actualAmount}
-          onChange={(event) => setActualAmount(event)}
-        />
-        <AmountInput
-          label="Mindestbestand"
-          name="maxAmount"
-          value={maxAmount}
-          onChange={(event) => setMaxAmount(event)}
-        />
+        {units.map((unit) => {
+          return (
+            <StyledOption key={unit.name} value={unit.name}>
+              {unit.name}
+            </StyledOption>
+          );
+        })}
+      </StyledSelect>
+      <p>Kategorie</p>
+      <StyledSelect
+        required
+        name="category"
+        value={category}
+        onChange={(event) => setCategory(event.target.value)}
+      >
+        <StyledOption value="" disabled hidden>
+          Wähle eine Kategorie
+        </StyledOption>
+        {categories.map((category) => {
+          return (
+            <StyledOption key={category.name} value={category.name}>
+              {category.name}
+            </StyledOption>
+          );
+        })}
+      </StyledSelect>
+      <AmountInput
+        label="Mindestbestand"
+        name="minAmount"
+        value={minAmount}
+        onChange={(event) => setMinAmount(event)}
+      />
+      <AmountInput
+        label="Aktueller Bestand"
+        name="actualAmount"
+        value={actualAmount}
+        onChange={(event) => setActualAmount(event)}
+      />
+      <AmountInput
+        label="Mindestbestand"
+        name="maxAmount"
+        value={maxAmount}
+        onChange={(event) => setMaxAmount(event)}
+      />
 
-        <ButtonBar>
-          <Link href="/">
-            <a>
-              <ButtonBack />
-            </a>
-          </Link>
-          <ButtonSave type="submit" />
-        </ButtonBar>
-      </FormStyled>
-    </>
+      <ButtonBar>
+        <ButtonBack />
+        <ButtonSave type="submit" />
+      </ButtonBar>
+    </FormStyled>
   );
 }
 

@@ -30,7 +30,6 @@ transition: 0.7s;
 &:hover {
     background-color: var(--green);
   }
-
 }
 
 .Collapsible__trigger {
@@ -39,5 +38,4 @@ transition: 0.7s;
   padding-left: 0.5rem;
   color: var(--darkblue);
 }
-
 `;

@@ -2,7 +2,6 @@ import { SessionProvider } from "next-auth/react";
 import { SWRConfig } from "swr";
 import { GlobalStyle } from "../components/GlobalStyle/GlobalStyle";
 import Navbar from "../components/Navbar/Navbar";
-import { Header } from "../components/Header/Header";
 
 function MyApp({ Component, pageProps: { session, ...pageProps } }) {
   return (
@@ -16,7 +15,6 @@ function MyApp({ Component, pageProps: { session, ...pageProps } }) {
           }}
         >
           <GlobalStyle />
-          <Header />
           <Component {...pageProps} />
           <Navbar />
         </SWRConfig>

@@ -3,7 +3,6 @@ import useSWR from "swr";
 import styled from "styled-components";
 import { useState, useEffect } from "react";
 import { units, categories } from "../../itemlist";
-import Link from "next/link";
 import {
   ButtonBack,
   ButtonSave,
@@ -74,6 +73,7 @@ function ProductId() {
       <FormStyled onSubmit={handleProductEdit}>
         <StyledEditProduct key={product._id}>
           <LabelStyled>Produkt bearbeiten</LabelStyled>
+          <p>Produktname</p>
           <StyledInput
             type="text"
             required
@@ -168,11 +168,7 @@ function ProductId() {
         </StyledEditProduct>
 
         <ButtonBar>
-          <Link href="/">
-            <a>
-              <ButtonBack />
-            </a>
-          </Link>
+          <ButtonBack />
           <ButtonSave type="submit" />
           <ButtonDelete productId={productId} />
         </ButtonBar>
