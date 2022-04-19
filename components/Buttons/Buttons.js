@@ -55,11 +55,13 @@ export function ButtonBack() {
   );
 }
 
-export function ButtonDelete() {
+export function ButtonDelete(props) {
   return (
-    <RoundButton>
-      <Trashcan />
-    </RoundButton>
+    <Link href={"/delete-product/" + props.productId} passHref>
+      <RoundButton>
+        <Trashcan />
+      </RoundButton>
+    </Link>
   );
 }
 

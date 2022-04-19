@@ -22,19 +22,19 @@ export const GlobalStyle = createGlobalStyle`
 background-color: var(--lightgreen);
 width: 95vw;
 border-radius: 0 1.25rem 0 0;
-padding: 1rem 0 0 0; 
+padding: 0.7rem 0 0 0; 
 cursor: pointer;
 border-bottom: 3px solid var(--green);
 transition: 0.7s;
 
 &:hover {
-    background-color: var(--lightorange);
+    background-color: var(--green);
   }
 
 }
 
 .Collapsible__trigger {
-  font-size: 1.6rem;
+  font-size: 1.5rem;
   margin: 0;
   padding-left: 0.5rem;
   color: var(--darkblue);

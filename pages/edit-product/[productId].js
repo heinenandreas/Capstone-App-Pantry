@@ -4,7 +4,11 @@ import styled from "styled-components";
 import { useState, useEffect } from "react";
 import { units, categories } from "../../itemlist";
 import Link from "next/link";
-import { ButtonBack, ButtonSave } from "../../components/Buttons/Buttons";
+import {
+  ButtonBack,
+  ButtonSave,
+  ButtonDelete,
+} from "../../components/Buttons/Buttons";
 import {
   ButtonBar,
   LabelStyled,
@@ -48,8 +52,6 @@ function ProductId() {
       });
     }
   }, [product.data]);
-
-  console.log({ currentProduct });
 
   async function handleProductEdit(event) {
     event.preventDefault();
@@ -172,6 +174,7 @@ function ProductId() {
             </a>
           </Link>
           <ButtonSave type="submit" />
+          <ButtonDelete productId={productId} />
         </ButtonBar>
       </FormStyled>
     </>

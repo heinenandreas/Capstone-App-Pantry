@@ -32,20 +32,20 @@ export function HighlightActualAmountPositive(product) {
 
 const StyledListActualAmount = styled.p`
   color: var(--darkblue);
-  font-size: 2.5rem;
+  font-size: 2rem;
 `;
 
 const StyledListShoppingAmount = styled.p`
   color: var(--darkblue);
-  font-size: 2.5rem;
+  font-size: 2rem;
 `;
 
 const StyledListNegativeActualAmount = styled.p`
   color: var(--pink);
-  font-size: 2.5rem;
+  font-size: 2rem;
 `;
 
 const StyledListPositiveActualAmount = styled.p`
   color: var(--green);
-  font-size: 2.5rem;
+  font-size: 2rem;
 `;
