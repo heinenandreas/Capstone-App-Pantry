@@ -13,14 +13,18 @@ export const units = [
   },
   {
     id: 3,
-    name: "Kilogramm",
+    name: "Gramm",
   },
   {
     id: 4,
-    name: "Flasche",
+    name: "Kilogramm",
   },
   {
     id: 5,
+    name: "Flasche",
+  },
+  {
+    id: 6,
     name: "Dose",
   },
 ];
