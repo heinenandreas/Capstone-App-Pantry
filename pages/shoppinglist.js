@@ -18,7 +18,6 @@ const fetcher = (resource, init) =>
 function Shoppinglist() {
   const products = useSWR("/api/products", fetcher);
   const productList = products.data;
-  test;
 
   async function handleProductAmount(id, actualAmount) {
     const response = await fetch(`/api/products/${id}`, {
