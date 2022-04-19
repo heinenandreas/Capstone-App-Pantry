@@ -1,9 +1,9 @@
 import useSWR from "swr";
 import styled from "styled-components";
-import Add from "../src/Icons/Add.svg";
-import Remove from "../src/Icons/Remove.svg";
+import { Decrement, Increment } from "../components/Buttons/Buttons";
 import { getSession } from "next-auth/react";
 import { HighlightActualAmountPositive } from "../components/HighlightAmount/HighlightAmount";
+import { StyledCategory } from "../components/Styles/Styles";
 
 const fetcher = (resource, init) =>
   fetch(resource, init).then((res) => res.json());
@@ -46,26 +46,11 @@ function Shoppinglist() {
             <StyledItem key={product._id}>
               <StyledListName>{product.productName}</StyledListName>
               <ElementContainer>
-                <DecrementButton
-                  type="button"
-                  amount={product.actualAmount}
-                  onClick={() => handleClickDecrement(product)}
-                >
-                  <Remove />
-                </DecrementButton>
+                <Decrement decrement={() => handleClickDecrement(product)} />
                 <HighlightActualAmountPositive
-                  product={product}
                   actualAmount={product.actualAmount}
-                  maxAmount={product.maxAmount}
                 />
-                <IncrementButton
-                  type="button"
-                  key={product.name}
-                  amount={product.actualAmount}
-                  onClick={() => handleClickIncrement(product)}
-                >
-                  <Add />
-                </IncrementButton>
+                <Increment increment={() => handleClickIncrement(product)} />
                 <StyledListMaxAmount>{product.maxAmount}</StyledListMaxAmount>
                 <StyledListUnit>{product.unit}</StyledListUnit>
               </ElementContainer>
@@ -146,52 +131,6 @@ const StyledListName = styled.p`
 const StyledListUnit = styled.p`
   color: var(--darkblue);
   font-size: 0.625rem;
-`;
-
-const IncrementButton = styled.button`
-  background-color: var(--lightgreen);
-  border: 2px solid var(--green);
-  border-radius: 999px;
-  height: 1.87rem;
-  width: 1.87rem;
-  transition: 0.2s;
-  font-size: 1.87rem;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  cursor: pointer;
-
-  &:hover {
-    font-size: 1.25rem;
-    transform: scale(1.1) rotate(90deg);
-    background-color: var(--green);
-    border: 2px solid var(--lightgreen);
-  }
-`;
-
-const DecrementButton = styled.button`
-  background-color: var(--neonpink);
-  border: 2px solid var(--pink);
-  border-radius: 999px;
-  height: 1.87rem;
-  width: 1.87rem;
-  transition: 0.2s;
-  font-size: 1.87rem;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  cursor: pointer;
-
-  &:hover {
-    font-size: 1.25rem;
-    transform: scale(1.1) rotate(180deg);
-    background-color: var(--pink);
-    border: 2px solid var(--neonpink);
-  }
-`;
-
-const StyledCategory = styled.div`
-  margin-bottom: 5.5rem;
 `;
 
 const ElementContainer = styled.div`

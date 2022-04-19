@@ -13,12 +13,12 @@ export default async function handler(request, response) {
     switch (request.method) {
       case "GET":
         if (session) {
-          const products = await Product.find()
+          const product = await Product.findById(productId)
             .where({
               userId: session.user.id,
             })
             .populate("userId");
-          response.status(200).json(products);
+          response.status(200).json(product);
         } else {
           response.status(401).json({ error: "Not authenticated" });
         }
