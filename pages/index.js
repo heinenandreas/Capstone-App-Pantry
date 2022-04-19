@@ -7,10 +7,7 @@ import Collapsible from "react-collapsible";
 import Image from "next/image";
 import { ProductList } from "../components/ProductList/ProductList";
 import { StyledCategory } from "../components/Styles/Styles";
-
-const LoadingGif = () => {
-  return <Image priority src="/loading.gif" alt="" width={300} height={300} />;
-};
+import { Loading } from "../components/Loading/Loading";
 
 const fetcher = (resource, init) =>
   fetch(resource, init).then((res) => res.json());
@@ -30,17 +27,8 @@ export default function Home() {
         })}
       </StyledCategory>
     ) : (
-      <LoadingContainer>
-        <LoadingGif />
-        <div>loading</div>
-      </LoadingContainer>
+      <Loading />
     );
   }
   return <Login />;
 }
-
-const LoadingContainer = styled.div`
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-`;

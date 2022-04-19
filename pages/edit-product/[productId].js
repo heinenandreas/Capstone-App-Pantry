@@ -15,6 +15,7 @@ import {
 } from "../../components/Styles/Styles";
 import { getSession } from "next-auth/react";
 import { AmountInput } from "../../components/AmountInputs/AmountInput";
+import { Loading } from "../../components/Loading/Loading";
 
 const fetcher = (resource, init) =>
   fetch(resource, init).then((res) => res.json());
@@ -175,7 +176,7 @@ function ProductId() {
       </FormStyled>
     </>
   ) : (
-    <div>loading</div>
+    <Loading />
   );
 }
 
