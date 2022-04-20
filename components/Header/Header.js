@@ -27,11 +27,10 @@ const ProfileStyled = styled.img`
 const HeaderContainer = styled.div`
   width: 100vw;
   display: flex;
-  height: 8rem;
+  height: 6.5rem;
   align-items: center;
   justify-content: center;
   box-shadow: 0 5px 5px 0px rgba(0, 0, 0, 0.3) inset;
-  color: #ffffff;
+  color: #fff;
   text-shadow: 2px 2px 2px #474747;
-  border-radius: 0 0 50px 0;
 `;

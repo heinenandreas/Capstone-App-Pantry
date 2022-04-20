@@ -16,7 +16,7 @@ function Logo() {
 export default Logo;
 
 const LogoContainer = styled.h2`
-  height: 8rem;
+  height: 6rem;
   display: flex;
   justify-content: flex-start;
   justify-content: center;
@@ -25,6 +25,8 @@ const LogoContainer = styled.h2`
   color: #ffffff;
   text-shadow: 2px 2px 2px #474747;
   border-radius: 0 0 50px 0;
+
+  margin-top: 0.5rem;
 `;
 
 const LogoOrange = styled.span`

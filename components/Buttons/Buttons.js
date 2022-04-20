@@ -49,17 +49,23 @@ export function ButtonShoppinglist() {
 
 export function ButtonBack() {
   return (
-    <RoundButton>
-      <ArrowLeft />
-    </RoundButton>
+    <Link href="/">
+      <a>
+        <RoundButtonBig>
+          <ArrowLeft />
+        </RoundButtonBig>
+      </a>
+    </Link>
   );
 }
 
-export function ButtonDelete() {
+export function ButtonDelete(props) {
   return (
-    <RoundButton>
-      <Trashcan />
-    </RoundButton>
+    <Link href={"/delete-product/" + props.productId} passHref>
+      <RoundButtonPink onClick={props.deletefunction}>
+        <Trashcan />
+      </RoundButtonPink>
+    </Link>
   );
 }
 
@@ -87,12 +93,10 @@ export function Increment(props) {
   );
 }
 
-const RoundButton = styled.div`
+const RoundButtonPink = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
-  bottom: 3rem;
-  right: 3rem;
   background-color: white;
   width: 4rem;
   height: 4rem;
@@ -102,8 +106,8 @@ const RoundButton = styled.div`
   transition: 0.6s;
 
   &:hover {
-    transform: scale(1.2);
-    background-color: var(--lightorange);
+    transform: scale(1.1);
+    background-color: var(--neonpink);
   }
 `;
 
@@ -111,8 +115,6 @@ const RoundButtonBig = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
-  top: 2.5rem;
-  right: 5vw;
   background-color: white;
   width: 4rem;
   height: 4rem;
@@ -123,9 +125,8 @@ const RoundButtonBig = styled.div`
   transition: 0.6s;
 
   &:hover {
-    transform: scale(1.15);
+    transform: scale(1.1);
     background-color: var(--lightorange);
-    box-shadow: 0 5px 5px 0px rgba(0, 0, 0, 0.3) inset;
   }
 `;
 
