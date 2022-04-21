@@ -114,7 +114,7 @@ function CreateProduct() {
         onChange={(event) => setActualAmount(event)}
       />
       <AmountInput
-        label="Mindestbestand"
+        label="Maximalbestand"
         name="maxAmount"
         value={maxAmount}
         onChange={(event) => setMaxAmount(event)}

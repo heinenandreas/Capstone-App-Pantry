@@ -1,6 +1,7 @@
 import { signIn } from "next-auth/react";
 import styled from "styled-components";
 import Image from "next/image";
+import { Header } from "../Header/Header";
 
 const LoginImage = () => {
   return <Image priority src="/food.gif" alt="" width={300} height={300} />;
@@ -8,16 +9,40 @@ const LoginImage = () => {
 
 export function Login() {
   return (
-    <Loginsite>
-      <GifContainer>
-        <LoginImage />
-      </GifContainer>
-      <LoginButton onClick={() => signIn()}>
-        <LoginText>Login</LoginText>
-      </LoginButton>
-    </Loginsite>
+    <>
+      <Header />
+      <Loginsite>
+        <Textfield>
+          <LandingText>
+            keep your supplies
+            <br />
+            up to date
+          </LandingText>
+        </Textfield>
+        <GifContainer>
+          <LoginImage />
+        </GifContainer>
+        <LoginButton onClick={() => signIn()}>
+          <LoginText>Login</LoginText>
+        </LoginButton>
+      </Loginsite>
+    </>
   );
 }
+const Textfield = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+`;
+
+const LandingText = styled.p`
+  margin-top: 2.5rem;
+  line-height: 3.5rem;
+  font-size: 2rem;
+  color: var(--darkblue);
+  transform: rotate(-7deg);
+`;
 
 const Loginsite = styled.div`
   position: relative;
@@ -39,7 +64,7 @@ const LoginButton = styled.button`
   cursor: pointer;
   position: absolute;
   z-index: 2;
-  top: 74%;
+  top: 82.4%;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -52,7 +77,7 @@ const LoginButton = styled.button`
   transition: 0.6s;
 
   &:hover {
-    transform: scale(1.2);
+    transform: scale(1.1);
     background-color: var(--lightgreen);
     box-shadow: 0 5px 5px 0px rgba(0, 0, 0, 0.3) inset;
   }

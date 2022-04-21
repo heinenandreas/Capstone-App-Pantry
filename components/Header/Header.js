@@ -9,7 +9,7 @@ export function Header() {
     return (
       <HeaderContainer>
         <Logo />
-        <ProfileStyled src={session.user.image} alt="" />
+        {/* <ProfileStyled src={session.user.image} alt="" /> */}
       </HeaderContainer>
     );
   }

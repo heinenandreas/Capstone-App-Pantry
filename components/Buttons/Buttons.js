@@ -166,6 +166,7 @@ const IncrementButton = styled.div`
   align-items: center;
   margin: 0 0.5rem;
   cursor: pointer;
+  transition: 0.4s;
 
   &:hover {
     font-size: 1.25rem;
@@ -188,6 +189,7 @@ const DecrementButton = styled.div`
   align-items: center;
   margin: 0 0.5rem;
   cursor: pointer;
+  transition: 0.4s;
 
   &:hover {
     font-size: 1.25rem;

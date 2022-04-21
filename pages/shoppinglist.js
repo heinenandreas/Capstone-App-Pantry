@@ -11,6 +11,7 @@ import {
   StyledListName,
   StyledListUnit,
 } from "../components/Styles/Styles";
+import { Loading } from "../components/Loading/Loading";
 
 const fetcher = (resource, init) =>
   fetch(resource, init).then((res) => res.json());
@@ -48,6 +49,7 @@ function Shoppinglist() {
         <ShoppinglistStyled>
           <ListTitle>Shoppinglist</ListTitle>
         </ShoppinglistStyled>
+        <MaxAmount>Max</MaxAmount>
         <StyledList>
           {productList
             .filter((product) => product.actualAmount < product.maxAmount)
@@ -73,7 +75,7 @@ function Shoppinglist() {
       </StyledCategory>
     </>
   ) : (
-    <div>loading</div>
+    <Loading />
   );
 }
 
@@ -96,6 +98,17 @@ export async function getServerSideProps(context) {
     },
   };
 }
+
+const MaxAmount = styled.div`
+  text-align: right;
+  padding-right: 1.5rem;
+  width: 95vw;
+  border: 2px solid var(--darkblue);
+  border-bottom: none;
+  border-top: 0px;
+  border-left: 0px;
+  background-color: #ffebd9;
+`;
 
 const StyledListAmount = styled.p`
   color: var(--darkblue);

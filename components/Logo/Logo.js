@@ -22,7 +22,7 @@ const LogoContainer = styled.h2`
   justify-content: center;
   align-items: center;
   font-size: 4rem;
-  color: #ffffff;
+  color: #fff;
   text-shadow: 2px 2px 2px #474747;
   border-radius: 0 0 50px 0;
 
