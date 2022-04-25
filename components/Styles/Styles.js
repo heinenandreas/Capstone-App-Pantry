@@ -102,7 +102,7 @@ export const StyledItem = styled.div`
 `;
 
 export const StyledListName = styled.p`
-  width: 50%;
+  width: 8rem;
   color: var(--darkblue);
   font-size: 1.1rem;
   padding-left: 1rem;
