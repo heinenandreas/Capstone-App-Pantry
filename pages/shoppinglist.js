@@ -49,8 +49,8 @@ function Shoppinglist() {
         <ShoppinglistStyled>
           <ListTitle>Shoppinglist</ListTitle>
         </ShoppinglistStyled>
-        <MaxAmount>Max</MaxAmount>
         <StyledList>
+          <MaxAmount>Max</MaxAmount>
           {productList
             .filter((product) => product.actualAmount < product.maxAmount)
             .map((product) => (
@@ -100,14 +100,7 @@ export async function getServerSideProps(context) {
 }
 
 const MaxAmount = styled.div`
-  text-align: right;
-  padding-right: 1.5rem;
-  width: 95vw;
-  border: 2px solid var(--darkblue);
-  border-bottom: none;
-  border-top: 0px;
-  border-left: 0px;
-  background-color: #ffebd9;
+  padding-left: 18rem;
 `;
 
 const StyledListAmount = styled.p`
@@ -124,7 +117,7 @@ const ListTitle = styled.h3`
 
 const ShoppinglistStyled = styled.div`
   height: 3rem;
-  width: 95vw;
+  width: 95%;
   background-color: var(--lightgreen);
   border-radius: 0 1em 0 0;
   display: flex;
@@ -135,7 +128,7 @@ const ShoppinglistStyled = styled.div`
 `;
 
 const StyledList = styled.div`
-  width: 95vw;
+  width: 95%;
   border: 2px solid var(--darkblue);
   border-top: 0px;
   border-left: 0px;

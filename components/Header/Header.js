@@ -9,20 +9,11 @@ export function Header() {
     return (
       <HeaderContainer>
         <Logo />
-        {/* <ProfileStyled src={session.user.image} alt="" /> */}
       </HeaderContainer>
     );
   }
   return <Logo />;
 }
-
-const ProfileStyled = styled.img`
-  margin: 0.5rem;
-  width: 4rem;
-  height: 4rem;
-  border-radius: 999px;
-  box-shadow: 0 5px 5px 0px rgba(0, 0, 0, 0.3);
-`;
 
 const HeaderContainer = styled.div`
   width: 100vw;
